@@ -1,150 +1,240 @@
-<!doctype html>
-<html lang="en-GB">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NIOS — Microsoft Power Platform Experts</title>
-  <meta name="description" content="NIOS designs, builds and supports Microsoft Power Platform, Dynamics 365, Power Automate and Power BI solutions. UK-based team serving clients across the UK and beyond." />
-  <style>
-    :root{
-      --accent:#A9DFA8; --text:#1f2937; --muted:#6b7280; --bg:#ffffff; --line:#e5e7eb;
-    }
-    html{scroll-behavior:smooth}
-    body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Inter,Helvetica,Arial,sans-serif;color:var(--text);background:var(--bg);}
-    .container{max-width:1200px;margin:0 auto;padding:0 24px}
-    header{position:fixed;top:0;left:0;right:0;background:rgba(255,255,255,.8);backdrop-filter:blur(8px);z-index:50;border-bottom:1px solid rgba(0,0,0,.04)}
-    .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
-    .brand{font-weight:800;letter-spacing:.5px}
-    nav a{color:var(--text);text-decoration:none;margin-left:22px;font-weight:600;font-size:15px;opacity:.85}
-    nav a:hover{opacity:1}
-    .cta{display:inline-block;background:var(--text);color:#fff;padding:12px 18px;border-radius:12px;text-decoration:none;font-weight:700}
-    section{padding:96px 0;border-bottom:1px solid var(--line)}
-    h1{font-size:44px;line-height:1.12;margin:0 0 16px}
-    h2{font-size:36px;margin:0 0 16px}
-    p.lead{font-size:18px;color:var(--muted);max-width:820px}
-    .hero{padding-top:136px}
-    .actions{display:flex;gap:14px;margin-top:22px}
-    .about{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:start}
-    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-    .service{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}
-    .cases{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    footer{padding:36px 0;color:var(--muted)}
-    @media (max-width:1000px){.about{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width:720px){nav a{display:none}.grid{grid-template-columns:1fr}.cases{grid-template-columns:1fr}}
-  </style>
+<!DOCTYPE html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>NIOS — Microsoft Power Platform Consulting</title><meta name="description" content="NIOS — We design, build and support Microsoft Power Platform solutions across Power Apps, Dynamics 365, Power Automate and Power BI."><!-- Optional CSP note: if you add a Content-Security-Policy later, allow: frame-src https://forms.office.com; -->
+<style>/* ======= Base / Tokens ======= */:root{--accent:#A9DFA8;--bg:#ffffff;--text:#1f2937;--muted:#6b7280;--card:#f8fafc;--radius:18px;--shadow:0 6px 24px rgba(0,0,0,.08),0 2px 8px rgba(0,0,0,.06)}*{box-sizing:border-box}html{scroll-behavior:smooth}html:focus-within{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";line-height:1.5}img{max-width:100%;height:auto}svg{shape-rendering:geometricPrecision;text-rendering:optimizeLegibility}a{color:inherit}a.button{display:inline-block;padding:.85rem 1.15rem;border-radius:999px;background:var(--text);color:#fff;text-decoration:none;font-weight:600;box-shadow:var(--shadow)}a.button.alt{background:transparent;color:var(--text);border:2px solid var(--text);box-shadow:none}a.button:hover{opacity:.9}
+/* ======= Accessibility ======= */.skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}.skip-link:focus{left:1rem;top:1rem;width:auto;height:auto;z-index:9999;background:#000;color:#fff;padding:.5rem .75rem;border-radius:.5rem} :focus{outline:3px solid var(--accent);outline-offset:2px} :focus:not(:focus-visible){outline:none}
+/* ======= Layout ======= */header.site-header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.9);backdrop-filter:saturate(120%) blur(6px);border-bottom:1px solid #e5e7eb} .container{max-width:1120px;margin:0 auto;padding:0 1rem} .nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:64px} .logo{display:flex;align-items:center;gap:.75rem;text-decoration:none;color:var(--text)} .logo svg{width:34px;height:34px} .logo strong{font-size:1.1rem;letter-spacing:.2px} nav ul{list-style:none;display:flex;gap:.75rem;margin:0;padding:0} nav a{display:inline-block;padding:.5rem .75rem;border-radius:.5rem;text-decoration:none;color:var(--text)} nav a:hover, nav a:focus{background:var(--card)} main{padding-top:72px} section{padding:64px 0;scroll-margin-top:80px} .muted{color:var(--muted)}
+/* Hero */ .hero{position:relative;display:grid;grid-template-columns:1fr;gap:1.25rem;align-items:center} .hero h1{font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.15;margin:.25rem 0 .5rem} .hero p{font-size:1.05rem;color:var(--muted);max-width:60ch} .hero-cta{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.75rem} .hero-art{position:relative;border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow);padding:1rem} .hero-art svg{width:100%;height:auto;display:block}
+/* About */ .about p{max-width:70ch}
+/* Services */ .grid{display:grid;grid-template-columns:1fr;gap:1rem} @media(min-width:720px){.grid{grid-template-columns:repeat(2,1fr)}.services .grid{grid-template-columns:repeat(5,1fr)}} .card{background:var(--card);border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow)} .card h3{margin:.25rem 0 .25rem;font-size:1.05rem} .card p{margin:.25rem 0 0;color:var(--muted)} .icon{width:28px;height:28px}
+/* Products */ .products .product{display:grid;grid-template-columns:1fr;gap:1rem;align-items:center} @media(min-width:900px){.products .product{grid-template-columns:1.2fr .8fr}} .bullets{margin:.25rem 0 0 1.2rem} .product .imgwrap{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1rem}
+/* Contact */ .contact .details{font-weight:600} .form-embed{margin-top:1rem}
+/* Footer */ footer{padding:32px 0;border-top:1px solid #e5e7eb;color:var(--muted);font-size:.95rem} .exports{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem} .exports button{border:1px solid #d1d5db;background:#fff;border-radius:.5rem;padding:.4rem .6rem;cursor:pointer} .exports button:hover{background:#f3f4f6}
+/* Motion / Reveal */ .reveal{opacity:0;transform:translateY(12px)} .reveal.revealed{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease} @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none}.reveal.revealed{transition:none}}
+/* Utilities */ .pill{display:inline-block;padding:.25rem .6rem;border-radius:999px;background:var(--accent);color:#0f172a;font-weight:700;font-size:.8rem}
+/* Responsive tweaks */ @media(min-width:768px){.hero{grid-template-columns:1.1fr .9fr}} </style>
+<link rel="icon" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="%23A9DFA8"/><text x="50%" y="57%" dominant-baseline="middle" text-anchor="middle" font-family="Segoe UI,Roboto,Helvetica,Arial" font-size="14" fill="%231f2937" font-weight="700">N</text></svg>'>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <div class="brand">NIOS Consulting</div>
-      <nav>
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#cases">Case Studies</a>
-        <a href="#contact" class="cta">Get a free consultation</a>
-      </nav>
-    </div>
-  </header>
-
-  <section id="home" class="hero">
-    <div class="container">
-      <h1>Empowering businesses with Microsoft Power Platform solutions</h1>
-      <p class="lead">We design, build and support applications across Power Apps, Dynamics 365, Power Automate and Power BI — delivering scalable outcomes that integrate with Azure, Microsoft 365, SharePoint and Teams.</p>
-      <div class="actions">
-        <a class="cta" href="#contact">Get a free consultation</a>
-        <a class="cta" style="background:var(--accent);color:#0b2310" href="#cases">See our work</a>
+<a class="skip-link" href="#home">Skip to content</a>
+<header class="site-header" role="banner">
+  <div class="container nav" aria-label="Top navigation">
+    <a class="logo" href="#home" aria-label="NIOS home">
+      <!-- Inline SVG Logo (light) -->
+      <svg aria-hidden="true" viewBox="0 0 64 64" role="img"><title>NIOS logo</title>
+        <defs>
+          <linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#A9DFA8"/><stop offset="1" stop-color="#8fd78e"/></linearGradient>
+        </defs>
+        <rect x="2" y="2" width="28" height="28" rx="6" fill="url(#g)"/>
+        <rect x="34" y="2" width="28" height="28" rx="6" fill="#d8f3d7"/>
+        <rect x="2" y="34" width="28" height="28" rx="6" fill="#e8f8e7"/>
+        <rect x="34" y="34" width="28" height="28" rx="6" fill="#A9DFA8"/>
+        <path d="M18 19l0-8 8 8" fill="none" stroke="#1f2937" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <strong>NIOS</strong>
+    </a>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="home" tabindex="-1">
+  <section class="hero container reveal">
+    <div>
+      <span class="pill">Microsoft-first</span>
+      <h1>Empowering businesses with Microsoft Power Platform solutions.</h1>
+      <p>We design, build and support secure, scalable solutions across Power Apps, Dynamics 365, Power Automate and Power BI—integrated with Azure, Microsoft 365, SharePoint and Teams.</p>
+      <div class="hero-cta">
+        <a class="button" href="#contact">Get a free consultation</a>
+        <a class="button alt" href="#products">See our work</a>
       </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <!-- Abstract Microsoft-ecosystem illustration (SVG) -->
+      <svg viewBox="0 0 720 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label=""
+        preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#000" flood-opacity=".08"/></filter>
+        </defs>
+        <rect width="100%" height="100%" rx="16" fill="#fff"/>
+        <g filter="url(#s)">
+          <rect x="40" y="40" width="220" height="140" rx="14" fill="#f3f6fa"/>
+          <rect x="70" y="70" width="160" height="16" rx="8" fill="#1f2937" opacity=".2"/>
+          <rect x="70" y="100" width="120" height="12" rx="6" fill="#1f2937" opacity=".12"/>
+          <rect x="70" y="120" width="180" height="12" rx="6" fill="#1f2937" opacity=".12"/>
+        </g>
+        <g filter="url(#s)">
+          <rect x="280" y="60" width="380" height="260" rx="16" fill="#f3f6fa"/>
+          <g transform="translate(310,90)">
+            <rect width="320" height="24" rx="12" fill="#1f2937" opacity=".2"/>
+            <rect y="40" width="140" height="140" rx="12" fill="#A9DFA8"/>
+            <rect x="160" y="40" width="150" height="16" rx="8" fill="#1f2937" opacity=".15"/>
+            <rect x="160" y="66" width="180" height="12" rx="6" fill="#1f2937" opacity=".12"/>
+            <rect x="160" y="86" width="180" height="12" rx="6" fill="#1f2937" opacity=".12"/>
+            <rect x="0" y="190" width="320" height="8" rx="4" fill="#1f2937" opacity=".08"/>
+          </g>
+        </g>
+        <g filter="url(#s)">
+          <rect x="60" y="220" width="240" height="140" rx="14" fill="#f3f6fa"/>
+          <!-- Sparkline bars -->
+          <g transform="translate(90,250)" fill="#1f2937" opacity=".18">
+            <rect width="14" height="60" rx="4"/>
+            <rect x="26" width="14" height="42" rx="4"/>
+            <rect x="52" width="14" height="70" rx="4"/>
+            <rect x="78" width="14" height="32" rx="4"/>
+            <rect x="104" width="14" height="56" rx="4"/>
+            <rect x="130" width="14" height="44" rx="4"/>
+          </g>
+        </g>
+        <!-- Accent nodes -->
+        <circle cx="660" cy="80" r="8" fill="#A9DFA8"/>
+        <circle cx="620" cy="340" r="6" fill="#A9DFA8"/>
+        <circle cx="40" cy="200" r="6" fill="#A9DFA8"/>
+      </svg>
     </div>
   </section>
 
-  <section id="about">
-    <div class="container about">
+  <section id="about" class="about container reveal">
+    <h2>About</h2>
+    <p>We are a Wales‑based team serving the UK and beyond. We blend low‑code and pro‑code to deliver secure, scalable outcomes. Our lifecycle covers requirements, architecture, build, pipelines and optimisation. We work independently or embedded with your teams, always Microsoft‑first.</p>
+  </section>
+
+  <section id="services" class="services container reveal">
+    <h2>Services</h2>
+    <div class="grid">
+      <article class="card" aria-label="Power Platform Apps">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="2" fill="#A9DFA8"/><rect x="13" y="3" width="8" height="8" rx="2" fill="#d8f3d7"/><rect x="3" y="13" width="8" height="8" rx="2" fill="#e8f8e7"/><rect x="13" y="13" width="8" height="8" rx="2" fill="#A9DFA8"/></svg>
+        <h3>Power Platform Apps</h3>
+        <p>Canvas & model‑driven apps with Dataverse, security roles and ALM pipelines.</p>
+      </article>
+      <article class="card" aria-label="Process Automation">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="3" fill="#A9DFA8"/><circle cx="18" cy="6" r="3" fill="#A9DFA8"/><circle cx="12" cy="18" r="3" fill="#A9DFA8"/><path d="M9 6h6M6 9l4 7M18 9l-4 7" stroke="#1f2937" stroke-width="1.5" fill="none"/></svg>
+        <h3>Process Automation</h3>
+        <p>Power Automate, Logic Apps & Azure Functions with REST/Graph integrations.</p>
+      </article>
+      <article class="card" aria-label="Data & Analytics">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="10" width="4" height="10" rx="1" fill="#A9DFA8"/><rect x="10" y="4" width="4" height="16" rx="1" fill="#A9DFA8"/><rect x="17" y="8" width="4" height="12" rx="1" fill="#A9DFA8"/></svg>
+        <h3>Data & Analytics</h3>
+        <p>Power BI reports and models with DAX, Power Query, SQL and Fabric.</p>
+      </article>
+      <article class="card" aria-label="Dynamics 365 & CRM">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h10l6 7-6 7H4l6-7-6-7z" fill="#A9DFA8"/><path d="M9 12l5 7" stroke="#1f2937" stroke-width="1.5"/></svg>
+        <h3>Dynamics 365 & CRM</h3>
+        <p>CE customisation, Dataverse models, Outlook integration & environments.</p>
+      </article>
+      <article class="card" aria-label="Consultancy & Training">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="12" rx="2" fill="#A9DFA8"/><path d="M6 18h12" stroke="#1f2937" stroke-width="1.5"/></svg>
+        <h3>Consultancy & Training</h3>
+        <p>Workshops, requirements, architecture, user training, docs and support.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="products" class="products container reveal">
+    <h2>Products</h2>
+    <article class="product">
       <div>
-        <h2>About NIOS</h2>
-        <p class="lead">Our mission is to deliver robust low‑code and pro‑code solutions that scale with your business. We integrate seamlessly with Dynamics 365, Azure, Microsoft 365, SharePoint and Teams, and we bring deep experience across the full lifecycle — from discovery and architecture to secure build, deployment pipelines and optimisation.</p>
-        <p>We work independently or alongside your team to accelerate delivery. Based in Wales, we serve clients across the UK and beyond.</p>
+        <h3>Timesheet App</h3>
+        <p>A Power Platform timesheet solution for quick entry, approvals and reporting. Teams integration, role‑based access, and optional embedded Power BI.</p>
+        <ul class="bullets">
+          <li>Canvas app on Dataverse</li>
+          <li>Multi‑stage approvals</li>
+          <li>Embedded analytics & export</li>
+          <li>Deployment via Azure DevOps</li>
+        </ul>
       </div>
-    </div>
+      <div class="imgwrap">
+        <img loading="lazy" alt="Placeholder UI mock-up of a Timesheet dashboard" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360"><rect width="640" height="360" fill="%23f3f6fa"/><rect x="24" y="24" width="592" height="64" rx="10" fill="%231f2937" opacity=".2"/><rect x="24" y="104" width="280" height="200" rx="12" fill="%23A9DFA8"/><rect x="320" y="104" width="296" height="20" rx="8" fill="%231f2937" opacity=".15"/><rect x="320" y="132" width="296" height="14" rx="7" fill="%231f2937" opacity=".12"/><rect x="320" y="154" width="296" height="14" rx="7" fill="%231f2937" opacity=".12"/></svg>'/>
+      </div>
+    </article>
+    <article class="product" style="margin-top:1rem">
+      <div>
+        <h3>Expenses App</h3>
+        <p>Submit, track and approve expenses with receipts and mileage. Secure by design, integrates with Dataverse and Microsoft 365.</p>
+        <ul class="bullets">
+          <li>Receipt capture & mileage rates</li>
+          <li>Role‑based approvals</li>
+          <li>Power BI reporting</li>
+          <li>Offline‑friendly patterns</li>
+        </ul>
+      </div>
+      <div class="imgwrap">
+        <img loading="lazy" alt="Placeholder UI mock-up of an Expenses dashboard" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360"><rect width="640" height="360" fill="%23f3f6fa"/><rect x="24" y="24" width="592" height="64" rx="10" fill="%231f2937" opacity=".2"/><rect x="24" y="104" width="280" height="200" rx="12" fill="%23A9DFA8"/><g fill="%231f2937" opacity=".12"><rect x="320" y="104" width="296" height="20" rx="8"/><rect x="320" y="132" width="296" height="14" rx="7"/><rect x="320" y="154" width="296" height="14" rx="7"/></g></svg>'/>
+      </div>
+    </article>
   </section>
 
-  <section id="services">
-    <div class="container">
-      <h2>Services</h2>
-      <div class="grid">
-        <div class="service"><h3>Power Platform Apps</h3><p>We design and build Canvas and Model‑driven apps with Dataverse, security roles and deployment pipelines.</p></div>
-        <div class="service"><h3>Process Automation</h3><p>Automate workflows with Power Automate, Logic Apps and Azure Functions. Integrate third‑party systems via REST/Graph API.</p></div>
-        <div class="service"><h3>Data &amp; Analytics</h3><p>Delivering Power BI dashboards, reports and data models with DAX, Power Query, SQL and Microsoft Fabric. PL‑300 certified with 200+ dashboards delivered.</p></div>
-        <div class="service"><h3>Dynamics 365 &amp; CRM</h3><p>Customise Dynamics 365/CE, build Dataverse models, integrate with Finance &amp; Operations and Outlook; configure security roles and environments.</p></div>
-        <div class="service"><h3>Consultancy &amp; Training</h3><p>Workshops, requirements, solution architecture, user training, documentation and ongoing support. We manage projects end‑to‑end.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="cases">
-    <div class="container">
-      <h2>Case studies</h2>
-      <div class="cases">
-        <div class="service"><h3>Timesheet &amp; Expenses App</h3><p>Canvas app on Dataverse for timesheet entry, approvals and reporting with embedded Power BI, Teams integration and Azure DevOps deployment.</p></div>
-        <div class="service"><h3>User Onboarding App</h3><p>Automates user creation in Entra ID with multi‑stage approvals using Power Apps, Power Automate and Microsoft Graph API.</p></div>
-        <div class="service"><h3>Property Survey App</h3><p>Survey capture with photos and notes via Canvas app connected to SharePoint and Teams. Custom security and offline capabilities.</p></div>
-      </div>
-    </div>
-  </section>
-
+  <!-- Contact / Start a new project (exact iframe block as required) -->
   <section id="contact">
-    <div class="container">
-      <h2>Start a project</h2>
-      <p class="lead">Tell us about your goals. Our team will respond quickly to arrange a short call.</p>
-      <form>
-        <input type="text" placeholder="Name" required>
-        <input type="text" placeholder="Company">
-        <input type="email" placeholder="Email" required>
-        <textarea placeholder="Message" required></textarea>
-        <button class="cta" type="submit">Send message</button>
-      </form>
+    <h2>Start a new project</h2>
+    <p>Email us at <a href="mailto:info@nios-cloud.com">info@nios-cloud.com</a> or call <a href="tel:+447769249689">07769 249689</a>.</p>
+
+    <div class="form-embed" style="position:relative;">
+      <iframe
+        title="Contact form"
+        width="640"
+        height="480"
+        src="https://forms.office.com/Pages/ResponsePage.aspx?id=AY9GxKikMEWyBr436N-O50PfGZ_sgdtFqosStlhSWU9UQzM0S1hGR1IyMEFOUTZLNjVZNlNMNEUzTy4u&embed=true"
+        frameborder="0"
+        marginwidth="0"
+        marginheight="0"
+        style="border:0; max-width:100%; height:70vh;"
+        allowfullscreen
+        webkitallowfullscreen
+        mozallowfullscreen
+        msallowfullscreen
+        referrerpolicy="strict-origin-when-cross-origin">
+      </iframe>
+      <noscript>
+        <p>Form not loading? <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=AY9GxKikMEWyBr436N-O50PfGZ_sgdtFqosStlhSWU9UQzM0S1hGR1IyMEFOUTZLNjVZNlNMNEUzTy4u" target="_blank" rel="noopener">Open the form in a new tab</a>.</p>
+      </noscript>
     </div>
   </section>
+</main>
 
-  <footer>
-    <div class="container">
-      <small>© <span id="y"></span> NIOS Consulting — Wales, UK</small>
-    </div>
-  </footer>
-  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
-  <script>
-    (function(){
-      const ENDPOINT = 'LOGIC_APP_URL'; // replace with your Logic App HTTPS URL
-      const form = document.getElementById('contactForm');
-      const msg  = document.getElementById('formMsg');
-      const btn  = document.getElementById('submitBtn');
+<footer class="container">
+  <div>© <span id="y"></span> NIOS — Microsoft Power Platform consulting & development.</div>
+  <div class="exports" aria-label="Logo asset exports">
+    <button type="button" id="saveSvg">Download logo (SVG)</button>
+    <button type="button" id="saveSvgDark">Download logo dark (SVG)</button>
+    <button type="button" id="savePng">Download favicon (32×32 PNG)</button>
+  </div>
+</footer>
 
-      function validEmail(v){return v.includes('@') && v.includes('.') && v.indexOf('@')>0;}
+<!-- Hidden logo variants for export -->
+<svg id="logo-light-src" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 32" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;">
+  <title>NIOS logo (light)</title>
+  <g>
+    <rect x="0" y="0" width="32" height="32" rx="6" fill="#A9DFA8"/>
+    <rect x="36" y="0" width="32" height="32" rx="6" fill="#d8f3d7"/>
+    <rect x="72" y="0" width="32" height="32" rx="6" fill="#e8f8e7"/>
+    <text x="120" y="22" font-family="Segoe UI,Roboto,Helvetica,Arial" font-size="18" fill="#1f2937" font-weight="700" text-anchor="end">NIOS</text>
+  </g>
+</svg>
+<svg id="logo-dark-src" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 32" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;">
+  <title>NIOS logo (dark)</title>
+  <rect width="128" height="32" fill="#1f2937" rx="6"/>
+  <g>
+    <rect x="2" y="2" width="28" height="28" rx="6" fill="#A9DFA8"/>
+    <rect x="36" y="2" width="28" height="28" rx="6" fill="#d8f3d7"/>
+    <rect x="70" y="2" width="28" height="28" rx="6" fill="#e8f8e7"/>
+    <text x="124" y="22" font-family="Segoe UI,Roboto,Helvetica,Arial" font-size="18" fill="#ffffff" font-weight="700" text-anchor="end">NIOS</text>
+  </g>
+</svg>
 
-      form.addEventListener('submit', async (e)=>{
-        e.preventDefault();
-        msg.textContent = '';
-        const data = {
-          name: form.name.value.trim(),
-          company: form.company.value.trim(),
-          email: form.email.value.trim(),
-          phone: form.phone.value.trim(),
-          message: form.message.value.trim(),
-          userAgent: navigator.userAgent,
-          pageUrl: location.href
-        };
-        if(document.getElementById('website').value){return;}
-        if(!data.name || !data.email || !data.message){msg.textContent='Please complete the required fields.';return;}
-        if(!validEmail(data.email)){msg.textContent='Please enter a valid email address.';return;}
-        btn.disabled = true; btn.textContent = 'Sending…';
-        try{
-          const res = await fetch(ENDPOINT, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)});
-          if(res.ok){ form.reset(); msg.textContent='Thanks — we’ll be in touch shortly.'; }
-          else { msg.textContent='Sorry, something went wrong. Please email contact@nios.consulting.'; }
-        }catch(err){ msg.textContent='Network error. Please email contact@nios.consulting.'; }
-        finally{ btn.disabled = false; btn.textContent = 'Send message'; }
-      });
-    })();
-  </script>
-</body>
-</html>
+<script>/* Minified-ish util JS: smooth scroll with header offset; on-scroll reveal; asset exports; year. */
+(function(){const d=document, h=d.querySelector('.site-header'); d.querySelector('#y').textContent=new Date().getFullYear();
+ // Smooth scroll with offset
+ function go(e){const a=e.target.closest('a[href^="#"]'); if(!a) return; const id=a.getAttribute('href').slice(1); if(!id) return; const el=d.getElementById(id)||d.querySelector('[id="'+CSS.escape(id)+'"]'); if(!el) return; e.preventDefault(); const top=el.getBoundingClientRect().top+window.scrollY-(h.offsetHeight+8); const pr=window.matchMedia('(prefers-reduced-motion: reduce)').matches; window.scrollTo({top,behavior: pr? 'auto':'smooth'});} d.querySelector('nav').addEventListener('click',go); d.querySelectorAll('a.button[href^="#"]').forEach(a=>a.addEventListener('click',go));
+ // Reveal on scroll
+ const prefersReduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches; if(!prefersReduced && 'IntersectionObserver'in window){const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('revealed'); io.unobserve(e.target);}})},{threshold:.12}); d.querySelectorAll('.reveal').forEach(el=>io.observe(el));}
+ // Export helpers (assets/ if supported is simulated by download names)
+ function dl(blob, name){const u=URL.createObjectURL(blob), a=d.createElement('a'); a.href=u; a.download=name; d.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(u),1500);} function svgBlob(id){const n=d.getElementById(id).cloneNode(true); const t='<?xml version="1.0" encoding="UTF-8"?>\n'+new XMLSerializer().serializeToString(n); return new Blob([t],{type:'image/svg+xml'});} d.getElementById('saveSvg').addEventListener('click',()=>dl(svgBlob('logo-light-src'),'assets/nios-logo.svg')); d.getElementById('saveSvgDark').addEventListener('click',()=>dl(svgBlob('logo-dark-src'),'assets/nios-logo-dark.svg'));
+ // PNG favicon 32
+ d.getElementById('savePng').addEventListener('click',()=>{const s=d.getElementById('logo-light-src').cloneNode(true); const c=d.createElement('canvas'); c.width=32; c.height=32; const ctx=c.getContext('2d'); const img=new Image(); const data='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(new XMLSerializer().serializeToString(s)); img.onload=function(){ctx.drawImage(img,0,0,32,32); c.toBlob(b=>dl(b,'assets/nios-favicon-32.png'));}; img.src=data;});})();</script>
+</body></html>
+
