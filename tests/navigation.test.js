@@ -12,6 +12,14 @@ if (start === -1 || end === -1) {
 }
 const goSrc = `const d=document, h=document.querySelector('.site-header'); ${html.slice(start, end)}`;
 
+// Extract the mobile menu script segment
+const mobileStart = html.indexOf("const toggleBtn = document.querySelector('.nav-toggle');");
+const mobileEnd = html.indexOf('// Smooth scroll with offset', mobileStart);
+if (mobileStart === -1 || mobileEnd === -1) {
+  throw new Error('mobile menu script not found in index.html');
+}
+const mobileMenuSrc = html.slice(mobileStart, mobileEnd);
+
 function setupEnvironment() {
   let scrollArgs;
   const header = { offsetHeight: 100 };
@@ -62,4 +70,62 @@ test('go works when CSS.escape is missing', { concurrency: 1 }, () => {
   const goFn = eval(`${goSrc}; go`);
   const result = env.triggerClick(goFn);
   assert.equal(result.top, 392);
+});
+
+test('mobile menu toggles on click', { concurrency: 1 }, () => {
+  const originalDocument = global.document;
+  const originalWindow = global.window;
+
+  const toggleStub = {
+    attrs: {},
+    setAttribute(name, value) { this.attrs[name] = value; },
+    getAttribute(name) { return this.attrs[name]; },
+    addEventListener(type, fn) { if (type === 'click') this.clickHandler = fn; },
+    focus() {}
+  };
+
+  const menuStub = {
+    hidden: true,
+    querySelector: () => ({ focus: () => {} }),
+    querySelectorAll: () => [],
+    addEventListener: () => {},
+    contains: () => false
+  };
+
+  const classList = {
+    list: new Set(),
+    add(cls) { this.list.add(cls); },
+    remove(cls) { this.list.delete(cls); },
+    contains(cls) { return this.list.has(cls); }
+  };
+
+  const documentStub = {
+    querySelector: (sel) => (sel === '.nav-toggle' ? toggleStub : null),
+    getElementById: (id) => (id === 'mobile-menu' ? menuStub : null),
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    body: { classList }
+  };
+
+  const windowStub = {
+    matchMedia: () => ({ addEventListener: () => {} })
+  };
+
+  global.document = documentStub;
+  global.window = windowStub;
+
+  eval(mobileMenuSrc);
+
+  // First click opens the menu
+  toggleStub.clickHandler();
+  assert.equal(menuStub.hidden, false);
+  assert.equal(classList.contains('menu-open'), true);
+
+  // Second click closes the menu
+  toggleStub.clickHandler();
+  assert.equal(menuStub.hidden, true);
+  assert.equal(classList.contains('menu-open'), false);
+
+  global.document = originalDocument;
+  global.window = originalWindow;
 });
