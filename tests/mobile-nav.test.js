@@ -52,7 +52,15 @@ function setup() {
     menu,
     body,
     clickToggle: () => btnClick && btnClick(),
-    clickMenuLink: () => menuClick && menuClick({ target: { closest: () => ({}) } })
+    clickMenuLink: () => menuClick && menuClick({ target: { closest: () => ({ hasAttribute: () => false }) } }),
+    clickExitLink: () => {
+      let prevented = false;
+      menuClick && menuClick({
+        target: { closest: () => ({ hasAttribute: attr => attr === 'data-exit' }) },
+        preventDefault: () => { prevented = true; }
+      });
+      return { prevented };
+    }
   };
 }
 
@@ -64,7 +72,7 @@ test('button toggles menu visibility and body scroll', () => {
   assert.equal(env.menu.classList.contains('open'), true);
   assert.equal('hidden' in env.menu.attrs, false);
   assert.equal(env.body.style.overflow, 'hidden');
-  assert.equal(env.toggle.textContent, '✕');
+  assert.equal(env.toggle.textContent, '☰');
   env.clickToggle();
   assert.equal(env.toggle.getAttribute('aria-expanded'), 'false');
   assert.equal(env.menu.classList.contains('open'), false);
@@ -83,5 +91,18 @@ test('clicking a menu link closes the menu', () => {
   assert.equal('hidden' in env.menu.attrs, true);
   assert.equal(env.body.style.overflow, '');
   assert.equal(env.toggle.textContent, '☰');
+});
+
+test('clicking the exit link closes the menu without navigation', () => {
+  const env = setup();
+  eval(navSrc);
+  env.clickToggle();
+  const res = env.clickExitLink();
+  assert.equal(env.toggle.getAttribute('aria-expanded'), 'false');
+  assert.equal(env.menu.classList.contains('open'), false);
+  assert.equal('hidden' in env.menu.attrs, true);
+  assert.equal(env.body.style.overflow, '');
+  assert.equal(env.toggle.textContent, '☰');
+  assert.equal(res.prevented, true);
 });
 

@@ -93,10 +93,12 @@ main{padding-top:80px}
 </header>
 <nav id="mobileNav" class="mobile-nav" aria-label="Mobile" hidden>
   <ul>
+    <li><a href="#home">Home</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#products">Products</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="#" data-exit>Exit</a></li>
   </ul>
 </nav>
 <main id="home" tabindex="-1">
@@ -394,15 +396,15 @@ main{padding-top:80px}
       toggle.setAttribute('aria-expanded', String(isOpen));
       menu.toggleAttribute('hidden', !isOpen);
       document.body.style.overflow = isOpen ? 'hidden' : '';
-      toggle.textContent = isOpen ? '✕' : '☰';
     });
     menu.addEventListener('click', e => {
-      if (!e.target.closest('a')) return;
+      const link = e.target.closest('a');
+      if (!link) return;
+      if (link.hasAttribute('data-exit')) e.preventDefault();
       menu.classList.toggle('open');
       toggle.setAttribute('aria-expanded', 'false');
       menu.toggleAttribute('hidden', true);
       document.body.style.overflow = '';
-      toggle.textContent = '☰';
     });
   }
 })();
