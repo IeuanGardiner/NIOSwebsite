@@ -12,13 +12,6 @@ if (start === -1 || end === -1) {
 }
 const goSrc = `const d=document, h=document.querySelector('.site-header'); ${html.slice(start, end)}`;
 
-// Extract the mobile menu script segment
-  const mobileStart = html.indexOf("const btn = d.getElementById('menu-btn');");
-  const mobileEnd = html.indexOf('\n  function go', mobileStart);
-  if (mobileStart === -1 || mobileEnd === -1) {
-    throw new Error('mobile menu script not found in index.html');
-  }
-  const mobileMenuSrc = html.slice(mobileStart, mobileEnd);
 
 function setupEnvironment() {
   let scrollArgs;
@@ -72,46 +65,3 @@ test('go works when CSS.escape is missing', { concurrency: 1 }, () => {
   assert.equal(result.top, 392);
 });
 
-test('mobile menu toggles on click', { concurrency: 1 }, () => {
-  const originalDocument = global.document;
-
-  const btnStub = {
-    attrs: {},
-    setAttribute(name, value) { this.attrs[name] = value; },
-    addEventListener(type, fn) { if (type === 'click') this.clickHandler = fn; }
-  };
-
-  const navStub = {
-    classList: {
-      list: new Set(),
-      add(cls) { this.list.add(cls); },
-      remove(cls) { this.list.delete(cls); },
-      toggle(cls) { if (this.list.has(cls)) { this.list.delete(cls); return false; } else { this.list.add(cls); return true; } },
-      contains(cls) { return this.list.has(cls); }
-    },
-    addEventListener(type, fn) { if (type === 'click') this.clickHandler = fn; }
-  };
-
-  const documentStub = {
-    getElementById: (id) => (id === 'menu-btn' ? btnStub : id === 'mobile-nav' ? navStub : null)
-  };
-
-  global.document = documentStub;
-
-  eval(`const d=document; ${mobileMenuSrc}`);
-
-  // nav should start hidden
-  assert.equal(navStub.classList.contains('hidden'), true);
-
-  // First click opens the menu
-  btnStub.clickHandler();
-  assert.equal(navStub.classList.contains('hidden'), false);
-  assert.equal(btnStub.attrs['aria-expanded'], 'true');
-
-  // Second click closes the menu
-  btnStub.clickHandler();
-  assert.equal(navStub.classList.contains('hidden'), true);
-  assert.equal(btnStub.attrs['aria-expanded'], 'false');
-
-  global.document = originalDocument;
-});

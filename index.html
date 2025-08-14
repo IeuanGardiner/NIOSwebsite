@@ -22,30 +22,10 @@
 .primary-nav a{display:inline-block;padding:.5rem .75rem;border-radius:.5rem;text-decoration:none;color:var(--text)}
 .primary-nav a:hover,.primary-nav a:focus{background:var(--card)}
 
-/* Mobile toggle */
-.nav-toggle{appearance:none;border:0;background:transparent;display:inline-flex;flex-direction:column;justify-content:center;gap:4px;padding:10px;border-radius:10px;position:relative;z-index:50}
-.nav-toggle:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.nav-toggle-bar{display:block;width:22px;height:2px;background:var(--text);border-radius:2px}
-
-/* Mobile menu drawer */
-.mobile-menu{position:fixed;inset:72px 0 0 0;background:#fff;border-top:1px solid #e5e7eb;box-shadow:0 12px 24px rgba(0,0,0,.08);z-index:1001;overflow:auto}
-.mobile-menu nav ul{list-style:none;margin:0;padding:12px}
-.mobile-menu li{border-bottom:1px solid #f1f5f9}
-.mobile-menu li:last-child{border-bottom:0}
-.mobile-menu a{display:block;padding:14px 16px;text-decoration:none;color:var(--text);border-radius:10px}
-.mobile-menu a:focus,.mobile-menu a:hover{background:var(--card)}
-.hidden{display:none}
-
-/* Open state */
-.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1){transform:translateY(6px) rotate(45deg)}
-.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2){opacity:0}
-.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
-
 /* Breakpoints: show desktop nav at ≥ 900px */
 @media (min-width:900px){
   .nav{height:90px}
   .brand-logo{height:64px}
-  .nav-toggle{display:none}
   .primary-nav{display:block}
 }
 
@@ -74,31 +54,7 @@ main{padding-top:80px}
       </ul>
     </nav>
 
-    <!-- Mobile toggle button (visible on small screens) -->
-    <button id="menu-btn"
-            class="nav-toggle md:hidden p-3 z-50 relative"
-            aria-controls="mobile-nav"
-            aria-expanded="false"
-            type="button">
-      <span class="sr-only">Open main menu</span>
-      <span class="nav-toggle-bar" aria-hidden="true"></span>
-      <span class="nav-toggle-bar" aria-hidden="true"></span>
-      <span class="nav-toggle-bar" aria-hidden="true"></span>
-    </button>
   </div>
-
-  <!-- Mobile nav (hidden by default; shown when menu is open) -->
-  <nav id="mobile-nav"
-       class="mobile-menu hidden"
-       aria-label="Primary mobile">
-    <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#products">Products</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
 </header>
 <main id="home" tabindex="-1">
   <section class="hero container reveal">
@@ -316,27 +272,6 @@ main{padding-top:80px}
   const h = d.querySelector('.site-header');
   const y = d.querySelector('#y');
   if (y) y.textContent = new Date().getFullYear();
-
-    const btn = d.getElementById('menu-btn');
-    const nav = d.getElementById('mobile-nav');
-    if (btn && nav) {
-      nav.classList.add('hidden');
-
-      function toggleMenu() {
-        const isHidden = nav.classList.toggle('hidden');
-        btn.setAttribute('aria-expanded', String(!isHidden));
-      }
-
-      btn.addEventListener('click', toggleMenu);
-
-      nav.addEventListener('click', (e) => {
-        const a = e.target.closest('a');
-        if (a) {
-          nav.classList.add('hidden');
-          btn.setAttribute('aria-expanded', 'false');
-        }
-      });
-    }
 
   function go(e) {
     const a = e.target.closest('a[href^="#"]');
