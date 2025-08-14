@@ -32,12 +32,16 @@
         background:rgba(0,0,0,.5);
         display:flex;flex-direction:column;
         align-items:center;justify-content:center;gap:2rem;
-        z-index:1001;
-        opacity:0;visibility:hidden;pointer-events:none;
+        z-index:1100;
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
         transition:opacity .3s ease,visibility 0s linear .3s;
       }
       .mobile-nav.open{
-        opacity:1;visibility:visible;pointer-events:auto;
+        opacity:1;
+        visibility:visible;
+        pointer-events:auto;
         transition:opacity .3s ease,visibility 0s;
       }
       .mobile-nav ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1.5rem;align-items:center}
@@ -84,19 +88,16 @@ main{padding-top:80px}
             aria-controls="mobileNav" aria-expanded="false">
       ☰
     </button>
-
-    <!-- Mobile menu -->
-    <nav id="mobileNav" class="mobile-nav" aria-label="Mobile" aria-hidden="true">
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#products">Products</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-
   </div>
 </header>
+<nav id="mobileNav" class="mobile-nav" aria-label="Mobile" hidden>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 <main id="home" tabindex="-1">
   <section class="hero container reveal">
     <div>
@@ -378,20 +379,14 @@ main{padding-top:80px}
   });
 
   // Mobile nav toggle
-  const menuBtn = document.getElementById('menuToggle');
-  const mobileNav = document.getElementById('mobileNav');
-  if (menuBtn && mobileNav){
-    menuBtn.addEventListener('click', () => {
-      const open = mobileNav.classList.toggle('open');
-      menuBtn.setAttribute('aria-expanded', String(open));
-      mobileNav.setAttribute('aria-hidden', String(!open));
-    });
-    mobileNav.addEventListener('click', e => {
-      if (e.target.closest('a')){
-        mobileNav.classList.remove('open');
-        menuBtn.setAttribute('aria-expanded', 'false');
-        mobileNav.setAttribute('aria-hidden', 'true');
-      }
+  const toggle = document.querySelector('.menu-toggle');
+  const menu   = document.getElementById('mobileNav');
+  if (toggle && menu){
+    toggle.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      menu.toggleAttribute('hidden', !isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
     });
   }
 })();
