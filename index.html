@@ -22,10 +22,25 @@
 .primary-nav a{display:inline-block;padding:.5rem .75rem;border-radius:.5rem;text-decoration:none;color:var(--text)}
 .primary-nav a:hover,.primary-nav a:focus{background:var(--card)}
 
-/* Breakpoints: show desktop nav at ≥ 900px */
-@media (min-width:900px){
-  .nav{height:90px}
-  .brand-logo{height:64px}
+      /* Mobile menu */
+      .menu-toggle{
+        background:none;border:0;font-size:1.8rem;
+        width:48px;height:48px;cursor:pointer;
+      }
+      .mobile-nav{
+        position:fixed;top:72px;right:1rem;
+        background:var(--card);box-shadow:var(--shadow);
+        border-radius:.5rem;padding:.5rem;z-index:1001;
+      }
+      @media(min-width:900px){
+        .menu-toggle{display:none}
+        .mobile-nav{display:none}
+      }
+
+      /* Breakpoints: show desktop nav at ≥ 900px */
+      @media (min-width:900px){
+        .nav{height:90px}
+        .brand-logo{height:64px}
   .primary-nav{display:block}
 }
 
@@ -45,6 +60,23 @@ main{padding-top:80px}
 
     <!-- Desktop nav -->
     <nav class="primary-nav" aria-label="Primary">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Mobile nav toggle -->
+    <button id="menuToggle" class="menu-toggle"
+            aria-controls="mobileNav" aria-expanded="false">
+      ☰
+    </button>
+
+    <!-- Mobile menu -->
+    <nav id="mobileNav" class="mobile-nav" hidden aria-label="Mobile">
       <ul>
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
@@ -335,6 +367,23 @@ main{padding-top:80px}
     };
     img.src = data;
   });
+
+  // Mobile nav toggle
+  const menuBtn = document.getElementById('menuToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  if (menuBtn && mobileNav){
+    menuBtn.addEventListener('click', () => {
+      const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
+      menuBtn.setAttribute('aria-expanded', String(!expanded));
+      mobileNav.hidden = expanded;
+    });
+    mobileNav.addEventListener('click', e => {
+      if (e.target.closest('a')){
+        menuBtn.setAttribute('aria-expanded', 'false');
+        mobileNav.hidden = true;
+      }
+    });
+  }
 })();
 </script>
 </body></html>
