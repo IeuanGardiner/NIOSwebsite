@@ -46,6 +46,7 @@
       }
       .mobile-nav ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1.5rem;align-items:center}
       .mobile-nav a{color:#fff;font-size:1.5rem;text-decoration:none}
+      .mobile-nav a:hover{color:#1f2937}
       @media(min-width:900px){
         .menu-toggle{display:none}
         .mobile-nav{display:none}
@@ -393,6 +394,15 @@ main{padding-top:80px}
       toggle.setAttribute('aria-expanded', String(isOpen));
       menu.toggleAttribute('hidden', !isOpen);
       document.body.style.overflow = isOpen ? 'hidden' : '';
+      toggle.textContent = isOpen ? '✕' : '☰';
+    });
+    menu.addEventListener('click', e => {
+      if (!e.target.closest('a')) return;
+      menu.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      menu.toggleAttribute('hidden', true);
+      document.body.style.overflow = '';
+      toggle.textContent = '☰';
     });
   }
 })();

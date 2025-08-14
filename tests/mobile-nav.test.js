@@ -13,9 +13,10 @@ if (start === -1 || end === -1) {
 const navSrc = html.slice(start, end);
 
 function setup() {
-  let btnClick;
+  let btnClick, menuClick;
   const toggle = {
     attrs: { 'aria-expanded': 'false' },
+    textContent: '☰',
     addEventListener: (type, fn) => { if (type === 'click') btnClick = fn; },
     getAttribute: name => toggle.attrs[name],
     setAttribute: (name, value) => { toggle.attrs[name] = value; }
@@ -37,7 +38,8 @@ function setup() {
       }
       if (force) { menu.attrs[name] = ''; return true; }
       delete menu.attrs[name]; return false;
-    }
+    },
+    addEventListener: (type, fn) => { if (type === 'click') menuClick = fn; }
   };
   const body = { style: {} };
   global.document = {
@@ -49,7 +51,8 @@ function setup() {
     toggle,
     menu,
     body,
-    clickToggle: () => btnClick && btnClick()
+    clickToggle: () => btnClick && btnClick(),
+    clickMenuLink: () => menuClick && menuClick({ target: { closest: () => ({}) } })
   };
 }
 
@@ -61,10 +64,24 @@ test('button toggles menu visibility and body scroll', () => {
   assert.equal(env.menu.classList.contains('open'), true);
   assert.equal('hidden' in env.menu.attrs, false);
   assert.equal(env.body.style.overflow, 'hidden');
+  assert.equal(env.toggle.textContent, '✕');
   env.clickToggle();
   assert.equal(env.toggle.getAttribute('aria-expanded'), 'false');
   assert.equal(env.menu.classList.contains('open'), false);
   assert.equal('hidden' in env.menu.attrs, true);
   assert.equal(env.body.style.overflow, '');
+  assert.equal(env.toggle.textContent, '☰');
+});
+
+test('clicking a menu link closes the menu', () => {
+  const env = setup();
+  eval(navSrc);
+  env.clickToggle();
+  env.clickMenuLink();
+  assert.equal(env.toggle.getAttribute('aria-expanded'), 'false');
+  assert.equal(env.menu.classList.contains('open'), false);
+  assert.equal('hidden' in env.menu.attrs, true);
+  assert.equal(env.body.style.overflow, '');
+  assert.equal(env.toggle.textContent, '☰');
 });
 
