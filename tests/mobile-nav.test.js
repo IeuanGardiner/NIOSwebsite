@@ -22,8 +22,19 @@ function setup() {
     setAttribute: (name, value) => { menuBtn.attrs[name] = value; }
   };
   const mobileNav = {
-    hidden: true,
-    addEventListener: (type, fn) => { if (type === 'click') navClick = fn; }
+    attrs: { 'aria-hidden': 'true' },
+    cls: new Set(),
+    addEventListener: (type, fn) => { if (type === 'click') navClick = fn; },
+    classList: {
+      toggle: name => {
+        if (mobileNav.cls.has(name)) { mobileNav.cls.delete(name); return false; }
+        mobileNav.cls.add(name); return true;
+      },
+      remove: name => { mobileNav.cls.delete(name); },
+      contains: name => mobileNav.cls.has(name)
+    },
+    getAttribute: name => mobileNav.attrs[name],
+    setAttribute: (name, value) => { mobileNav.attrs[name] = value; }
   };
   global.document = {
     getElementById: id => {
@@ -40,15 +51,17 @@ function setup() {
   };
 }
 
-test('button toggles hidden and aria-expanded', () => {
+test('button toggles class and aria attributes', () => {
   const env = setup();
   eval(navSrc);
   env.clickToggle();
   assert.equal(env.menuBtn.getAttribute('aria-expanded'), 'true');
-  assert.equal(env.mobileNav.hidden, false);
+  assert.equal(env.mobileNav.classList.contains('open'), true);
+  assert.equal(env.mobileNav.getAttribute('aria-hidden'), 'false');
   env.clickToggle();
   assert.equal(env.menuBtn.getAttribute('aria-expanded'), 'false');
-  assert.equal(env.mobileNav.hidden, true);
+  assert.equal(env.mobileNav.classList.contains('open'), false);
+  assert.equal(env.mobileNav.getAttribute('aria-hidden'), 'true');
 });
 
 test('link click closes menu', () => {
@@ -57,5 +70,6 @@ test('link click closes menu', () => {
   env.clickToggle();
   env.clickLink();
   assert.equal(env.menuBtn.getAttribute('aria-expanded'), 'false');
-  assert.equal(env.mobileNav.hidden, true);
+  assert.equal(env.mobileNav.classList.contains('open'), false);
+  assert.equal(env.mobileNav.getAttribute('aria-hidden'), 'true');
 });
