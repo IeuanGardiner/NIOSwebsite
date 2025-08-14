@@ -28,10 +28,17 @@
         width:48px;height:48px;cursor:pointer;
       }
       .mobile-nav{
-        position:fixed;top:72px;right:1rem;
-        background:var(--card);box-shadow:var(--shadow);
-        border-radius:.5rem;padding:.5rem;z-index:1001;
+        position:fixed;inset:0;
+        background:rgba(0,0,0,.5);
+        display:flex;flex-direction:column;
+        align-items:center;justify-content:center;gap:2rem;
+        z-index:1001;
+        opacity:0;visibility:hidden;pointer-events:none;
+        transition:opacity .3s ease;
       }
+      .mobile-nav.open{opacity:1;visibility:visible;pointer-events:auto}
+      .mobile-nav ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1.5rem;align-items:center}
+      .mobile-nav a{color:#fff;font-size:1.5rem;text-decoration:none}
       @media(min-width:900px){
         .menu-toggle{display:none}
         .mobile-nav{display:none}
@@ -74,20 +81,17 @@ main{padding-top:80px}
             aria-controls="mobileNav" aria-expanded="false">
       ☰
     </button>
-
-    <!-- Mobile menu -->
-    <nav id="mobileNav" class="mobile-nav" hidden aria-label="Mobile">
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#products">Products</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-
   </div>
 </header>
+<!-- Mobile menu -->
+<nav id="mobileNav" class="mobile-nav" aria-label="Mobile" aria-hidden="true">
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 <main id="home" tabindex="-1">
   <section class="hero container reveal">
     <div>
@@ -373,14 +377,15 @@ main{padding-top:80px}
   const mobileNav = document.getElementById('mobileNav');
   if (menuBtn && mobileNav){
     menuBtn.addEventListener('click', () => {
-      const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
-      menuBtn.setAttribute('aria-expanded', String(!expanded));
-      mobileNav.hidden = expanded;
+      const open = mobileNav.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(open));
+      mobileNav.setAttribute('aria-hidden', String(!open));
     });
     mobileNav.addEventListener('click', e => {
       if (e.target.closest('a')){
+        mobileNav.classList.remove('open');
         menuBtn.setAttribute('aria-expanded', 'false');
-        mobileNav.hidden = true;
+        mobileNav.setAttribute('aria-hidden', 'true');
       }
     });
   }
