@@ -6,7 +6,7 @@ const path = require('node:path');
 // Extract the navigation function from index.html
 const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
 const start = html.indexOf('function go(e)');
-const end = html.indexOf('} d.querySelector(\'nav\'', start) + 1;
+const end = html.indexOf('} document.querySelectorAll(\'nav\'', start) + 1;
 if (start === -1 || end === -1) {
   throw new Error('go function not found in index.html');
 }
