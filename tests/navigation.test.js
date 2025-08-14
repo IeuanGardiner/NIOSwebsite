@@ -5,20 +5,20 @@ const path = require('node:path');
 
 // Extract the navigation function from index.html
 const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
-const start = html.indexOf('function go(e)');
-const end = html.indexOf('} document.querySelectorAll(\'nav\'', start) + 1;
+  const start = html.indexOf('function go(e)');
+  const end = html.indexOf('} document.querySelectorAll(\'nav\'', start) + 1;
 if (start === -1 || end === -1) {
   throw new Error('go function not found in index.html');
 }
 const goSrc = `const d=document, h=document.querySelector('.site-header'); ${html.slice(start, end)}`;
 
 // Extract the mobile menu script segment
-const mobileStart = html.indexOf("const toggleBtn = document.querySelector('.nav-toggle');");
-const mobileEnd = html.indexOf('// Smooth scroll with offset', mobileStart);
-if (mobileStart === -1 || mobileEnd === -1) {
-  throw new Error('mobile menu script not found in index.html');
-}
-const mobileMenuSrc = html.slice(mobileStart, mobileEnd);
+  const mobileStart = html.indexOf("const toggleBtn = d.querySelector('.nav-toggle');");
+  const mobileEnd = html.indexOf('\n  });\n', mobileStart);
+  if (mobileStart === -1 || mobileEnd === -1) {
+    throw new Error('mobile menu script not found in index.html');
+  }
+  const mobileMenuSrc = html.slice(mobileStart, mobileEnd);
 
 function setupEnvironment() {
   let scrollArgs;
@@ -84,20 +84,26 @@ test('mobile menu toggles on click', { concurrency: 1 }, () => {
     focus() {}
   };
 
-  const menuStub = {
-    hidden: true,
-    querySelector: () => ({ focus: () => {} }),
-    querySelectorAll: () => [],
-    addEventListener: () => {},
-    contains: () => false
-  };
+    const menuStub = {
+      hidden: true,
+      classList: {
+        list: new Set(),
+        add(cls) { this.list.add(cls); },
+        remove(cls) { this.list.delete(cls); },
+        contains(cls) { return this.list.has(cls); }
+      },
+      querySelector: () => ({ focus: () => {} }),
+      querySelectorAll: () => [],
+      addEventListener: () => {},
+      contains: () => false
+    };
 
-  const classList = {
-    list: new Set(),
-    add(cls) { this.list.add(cls); },
-    remove(cls) { this.list.delete(cls); },
-    contains(cls) { return this.list.has(cls); }
-  };
+    const classList = {
+      list: new Set(),
+      add(cls) { this.list.add(cls); },
+      remove(cls) { this.list.delete(cls); },
+      contains(cls) { return this.list.has(cls); }
+    };
 
   const documentStub = {
     querySelector: (sel) => (sel === '.nav-toggle' ? toggleStub : null),
@@ -114,17 +120,19 @@ test('mobile menu toggles on click', { concurrency: 1 }, () => {
   global.document = documentStub;
   global.window = windowStub;
 
-  eval(mobileMenuSrc);
+    eval(`const d=document; ${mobileMenuSrc}`);
 
-  // First click opens the menu
-  toggleStub.clickHandler();
-  assert.equal(menuStub.hidden, false);
-  assert.equal(classList.contains('menu-open'), true);
+    // First click opens the menu
+    toggleStub.clickHandler();
+    assert.equal(menuStub.hidden, false);
+    assert.equal(menuStub.classList.contains('is-open'), true);
+    assert.equal(classList.contains('menu-open'), true);
 
-  // Second click closes the menu
-  toggleStub.clickHandler();
-  assert.equal(menuStub.hidden, true);
-  assert.equal(classList.contains('menu-open'), false);
+    // Second click closes the menu
+    toggleStub.clickHandler();
+    assert.equal(menuStub.hidden, true);
+    assert.equal(menuStub.classList.contains('is-open'), false);
+    assert.equal(classList.contains('menu-open'), false);
 
   global.document = originalDocument;
   global.window = originalWindow;

@@ -80,7 +80,7 @@ main{padding-top:80px}
     </nav>
 
     <!-- Mobile toggle button (visible on small screens) -->
-    <button class="nav-toggle" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu">
+    <button class="nav-toggle" type="button" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu">
       <span class="nav-toggle-bar" aria-hidden="true"></span>
       <span class="nav-toggle-bar" aria-hidden="true"></span>
       <span class="nav-toggle-bar" aria-hidden="true"></span>
@@ -88,7 +88,7 @@ main{padding-top:80px}
   </div>
 
   <!-- Mobile menu drawer -->
-    <div id="mobile-menu" class="mobile-menu">
+    <div id="mobile-menu" class="mobile-menu" hidden>
     <nav aria-label="Primary mobile">
       <ul>
         <li><a href="#home" data-close-menu>Home</a></li>
@@ -324,6 +324,7 @@ main{padding-top:80px}
       const focusableSel = 'a[href],button:not([disabled]),[tabindex]:not([tabindex="-1"])';
 
       function openMenu() {
+        mobileMenu.hidden = false;
         mobileMenu.classList.add('is-open');
         toggleBtn.setAttribute('aria-expanded', 'true');
         document.body.classList.add('menu-open');
@@ -334,6 +335,7 @@ main{padding-top:80px}
       }
 
       function closeMenu() {
+        mobileMenu.hidden = true;
         mobileMenu.classList.remove('is-open');
         toggleBtn.setAttribute('aria-expanded', 'false');
         document.body.classList.remove('menu-open');
