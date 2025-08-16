@@ -6,6 +6,7 @@
 /* About */ .about p{max-width:70ch}
 /* Services */ .grid{display:grid;grid-template-columns:1fr;gap:1rem} .services .grid{gap:1.25rem} @media(min-width:720px){.grid{grid-template-columns:repeat(2,1fr)}.services .grid{grid-template-columns:repeat(3,1fr)}} .card{background:var(--card);border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow)} .card h3{margin:.25rem 0 .25rem;font-size:1.05rem} .card p{margin:.25rem 0 0;color:var(--muted)} .icon{width:28px;height:28px} .services .card{display:flex;flex-direction:column;justify-content:space-between;min-height:320px} .service-img{margin-top:1rem;border-radius:var(--radius);width:100%;aspect-ratio:16/9;object-fit:cover}
 /* Products */ .products .product{display:grid;grid-template-columns:1fr;gap:1rem;align-items:center;padding:1.5rem 0;margin-block-end:1.5rem;margin-bottom:1.5rem;border-top:none} @media(min-width:900px){.products .product{grid-template-columns:1.2fr .8fr}} @media(max-width:639px){.products .product{padding:1rem 0;margin-block-end:1rem;margin-bottom:1rem}} .bullets{margin:.25rem 0 0 1.2rem} .product .imgwrap{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1rem} .placeholder{position:relative} .placeholder img{opacity:.5;display:block} .placeholder-badge{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--text);color:#fff;padding:.5rem .75rem;border-radius:.5rem;font-weight:600}
+/* CTA */ .cta{text-align:center} .cta .button{margin-top:.5rem}
 /* Contact */ .contact .details{font-weight:600} .form-embed{margin-top:1rem}
 /* Footer */ footer{margin-top:64px;padding:48px 0 64px;border-top:1px solid #e5e7eb;color:var(--muted);font-size:.95rem;text-align:center} .footer-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem;margin-bottom:1rem} .footer-nav a{color:inherit;padding:.25rem .5rem;border-radius:.5rem;text-decoration:none} .footer-nav a:hover,.footer-nav a:focus{background:var(--card);color:var(--text)}
 /* Motion / Reveal */ .reveal{opacity:0;transform:translateY(12px)} .reveal.revealed{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease} @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none}.reveal.revealed{transition:none}}
@@ -23,6 +24,7 @@
 .primary-nav ul{list-style:none;display:flex;gap:.5rem;margin:0;padding:0;flex-wrap:wrap}
 .primary-nav a{display:inline-block;padding:.5rem .75rem;border-radius:.5rem;text-decoration:none;color:var(--text)}
 .primary-nav a:hover,.primary-nav a:focus{background:var(--card)}
+.header-contact{display:none;gap:.75rem} .header-contact a{text-decoration:none;color:var(--text)} .header-contact a:hover,.header-contact a:focus{text-decoration:underline} @media(min-width:900px){.header-contact{display:flex;align-items:center}}
 
       /* Mobile menu */
       .menu-toggle{
@@ -61,6 +63,7 @@
   .primary-nav{display:block}
 }
 
+ .floating-contact{position:fixed;bottom:1.5rem;right:1.5rem;z-index:1000} @media(max-width:600px){.floating-contact{bottom:4.5rem;right:1rem}}
 /* Bump main padding to account for fixed header */
 main{padding-top:var(--header-height)}
 /* Mobile background */
@@ -87,6 +90,11 @@ main{padding-top:var(--header-height)}
       </ul>
     </nav>
 
+    <div class="header-contact">
+      <a href="tel:+447769249689">07769 249689</a>
+      <a href="mailto:info@nios-cloud.com">info@nios-cloud.com</a>
+    </div>
+
     <!-- Mobile nav toggle -->
     <button id="menuToggle" class="menu-toggle"
             aria-controls="mobileNav" aria-expanded="false">
@@ -101,6 +109,8 @@ main{padding-top:var(--header-height)}
     <li><a href="#services">Services</a></li>
     <li><a href="#products">Products</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="tel:+447769249689">07769 249689</a></li>
+    <li><a href="mailto:info@nios-cloud.com">info@nios-cloud.com</a></li>
     <li><a href="#" data-exit>Exit</a></li>
   </ul>
 </nav>
@@ -220,6 +230,11 @@ main{padding-top:var(--header-height)}
       <sub><span style="color:grey">*Certain Microsoft licensing is required for Dataverse and Power BI integration – I can advise and assist in ensuring you have the right licences in place.</span></sub>
   </section>
 
+  <section class="cta container reveal">
+    <h2>Ready to transform your business?</h2>
+    <a class="button" href="#contact">Contact us</a>
+  </section>
+
   <!-- Contact section with embedded Microsoft Forms iframe and noscript fallback -->
   <section id="contact" class="container">
     <h2>Start a new project</h2>
@@ -246,7 +261,7 @@ main{padding-top:var(--header-height)}
   </section>
 </main>
 
-<footer class="container">
+  <footer class="container">
   <nav class="footer-nav" aria-label="Footer">
     <a href="#home">Home</a>
     <a href="#services">Services</a>
@@ -254,7 +269,9 @@ main{padding-top:var(--header-height)}
     <a href="#contact">Contact</a>
   </nav>
   <div>&copy; NIOS Cloud Solutions Ltd.</div>
-</footer>
+  </footer>
+
+<a href="#contact" class="button floating-contact" aria-label="Contact us">Contact Us</a>
 
 <script>
 /* Minified-ish util JS: smooth scroll with header offset; on-scroll reveal; year. */
