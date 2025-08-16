@@ -7,7 +7,7 @@
 /* Services */ .grid{display:grid;grid-template-columns:1fr;gap:1rem} @media(min-width:720px){.grid{grid-template-columns:repeat(2,1fr)}.services .grid{grid-template-columns:repeat(3,1fr)}} .card{background:var(--card);border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow)} .card h3{margin:.25rem 0 .25rem;font-size:1.05rem} .card p{margin:.25rem 0 0;color:var(--muted)} .icon{width:28px;height:28px} .services .card{display:flex;flex-direction:column;justify-content:space-between;min-height:320px} .service-img{margin-top:1rem;border-radius:var(--radius);width:100%;aspect-ratio:16/9;object-fit:cover}
 /* Products */ .products .product{display:grid;grid-template-columns:1fr;gap:1rem;align-items:center;padding:1.5rem 0;margin-block-end:1.5rem;margin-bottom:1.5rem;border-top:none} @media(min-width:900px){.products .product{grid-template-columns:1.2fr .8fr}} @media(max-width:639px){.products .product{padding:1rem 0;margin-block-end:1rem;margin-bottom:1rem}} .bullets{margin:.25rem 0 0 1.2rem} .product .imgwrap{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1rem} .placeholder{position:relative} .placeholder img{opacity:.5;display:block} .placeholder-badge{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--text);color:#fff;padding:.5rem .75rem;border-radius:.5rem;font-weight:600}
 /* Contact */ .contact .details{font-weight:600} .form-embed{margin-top:1rem}
-/* Footer */ footer{margin-top:64px;padding:48px 0 64px;border-top:1px solid #e5e7eb;color:var(--muted);font-size:.95rem;text-align:center} .social{display:flex;justify-content:center;gap:1rem;margin-top:1rem} .social a{color:inherit} .social svg{width:24px;height:24px;display:block} .exports{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem;justify-content:center} .exports button{border:1px solid #d1d5db;background:#fff;border-radius:.5rem;padding:.4rem .6rem;cursor:pointer} .exports button:hover{background:#f3f4f6}
+/* Footer */ footer{margin-top:64px;padding:48px 0 64px;border-top:1px solid #e5e7eb;color:var(--muted);font-size:.95rem;text-align:center} .footer-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem;margin-bottom:1rem} .footer-nav a{color:inherit;padding:.25rem .5rem;border-radius:.5rem;text-decoration:none} .footer-nav a:hover,.footer-nav a:focus{background:var(--card);color:var(--text)}
 /* Motion / Reveal */ .reveal{opacity:0;transform:translateY(12px)} .reveal.revealed{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease} @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none}.reveal.revealed{transition:none}}
 /* Utilities */ .pill{display:inline-block;padding:.25rem .6rem;border-radius:999px;background:var(--accent);color:#0f172a;font-weight:700;font-size:.8rem}
 /* Responsive tweaks */ @media(min-width:768px){.hero{grid-template-columns:1.1fr .9fr}}
@@ -276,48 +276,18 @@ main{padding-top:80px}
 </main>
 
 <footer class="container">
-  <div>© <span id="y"></span> NIOS — Microsoft Power Platform consulting & development.</div>
-  <nav class="social" aria-label="Social media">
-    <a href="#" aria-label="LinkedIn">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="4" fill="currentColor"/><text x="12" y="12" dominant-baseline="middle" text-anchor="middle" font-size="10" fill="#fff" font-family="Segoe UI,Roboto,Helvetica,Arial">in</text></svg>
-    </a>
-    <a href="#" aria-label="X">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="4" fill="currentColor"/><text x="12" y="12" dominant-baseline="middle" text-anchor="middle" font-size="10" fill="#fff" font-family="Segoe UI,Roboto,Helvetica,Arial">x</text></svg>
-    </a>
-    <a href="#" aria-label="GitHub">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="4" fill="currentColor"/><text x="12" y="12" dominant-baseline="middle" text-anchor="middle" font-size="10" fill="#fff" font-family="Segoe UI,Roboto,Helvetica,Arial">gh</text></svg>
-    </a>
+  <nav class="footer-nav" aria-label="Footer">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#products">Products</a>
+    <a href="#contact">Contact</a>
   </nav>
-  <div class="exports" aria-label="Logo asset exports">
-    <button type="button" id="saveSvg">Download logo (SVG)</button>
-    <button type="button" id="saveSvgDark">Download logo dark (SVG)</button>
-    <button type="button" id="savePng">Download favicon (32×32 PNG)</button>
-  </div>
+  <div>© <span id="y"></span> NIOS — Microsoft Power Platform consulting & development.</div>
 </footer>
 
-<!-- Hidden logo variants for export -->
-<svg id="logo-light-src" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 32" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;">
-  <title>NIOS logo (light)</title>
-  <g>
-    <rect x="0" y="0" width="32" height="32" rx="6" fill="#A9DFA8"/>
-    <rect x="36" y="0" width="32" height="32" rx="6" fill="#d8f3d7"/>
-    <rect x="72" y="0" width="32" height="32" rx="6" fill="#e8f8e7"/>
-    <text x="120" y="22" font-family="Segoe UI,Roboto,Helvetica,Arial" font-size="18" fill="#1f2937" font-weight="700" text-anchor="end">NIOS</text>
-  </g>
-</svg>
-<svg id="logo-dark-src" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 32" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;">
-  <title>NIOS logo (dark)</title>
-  <rect width="128" height="32" fill="#1f2937" rx="6"/>
-  <g>
-    <rect x="2" y="2" width="28" height="28" rx="6" fill="#A9DFA8"/>
-    <rect x="36" y="2" width="28" height="28" rx="6" fill="#d8f3d7"/>
-    <rect x="70" y="2" width="28" height="28" rx="6" fill="#e8f8e7"/>
-    <text x="124" y="22" font-family="Segoe UI,Roboto,Helvetica,Arial" font-size="18" fill="#ffffff" font-weight="700" text-anchor="end">NIOS</text>
-  </g>
-</svg>
-
 <script>
-/* Minified-ish util JS: smooth scroll with header offset; on-scroll reveal; asset exports; year. */
+/* Minified-ish util JS: smooth scroll with header offset; on-scroll reveal; year. */
 (function(){
   const d = document;
   const h = d.querySelector('.site-header');
@@ -339,55 +309,20 @@ main{padding-top:80px}
   } document.querySelectorAll('nav').forEach(n => n.addEventListener('click', go));
   d.querySelectorAll('a.button[href^="#"]').forEach(a => a.addEventListener('click', go));
 
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!prefersReduced && 'IntersectionObserver' in window) {
-    const io = new IntersectionObserver(es => {
-      es.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('revealed');
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: .12 });
-    d.querySelectorAll('.reveal').forEach(el => io.observe(el));
-  }
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReduced && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver(es => {
+        es.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('revealed');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: .12 });
+      d.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    }
 
-  function dl(blob, name) {
-    const u = URL.createObjectURL(blob), a = d.createElement('a');
-    a.href = u; a.download = name; d.body.appendChild(a);
-    a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 1500);
-  }
-
-  function svgBlob(id) {
-    const src = d.getElementById(id);
-    if (!src) return new Blob();
-    const n = src.cloneNode(true);
-    const t = '<?xml version="1.0" encoding="UTF-8"?>\n' + new XMLSerializer().serializeToString(n);
-    return new Blob([t], { type: 'image/svg+xml' });
-  }
-
-  const saveSvg = d.getElementById('saveSvg');
-  if (saveSvg) saveSvg.addEventListener('click', () => dl(svgBlob('logo-light-src'), 'assets/nios-logo.svg'));
-  const saveSvgDark = d.getElementById('saveSvgDark');
-  if (saveSvgDark) saveSvgDark.addEventListener('click', () => dl(svgBlob('logo-dark-src'), 'assets/nios-logo-dark.svg'));
-  const savePng = d.getElementById('savePng');
-  if (savePng) savePng.addEventListener('click', () => {
-    const src = d.getElementById('logo-light-src');
-    if (!src) return;
-    const s = src.cloneNode(true);
-    const c = d.createElement('canvas');
-    c.width = 32; c.height = 32;
-    const ctx = c.getContext('2d');
-    const img = new Image();
-    const data = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(new XMLSerializer().serializeToString(s));
-    img.onload = function() {
-      ctx.drawImage(img, 0, 0, 32, 32);
-      c.toBlob(b => dl(b, 'assets/nios-favicon-32.png'));
-    };
-    img.src = data;
-  });
-
-  // Mobile nav toggle
+    // Mobile nav toggle
   const toggle = document.querySelector('.menu-toggle');
   const menu   = document.getElementById('mobileNav');
   if (toggle && menu){
