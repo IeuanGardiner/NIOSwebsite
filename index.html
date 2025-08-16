@@ -3,6 +3,61 @@
 /* ======= Accessibility ======= */.skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}.skip-link:focus{left:1rem;top:1rem;width:auto;height:auto;z-index:9999;background:#000;color:#fff;padding:.5rem .75rem;border-radius:.5rem} :focus{outline:3px solid var(--accent);outline-offset:2px} :focus:not(:focus-visible){outline:none}
 /* ======= Layout ======= */header.site-header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.9);backdrop-filter:saturate(120%) blur(6px);border-bottom:1px solid #e5e7eb} .container{max-width:1120px;margin:0 auto;padding:0 1rem} .nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:100px} .logo{display:flex;align-items:center;text-decoration:none;color:var(--text)} .brand-logo{height:80px;width:auto;vertical-align:middle} nav ul{list-style:none;display:flex;gap:.75rem;margin:0;padding:0} nav a{display:inline-block;padding:.5rem .75rem;border-radius:.5rem;text-decoration:none;color:var(--text)} nav a:hover, nav a:focus{background:var(--card)} main{padding-top:108px} section{padding:96px 0;scroll-margin-top:80px} section.container{padding:30px 1rem} section+section{border-top:1px solid #e5e7eb;} .muted{color:var(--muted)}
 /* Hero */ .hero{position:relative;display:grid;grid-template-columns:1fr;gap:1.25rem;align-items:center} .hero h1{font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.15;margin:.25rem 0 .5rem} .hero p{font-size:1.05rem;color:var(--muted);max-width:60ch} .hero-cta{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.75rem} .hero-art{position:relative;border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow);padding:1rem} .hero-art svg{width:100%;height:auto;display:block}
+
+/* Full-viewport hero */
+:root{ --headerH: 80px; }          /* JS updates this on load/resize */
+@media (min-width:900px){ :root{ --headerH: 100px; } }
+
+.hero{
+  min-height: calc(100svh - var(--headerH)); /* full screen incl. mobile UI chrome */
+  align-items: center;
+}
+
+/* Carousel */
+.carousel{
+  position:relative;background:var(--card);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:1rem;overflow:hidden;
+}
+.carousel-viewport{overflow:hidden}
+.carousel-track{
+  display:flex;transition:transform .45s ease;will-change:transform;
+}
+.carousel-slide{
+  min-width:100%;padding:0 .25rem  .25rem  .25rem;
+}
+.carousel-card{
+  background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:1rem;display:grid;grid-template-columns:1fr;gap:.75rem;
+}
+.carousel-card h4{margin:.25rem 0}
+.carousel-img{
+  width:100%;aspect-ratio:16/9;border-radius:12px;object-fit:cover;background:#eef2f7;
+}
+
+/* carousel controls */
+.carousel-btn{
+  position:absolute;top:50%;transform:translateY(-50%);
+  border:0;background:#fff;box-shadow:var(--shadow);
+  width:40px;height:40px;border-radius:999px;cursor:pointer;
+}
+.carousel-btn[disabled]{opacity:.5;cursor:not-allowed}
+.carousel-prev{left:.5rem}
+.carousel-next{right:.5rem}
+.carousel-dots{
+  display:flex;gap:.4rem;justify-content:center;margin:.5rem 0 0;
+}
+.carousel-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:#d1d5db;border:0;cursor:pointer;
+}
+.carousel-dot[aria-current="true"]{background:#111827}
+.hero-cta-under{
+  display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.5rem;justify-content:center;
+}
+@media(min-width:768px){
+  .carousel-card{grid-template-columns:1fr 1.1fr;align-items:center}
+}
 /* About */ .about p{max-width:70ch}
 /* Services */ .grid{display:grid;grid-template-columns:1fr;gap:1rem} .services .grid{gap:1.25rem} @media(min-width:720px){.grid{grid-template-columns:repeat(2,1fr)}.services .grid{grid-template-columns:repeat(3,1fr)}} .card{background:var(--card);border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow)} .card h3{margin:.25rem 0 .25rem;font-size:1.05rem} .card p{margin:.25rem 0 0;color:var(--muted)} .icon{width:28px;height:28px} .services .card{display:flex;flex-direction:column;justify-content:space-between;min-height:320px} .service-img{margin-top:1rem;border-radius:var(--radius);width:100%;aspect-ratio:16/9;object-fit:cover}
 /* Products */ .products .product{display:grid;grid-template-columns:1fr;gap:1rem;align-items:center;padding:1.5rem 0;margin-block-end:1.5rem;margin-bottom:1.5rem;border-top:none} @media(min-width:900px){.products .product{grid-template-columns:1.2fr .8fr}} @media(max-width:639px){.products .product{padding:1rem 0;margin-block-end:1rem;margin-bottom:1rem}} .bullets{margin:.25rem 0 0 1.2rem} .product .imgwrap{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1rem} .placeholder{position:relative} .placeholder img{opacity:.5;display:block} .placeholder-badge{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--text);color:#fff;padding:.5rem .75rem;border-radius:.5rem;font-weight:600}
@@ -104,60 +159,84 @@ main{padding-top:80px}
   </ul>
 </nav>
 <main id="home" tabindex="-1">
-  <section class="hero container reveal">
-      <div>
-        <span class="pill">Low-code first</span>
-        <h1>Transform your processes — fast, flexible, low-code</h1>
-        <p>From concept to delivery, we design secure, scalable solutions using Power Platform, Azure, Microsoft 365, SharePoint and Teams — enabling rapid deployment, customisability and smarter workflows.</p>
-        <div class="hero-cta">
-        <a class="button" href="#contact">Get a free consultation</a>
-        <a class="button alt" href="#products">See our work</a>
+<section class="hero container reveal" id="home">
+  <div>
+    <span class="pill">Low-code first</span>
+    <h1>Transform your processes — fast, flexible, low-code</h1>
+    <p>From concept to delivery, we design secure, scalable solutions using Power Platform, Azure, Microsoft 365, SharePoint and Teams — enabling rapid deployment, customisability and smarter workflows.</p>
+  </div>
+
+  <!-- Carousel column -->
+  <div class="hero-art" aria-label="Featured products">
+    <div class="carousel" id="productCarousel" role="region" aria-roledescription="carousel" aria-label="Featured products">
+      <div class="carousel-viewport" tabindex="0" aria-live="polite">
+        <div class="carousel-track">
+          <!-- Slide 1 -->
+          <div class="carousel-slide" data-name="Timesheet App">
+            <article class="carousel-card">
+              <div>
+                <h4>Timesheet App</h4>
+                <p>Track time. Get approvals. Gain insights.</p>
+                <ul class="bullets">
+                  <li>Mobile-first time entry</li>
+                  <li>Flexible approvals</li>
+                  <li>Power BI analytics</li>
+                </ul>
+              </div>
+              <img class="carousel-img" alt="Timesheet App mock-up"
+                   src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360"><rect width="640" height="360" fill="%23f3f6fa"/><rect x="24" y="24" width="592" height="64" rx="10" fill="%231f2937" opacity=".15"/><rect x="24" y="104" width="280" height="200" rx="12" fill="%23A9DFA8"/><rect x="320" y="104" width="296" height="20" rx="8" fill="%231f2937" opacity=".15"/><rect x="320" y="132" width="296" height="14" rx="7" fill="%231f2937" opacity=".12"/></svg>'>
+            </article>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="carousel-slide" data-name="Expense App">
+            <article class="carousel-card">
+              <div>
+                <h4>Expense App</h4>
+                <p>Snap receipts. Submit claims. Get reimbursed faster.</p>
+                <ul class="bullets">
+                  <li>Receipt capture</li>
+                  <li>Multi-stage approvals</li>
+                  <li>Spend analytics</li>
+                </ul>
+              </div>
+              <img class="carousel-img" alt="Expense App mock-up"
+                   src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360"><rect width="640" height="360" fill="%23f3f6fa"/><rect x="24" y="24" width="592" height="64" rx="10" fill="%231f2937" opacity=".15"/><rect x="24" y="104" width="280" height="200" rx="12" fill="%23A9DFA8"/><g fill="%231f2937" opacity=".12"><rect x="320" y="104" width="296" height="20" rx="8"/><rect x="320" y="132" width="296" height="14" rx="7"/></g></svg>'>
+            </article>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="carousel-slide" data-name="Projects/PMO Suite">
+            <article class="carousel-card">
+              <div>
+                <h4>Projects / PMO Suite</h4>
+                <p>Requests, projects, tasks, and reporting—built on Dataverse.</p>
+                <ul class="bullets">
+                  <li>Project requests → projects</li>
+                  <li>Risks, issues, status reports</li>
+                  <li>Teams integration</li>
+                </ul>
+              </div>
+              <img class="carousel-img" alt="Projects Suite mock-up"
+                   src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360"><rect width="640" height="360" fill="%23f3f6fa"/><rect x="24" y="24" width="592" height="64" rx="10" fill="%231f2937" opacity=".15"/><rect x="24" y="104" width="280" height="200" rx="12" fill="%23A9DFA8"/><rect x="320" y="104" width="296" height="96" rx="12" fill="%23e8f8e7"/></svg>'>
+            </article>
+          </div>
+        </div>
       </div>
+
+      <!-- Controls -->
+      <button class="carousel-btn carousel-prev" aria-label="Previous slide">‹</button>
+      <button class="carousel-btn carousel-next" aria-label="Next slide">›</button>
+      <div class="carousel-dots" role="tablist" aria-label="Choose slide"></div>
     </div>
-    <div class="hero-art" aria-hidden="true">
-      <!-- Abstract Microsoft-ecosystem illustration (SVG) -->
-      <svg viewBox="0 0 720 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label=""
-        preserveAspectRatio="xMidYMid meet">
-        <defs>
-          <filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#000" flood-opacity=".08"/></filter>
-        </defs>
-        <rect width="100%" height="100%" rx="16" fill="#fff"/>
-        <g filter="url(#s)">
-          <rect x="40" y="40" width="220" height="140" rx="14" fill="#f3f6fa"/>
-          <rect x="70" y="70" width="160" height="16" rx="8" fill="#1f2937" opacity=".2"/>
-          <rect x="70" y="100" width="120" height="12" rx="6" fill="#1f2937" opacity=".12"/>
-          <rect x="70" y="120" width="180" height="12" rx="6" fill="#1f2937" opacity=".12"/>
-        </g>
-        <g filter="url(#s)">
-          <rect x="280" y="60" width="380" height="260" rx="16" fill="#f3f6fa"/>
-          <g transform="translate(310,90)">
-            <rect width="320" height="24" rx="12" fill="#1f2937" opacity=".2"/>
-            <rect y="40" width="140" height="140" rx="12" fill="#A9DFA8"/>
-            <rect x="160" y="40" width="150" height="16" rx="8" fill="#1f2937" opacity=".15"/>
-            <rect x="160" y="66" width="180" height="12" rx="6" fill="#1f2937" opacity=".12"/>
-            <rect x="160" y="86" width="180" height="12" rx="6" fill="#1f2937" opacity=".12"/>
-            <rect x="0" y="190" width="320" height="8" rx="4" fill="#1f2937" opacity=".08"/>
-          </g>
-        </g>
-        <g filter="url(#s)">
-          <rect x="60" y="220" width="240" height="140" rx="14" fill="#f3f6fa"/>
-          <!-- Sparkline bars -->
-          <g transform="translate(90,250)" fill="#1f2937" opacity=".18">
-            <rect width="14" height="60" rx="4"/>
-            <rect x="26" width="14" height="42" rx="4"/>
-            <rect x="52" width="14" height="70" rx="4"/>
-            <rect x="78" width="14" height="32" rx="4"/>
-            <rect x="104" width="14" height="56" rx="4"/>
-            <rect x="130" width="14" height="44" rx="4"/>
-          </g>
-        </g>
-        <!-- Accent nodes -->
-        <circle cx="660" cy="80" r="8" fill="#A9DFA8"/>
-        <circle cx="620" cy="340" r="6" fill="#A9DFA8"/>
-        <circle cx="40" cy="200" r="6" fill="#A9DFA8"/>
-      </svg>
+
+    <!-- CTAs under the carousel -->
+    <div class="hero-cta-under">
+      <a class="button" href="#contact">Get a free consultation</a>
+      <a class="button alt" href="#products">See our work</a>
     </div>
-  </section>
+  </div>
+</section>
 
   <section id="about" class="about container reveal">
     <h2>About</h2>
@@ -343,6 +422,72 @@ main{padding-top:80px}
       document.body.style.overflow = '';
     });
   }
+
+  // --- Header height → CSS var (ensures perfect full-screen hero)
+  function setHeaderVar(){
+    const header = document.querySelector ? document.querySelector('.site-header') : null;
+    const hh = header ? header.offsetHeight : 0;
+    if (document.documentElement && document.documentElement.style) {
+      document.documentElement.style.setProperty('--headerH', hh + 'px');
+    }
+  }
+  setHeaderVar();
+  if (typeof window !== 'undefined') {
+    window.addEventListener('resize', setHeaderVar);
+  }
+
+  // --- Simple, accessible carousel
+  (function(){
+    const root  = document.getElementById('productCarousel');
+    if(!root) return;
+
+    const track = root.querySelector('.carousel-track');
+    const slides= [...root.querySelectorAll('.carousel-slide')];
+    const prev  = root.querySelector('.carousel-prev');
+    const next  = root.querySelector('.carousel-next');
+    const dotsC = root.querySelector('.carousel-dots');
+    let index = 0, timer;
+
+    // dots
+    slides.forEach((s,i)=>{
+      const b = document.createElement('button');
+      b.className = 'carousel-dot';
+      b.type = 'button';
+      b.setAttribute('role','tab');
+      b.setAttribute('aria-label', `Show ${s.dataset.name}`);
+      b.addEventListener('click', ()=>go(i, true));
+      dotsC.appendChild(b);
+    });
+
+    function update(){
+      track.style.transform = `translateX(-${index*100}%)`;
+      [...dotsC.children].forEach((d,i)=>d.setAttribute('aria-current', i===index ? 'true' : 'false'));
+      prev.disabled = (index===0);
+      next.disabled = (index===slides.length-1);
+    }
+    function go(i, pause){
+      index = Math.max(0, Math.min(slides.length-1, i));
+      update();
+      if(pause) stopAuto();
+    }
+    function nextSlide(){ go(index+1); if(index===slides.length-1) go(0); }
+    function startAuto(){ timer = setInterval(nextSlide, 6000); }
+    function stopAuto(){ clearInterval(timer); }
+
+    prev.addEventListener('click',()=>go(index-1,true));
+    next.addEventListener('click',()=>go(index+1,true));
+
+    // keyboard
+    root.querySelector('.carousel-viewport')
+        .addEventListener('keydown', e=>{
+          if(e.key==='ArrowRight'){ go(index+1,true); }
+          if(e.key==='ArrowLeft'){ go(index-1,true); }
+        });
+
+    update(); startAuto();
+    root.addEventListener('pointerenter', stopAuto);
+    root.addEventListener('pointerleave', startAuto);
+  })();
 })();
 </script>
 </body></html>
