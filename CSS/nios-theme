@@ -79,6 +79,13 @@
   --on-accent:     #092012;
 }
 
+/* ---------- Responsive variable adjustments ---------- */
+@media (min-width: 900px) {
+  :root {
+    --header-height: 90px;
+  }
+}
+
 /* ---------- Optional colour helpers ---------- */
 /*
    These classes allow you to apply the palette directly to elements
