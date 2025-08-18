@@ -1,0 +1,134 @@
+/* ======================================================================
+   NIOS Theme – extracted from index.html and updated with new palette
+   ----------------------------------------------------------------------
+   This stylesheet defines CSS custom properties for the NIOS website.
+   It overrides the base variables declared inline in the existing
+   `index.html` and introduces support for dark mode via the user's
+   system preference or a manual `data-theme="dark"` attribute on any
+   ancestor element. Drop this file into your repo and include it after
+   your existing styles to apply the new colours and dark‑mode support.
+
+   Source palette (light mode):
+     • NIOS‑Theme‑1 — #253140 (primary text/deep slate)
+     • NIOS‑Theme‑2 — #656B73 (muted text/muted slate)
+     • NIOS‑Theme‑3 — #E4F2E6 (surface/light mint tint)
+     • NIOS‑Theme‑4 — #A9D9A7 (accent/mint)
+     • NIOS‑Theme‑5 — #F2F2F2 (page background/neutral mist)
+   ----------------------------------------------------------------------
+*/
+
+/* ---------- Base variables (light mode) ---------- */
+/*
+   The :root selector holds our design tokens.  These variables mirror
+   those found in the original inline <style> block of index.html but
+   are updated to use the new palette.  When this stylesheet is loaded
+   after the inline styles, these values take precedence.
+*/
+:root {
+  /* Core colour tokens */
+  --text:   #253140; /* primary text colour (deep slate) */
+  --muted:  #656B73; /* secondary/muted text (muted slate) */
+  --bg:     #F2F2F2; /* page background (neutral mist) */
+  --card:   #E4F2E6; /* card and surface backgrounds (soft mint tint) */
+  --accent: #A9D9A7; /* brand accent colour (mint) */
+
+  /* Structural tokens (unchanged from original) */
+  --radius: 18px;
+  --shadow: 0 6px 24px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.06);
+  --header-height: 72px;
+
+  /* Additional tokens */
+  --border-subtle: #F2F2F2; /* subtle border colour for dividers */
+  --border:        #656B73; /* default border colour */
+  --on-accent:     #0F1A24; /* text colour when placed on accent backgrounds */
+}
+
+/* ---------- Dark mode via prefers-colour-scheme ---------- */
+/*
+   When the user's operating system indicates a preference for a dark
+   colour scheme, these variables override the light‑mode values above.
+   Only variables that differ between themes are redefined here.
+*/
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:     #0F1A24; /* dark page background */
+    --card:   #182431; /* dark surface background */
+    --text:   #E8EEF2; /* light text colour */
+    --muted:  #B9C1C8; /* muted/light text colour */
+    --border-subtle: #1A2531; /* subtle borders in dark mode */
+    --border:        #314051; /* default border in dark mode */
+    --on-accent:     #092012; /* text colour on accent in dark mode */
+    /* accent remains the same across themes */
+  }
+}
+
+/* ---------- Manual dark mode override ---------- */
+/*
+   If you want to allow users to explicitly toggle dark mode, you can
+   set the `data-theme="dark"` attribute on the <html> element or any
+   ancestor container.  These definitions mirror the prefers‑colour
+   rules above and will override them when present.
+*/
+[data-theme="dark"] {
+  --bg:     #0F1A24;
+  --card:   #182431;
+  --text:   #E8EEF2;
+  --muted:  #B9C1C8;
+  --border-subtle: #1A2531;
+  --border:        #314051;
+  --on-accent:     #092012;
+}
+
+/* ---------- Optional colour helpers ---------- */
+/*
+   These classes allow you to apply the palette directly to elements
+   without using variables.  They may be useful when writing HTML or
+   Markdown content outside of the index file.
+*/
+.NIOS-Theme-1-hex  { color: #253140; }
+.NIOS-Theme-2-hex  { color: #656B73; }
+.NIOS-Theme-3-hex  { color: #E4F2E6; }
+.NIOS-Theme-4-hex  { color: #A9D9A7; }
+.NIOS-Theme-5-hex  { color: #F2F2F2; }
+
+.NIOS-Theme-1-rgba { color: rgba(37, 49, 64, 1); }
+.NIOS-Theme-2-rgba { color: rgba(101, 107, 115, 1); }
+.NIOS-Theme-3-rgba { color: rgba(228, 242, 230, 1); }
+.NIOS-Theme-4-rgba { color: rgba(169, 217, 167, 1); }
+.NIOS-Theme-5-rgba { color: rgba(242, 242, 242, 1); }
+
+.NIOS-Theme-1-hsla { color: hsla(213, 26%, 19%, 1); }
+.NIOS-Theme-2-hsla { color: hsla(214, 6%, 42%, 1); }
+.NIOS-Theme-3-hsla { color: hsla(128, 34%, 92%, 1); }
+.NIOS-Theme-4-hsla { color: hsla(117, 39%, 75%, 1); }
+.NIOS-Theme-5-hsla { color: hsla(0, 0%, 94%, 1); }
+
+/* ---------- Utility overrides for existing elements ---------- */
+/*
+   The original index.html contains a few hard‑coded colours such as
+   white backgrounds (#fff) or grey borders (#e5e7eb).  These rules
+   override those hard‑coded values to ensure they match the new
+   palette.  You can extend or adjust these selectors further to
+   customise other elements as needed.
+*/
+/* Replace white modal background with the card colour */
+.modal {
+  background: var(--card) !important;
+}
+
+/* Update borders from the old grey to our subtle border colour */
+header.site-header,
+footer,
+section + section {
+  border-color: var(--border-subtle) !important;
+}
+
+/* Ensure mobile navigation hover state uses the primary text colour */
+.mobile-nav a:hover {
+  color: var(--text) !important;
+}
+
+/* Pill component text colour matches on‑accent token */
+.pill {
+  color: var(--on-accent) !important;
+}
