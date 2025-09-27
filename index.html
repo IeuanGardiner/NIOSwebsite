@@ -7,6 +7,7 @@
 /* Services */ .grid{display:grid;grid-template-columns:1fr;gap:1rem} .services .grid{gap:1.25rem} @media(min-width:720px){.grid{grid-template-columns:repeat(2,1fr)}.services .grid{grid-template-columns:repeat(3,1fr)}} .card{background:var(--card);border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow)} .card h3{margin:.25rem 0 .25rem;font-size:1.05rem} .card p{margin:.25rem 0 0;color:var(--muted)} .icon{width:28px;height:28px} .fill-accent{fill:var(--accent)} .fill-accent-light{fill:color-mix(in srgb,var(--accent) 80%,white)} .fill-accent-lighter{fill:color-mix(in srgb,var(--accent) 60%,white)} .stroke-text{stroke:var(--text)} .services .card{display:flex;flex-direction:column;justify-content:space-between;min-height:320px} .service-img{margin-top:1rem;border-radius:var(--radius);width:100%;aspect-ratio:16/9;object-fit:cover}
 /* Products */ .products .product{display:grid;grid-template-columns:1fr;gap:1rem;align-items:center;padding:1.5rem 0;margin-block-end:1.5rem;margin-bottom:1.5rem;border-top:none} @media(min-width:900px){.products .product{grid-template-columns:1.2fr .8fr}} @media(max-width:639px){.products .product{padding:1rem 0;margin-block-end:1rem;margin-bottom:1rem}} .bullets{margin:.25rem 0 0 1.2rem} .product .imgwrap{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1rem} .placeholder{position:relative} .placeholder img{opacity:.5;display:block} .placeholder-badge{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--text);color:var(--bg);padding:.5rem .75rem;border-radius:.5rem;font-weight:600}
 /* CTA */ .cta{text-align:center} .cta .button{margin-top:.5rem}
+/* Contact */ .contact{background:rgba(255,255,255,.7);border-radius:var(--radius);box-shadow:var(--shadow);padding:72px 2rem;margin:0 auto} .contact h2{margin-top:0} .contact-grid{display:grid;gap:2rem} @media(min-width:780px){.contact-grid{grid-template-columns:1fr 1fr}} .contact-card{background:var(--card);border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow)} .contact-card p{margin-top:0;color:var(--muted)} .contact-list{list-style:none;padding:0;margin:1.25rem 0 0;display:grid;gap:.75rem} .contact-list a{text-decoration:none;font-weight:600} .contact-placeholder{border:2px dashed color-mix(in srgb,var(--text) 40%,transparent);border-radius:var(--radius);padding:2rem;min-height:260px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:1rem;background:rgba(255,255,255,.65)} .contact-placeholder strong{font-size:1.1rem} .contact-placeholder p{margin:0;color:var(--muted)}
 /* Footer */ footer{margin-top:64px;padding:48px 0 64px;border-top:1px solid var(--card);color:var(--muted);font-size:.95rem;text-align:center} .footer-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem;margin-bottom:1rem} .footer-nav a{color:inherit;padding:.25rem .5rem;border-radius:.5rem;text-decoration:none} .footer-nav a:hover,.footer-nav a:focus{background:var(--card);color:var(--text)}
 /* Motion / Reveal */ .reveal{opacity:0;transform:translateY(12px)} .reveal.revealed{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease} @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none}.reveal.revealed{transition:none}}
 /* Utilities */ .pill{display:inline-block;padding:.25rem .6rem;border-radius:999px;background:var(--accent);color:var(--text);font-weight:700;font-size:.8rem}
@@ -84,6 +85,7 @@ main{padding-top:var(--header-height)}
         <li><a href="#about">About</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#products">Products</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
 
@@ -104,6 +106,7 @@ main{padding-top:var(--header-height)}
     <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#products">Products</a></li>
+    <li><a href="#contact">Contact</a></li>
     <li><a href="mailto:info@nios-cloud.com">info@nios-cloud.com</a></li>
     <li><a href="#" data-exit>Exit</a></li>
   </ul>
@@ -223,6 +226,24 @@ main{padding-top:var(--header-height)}
       <sub><span style="color:grey">*Certain Microsoft licensing is required for Dataverse and Power BI integration – I can advise and assist in ensuring you have the right licences in place.</span></sub>
   </section>
 
+  <section id="contact" class="contact container reveal" aria-labelledby="contact-title">
+    <h2 id="contact-title">Contact</h2>
+    <div class="contact-grid">
+      <article class="contact-card" aria-label="Ways to reach NIOS">
+        <h3>Let’s plan your next project</h3>
+        <p>Share a little about your organisation, the processes you’d like to improve, and the outcomes you need. We’ll schedule a discovery call to explore options across Microsoft Power Platform, Dynamics 365, and Azure.</p>
+        <ul class="contact-list">
+          <li><a href="mailto:info@nios-cloud.com">info@nios-cloud.com</a></li>
+          <li><a href="https://www.linkedin.com/company/nios-cloud" target="_blank" rel="noopener">Connect on LinkedIn</a></li>
+        </ul>
+      </article>
+      <div class="contact-placeholder" role="group" aria-labelledby="contact-form-placeholder">
+        <strong id="contact-form-placeholder">Contact form coming soon</strong>
+        <p>This space will host our secure enquiry form. In the meantime, drop us a message and we’ll get back to you within one business day.</p>
+      </div>
+    </div>
+  </section>
+
 </main>
 
   <footer class="container">
@@ -230,6 +251,7 @@ main{padding-top:var(--header-height)}
     <a href="#home">Home</a>
     <a href="#services">Services</a>
     <a href="#products">Products</a>
+    <a href="#contact">Contact</a>
   </nav>
   <div>&copy; NIOS Cloud Solutions Ltd.</div>
   </footer>
