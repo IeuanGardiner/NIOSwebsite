@@ -1,17 +1,9 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const fs = require('node:fs');
 const path = require('node:path');
 
-// Extract the navigation function from index.html
-const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
-  const start = html.indexOf('function go(e)');
-  const end = html.indexOf('} document.querySelectorAll(\'nav\'', start) + 1;
-if (start === -1 || end === -1) {
-  throw new Error('go function not found in index.html');
-}
-const goSrc = `const d=document, h=document.querySelector('.site-header'); ${html.slice(start, end)}`;
-
+// Load the navigation handler from the modular script
+const { go } = require(path.join('..', 'scripts', 'main.js'));
 
 function setupEnvironment() {
   let scrollArgs;
@@ -52,16 +44,14 @@ function setupEnvironment() {
 test('go calls scrollTo with header offset', { concurrency: 1 }, () => {
   global.CSS = { escape: (s) => s };
   const env = setupEnvironment();
-  const goFn = eval(`${goSrc}; go`);
-  const result = env.triggerClick(goFn);
+  const result = env.triggerClick(go);
   assert.deepStrictEqual(result, { top: 392, behavior: 'smooth' });
 });
 
 test('go works when CSS.escape is missing', { concurrency: 1 }, () => {
   global.CSS = undefined;
   const env = setupEnvironment();
-  const goFn = eval(`${goSrc}; go`);
-  const result = env.triggerClick(goFn);
+  const result = env.triggerClick(go);
   assert.equal(result.top, 392);
 });
 

@@ -1,16 +1,8 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const fs = require('node:fs');
 const path = require('node:path');
 
-// Extract mobile nav script from index.html
-const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
-const start = html.indexOf("const toggle = document.querySelector('.menu-toggle')");
-const end = html.indexOf('\n})();', start);
-if (start === -1 || end === -1) {
-  throw new Error('mobile nav script not found in index.html');
-}
-const navSrc = html.slice(start, end);
+const { initialiseSite } = require(path.join('..', 'scripts', 'main.js'));
 
 function setup() {
   let btnClick, menuClick;
@@ -29,7 +21,8 @@ function setup() {
         if (menu.cls.has(name)) { menu.cls.delete(name); return false; }
         menu.cls.add(name); return true;
       },
-      contains: name => menu.cls.has(name)
+      contains: name => menu.cls.has(name),
+      remove: name => menu.cls.delete(name)
     },
     toggleAttribute: (name, force) => {
       if (force === undefined) {
@@ -42,11 +35,22 @@ function setup() {
     addEventListener: (type, fn) => { if (type === 'click') menuClick = fn; }
   };
   const body = { style: {} };
+  const navElement = { addEventListener: () => {} };
   global.document = {
     querySelector: sel => sel === '.menu-toggle' ? toggle : null,
+    querySelectorAll: (selector) => {
+      if (selector === 'nav') return [navElement];
+      if (selector === 'a.button[href^="#"]') return [];
+      if (selector === '.reveal') return [];
+      return [];
+    },
     getElementById: id => id === 'mobileNav' ? menu : null,
     body
   };
+  global.window = {
+    matchMedia: () => ({ matches: false })
+  };
+  initialiseSite();
   return {
     toggle,
     menu,
@@ -66,7 +70,6 @@ function setup() {
 
 test('button toggles menu visibility and body scroll', () => {
   const env = setup();
-  eval(navSrc);
   env.clickToggle();
   assert.equal(env.toggle.getAttribute('aria-expanded'), 'true');
   assert.equal(env.menu.classList.contains('open'), true);
@@ -83,7 +86,6 @@ test('button toggles menu visibility and body scroll', () => {
 
 test('clicking a menu link closes the menu', () => {
   const env = setup();
-  eval(navSrc);
   env.clickToggle();
   env.clickMenuLink();
   assert.equal(env.toggle.getAttribute('aria-expanded'), 'false');
@@ -95,7 +97,6 @@ test('clicking a menu link closes the menu', () => {
 
 test('clicking the exit link closes the menu without navigation', () => {
   const env = setup();
-  eval(navSrc);
   env.clickToggle();
   const res = env.clickExitLink();
   assert.equal(env.toggle.getAttribute('aria-expanded'), 'false');
