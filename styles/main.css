@@ -30,6 +30,10 @@ svg {
   display: block;
 }
 
+figure {
+  margin: 0;
+}
+
 a {
   color: inherit;
 }
