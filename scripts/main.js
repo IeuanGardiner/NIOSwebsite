@@ -65,43 +65,87 @@ function initialiseSite() {
   const toggle = d.querySelector('.menu-toggle');
   const menu = d.getElementById('mobileNav');
   if (toggle && menu) {
-    toggle.addEventListener('click', () => {
-      const isOpen = menu.classList.toggle('open');
+    const focusableSelector = 'a[href], button:not([disabled])';
+    let focusableElements = [];
+    let previouslyFocused;
+
+    const setAria = (isOpen) => {
       toggle.setAttribute('aria-expanded', String(isOpen));
       menu.toggleAttribute('hidden', !isOpen);
+      menu.classList.toggle('open', isOpen);
       document.body.style.overflow = isOpen ? 'hidden' : '';
+    };
+
+    const focusFirstElement = () => {
+      focusableElements = Array.from(menu.querySelectorAll(focusableSelector));
+      const first = focusableElements.find((el) => !el.hasAttribute('data-close')) || focusableElements[0];
+      first?.focus({ preventScroll: true });
+    };
+
+    const closeMenu = (returnFocus = true) => {
+      if (!menu.classList.contains('open')) return;
+      setAria(false);
+      if (returnFocus) {
+        (previouslyFocused || toggle).focus({ preventScroll: true });
+      }
+    };
+
+    const openMenu = () => {
+      previouslyFocused = d.activeElement;
+      setAria(true);
+      focusFirstElement();
+    };
+
+    toggle.addEventListener('click', () => {
+      if (menu.classList.contains('open')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
     });
 
     menu.addEventListener('click', (event) => {
-      const link = event.target.closest('a');
-      if (!link) return;
-      if (link.hasAttribute('data-exit')) event.preventDefault();
-      menu.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
-      menu.toggleAttribute('hidden', true);
-      document.body.style.overflow = '';
+      const isOutsidePanel = !event.target.closest('.mobile-drawer__panel');
+      if (isOutsidePanel) {
+        closeMenu();
+        return;
+      }
+
+      const closeTarget = event.target.closest('[data-close]');
+      if (closeTarget) {
+        event.preventDefault();
+        closeMenu();
+        return;
+      }
+
+      const link = event.target.closest('a[href^="#"]');
+      if (link) {
+        closeMenu(false);
+      }
     });
-  }
 
-  const track = d.querySelector('.carousel-track');
-  if (track) {
-    const slides = Array.from(track.children);
-    const nextButton = d.getElementById('next');
-    const prevButton = d.getElementById('prev');
-    let currentSlide = 0;
+    d.addEventListener('keydown', (event) => {
+      if (!menu.classList.contains('open')) return;
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeMenu();
+        return;
+      }
 
-    function updateSlide(position) {
-      track.style.transform = `translateX(-${position * 100}%)`;
-    }
-
-    const advance = (direction = 1) => {
-      currentSlide = (currentSlide + direction + slides.length) % slides.length;
-      updateSlide(currentSlide);
-    };
-
-    nextButton?.addEventListener('click', () => advance(1));
-    prevButton?.addEventListener('click', () => advance(-1));
-    setInterval(() => advance(1), 5000);
+      if (event.key === 'Tab') {
+        focusableElements = focusableElements.length ? focusableElements : Array.from(menu.querySelectorAll(focusableSelector));
+        if (!focusableElements.length) return;
+        const first = focusableElements[0];
+        const last = focusableElements[focusableElements.length - 1];
+        if (event.shiftKey && d.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && d.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    });
   }
 }
 

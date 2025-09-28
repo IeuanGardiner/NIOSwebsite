@@ -1,0 +1,19 @@
+:root {
+  --nios-color-background: #F2F2F2;
+  --nios-color-surface: #FFFFFF;
+  --nios-color-surface-muted: #E4F2E6;
+  --nios-color-text: #253140;
+  --nios-color-text-muted: #656B73;
+  --nios-color-accent: #A9D9A7;
+  --nios-color-ring: #A9D9A7;
+  --nios-color-ring-strong: #253140;
+  --nios-radius-sm: 12px;
+  --nios-radius-lg: 18px;
+  --nios-shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.06);
+  --nios-shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.08);
+  --nios-shadow-card: 0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 12px rgba(0, 0, 0, 0.06);
+  --nios-max-width: 1160px;
+  --nios-grid-gap: clamp(1.5rem, 2vw, 2rem);
+  --nios-section-space: clamp(72px, 12vw, 128px);
+  --nios-font-body: "Segoe UI", "Helvetica Neue", Arial, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI Emoji", sans-serif;
+}

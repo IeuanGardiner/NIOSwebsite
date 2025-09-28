@@ -4,106 +4,195 @@ const path = require('node:path');
 
 const { initialiseSite } = require(path.join('..', 'scripts', 'main.js'));
 
-function setup() {
-  let btnClick, menuClick;
-  const toggle = {
-    attrs: { 'aria-expanded': 'false' },
-    textContent: '☰',
-    addEventListener: (type, fn) => { if (type === 'click') btnClick = fn; },
-    getAttribute: name => toggle.attrs[name],
-    setAttribute: (name, value) => { toggle.attrs[name] = value; }
+function createClassList() {
+  const classes = new Set();
+  return {
+    add: (name) => classes.add(name),
+    remove: (name) => classes.delete(name),
+    contains: (name) => classes.has(name),
+    toggle: (name, force) => {
+      if (typeof force === 'boolean') {
+        if (force) {
+          classes.add(name);
+          return true;
+        }
+        classes.delete(name);
+        return false;
+      }
+      if (classes.has(name)) {
+        classes.delete(name);
+        return false;
+      }
+      classes.add(name);
+      return true;
+    }
   };
+}
+
+function createFocusable(tagName, attrs = {}) {
+  return {
+    tagName: tagName.toUpperCase(),
+    attrs: { ...attrs },
+    focusCalled: false,
+    hasAttribute(name) {
+      return Object.prototype.hasOwnProperty.call(this.attrs, name);
+    },
+    setAttribute(name, value) {
+      this.attrs[name] = value;
+    },
+    getAttribute(name) {
+      return this.attrs[name];
+    },
+    focus() {
+      this.focusCalled = true;
+      documentStub.activeElement = this;
+    },
+    closest(selector) {
+      if (selector === '[data-close]' && this.hasAttribute('data-close')) {
+        return this;
+      }
+      if (selector === '.mobile-drawer__panel') {
+        return panel;
+      }
+      if (selector === 'a[href^="#"]' && this.tagName === 'A' && typeof this.attrs.href === 'string' && this.attrs.href.startsWith('#')) {
+        return this;
+      }
+      return null;
+    }
+  };
+}
+
+const panel = { name: 'panel' };
+
+function setup() {
+  let toggleClick;
+  let menuClick;
+  let keydownHandler;
+
+  const toggle = createFocusable('button', { 'aria-controls': 'mobileNav', 'aria-expanded': 'false' });
+  toggle.addEventListener = (type, fn) => { if (type === 'click') toggleClick = fn; };
+
+  const closeButton = createFocusable('button', { 'data-close': '' });
+  const navLink = createFocusable('a', { href: '#services' });
+  const exitLink = createFocusable('a', { href: '#', 'data-close': '', 'data-exit': '' });
+
+  const focusables = [closeButton, navLink, exitLink];
+
   const menu = {
     attrs: { hidden: '' },
-    cls: new Set(),
-    classList: {
-      toggle: name => {
-        if (menu.cls.has(name)) { menu.cls.delete(name); return false; }
-        menu.cls.add(name); return true;
-      },
-      contains: name => menu.cls.has(name),
-      remove: name => menu.cls.delete(name)
-    },
-    toggleAttribute: (name, force) => {
-      if (force === undefined) {
-        if (name in menu.attrs) { delete menu.attrs[name]; return false; }
-        menu.attrs[name] = ''; return true;
+    classList: createClassList(),
+    toggleAttribute(name, force) {
+      if (typeof force === 'boolean') {
+        if (force) {
+          this.attrs[name] = '';
+          return true;
+        }
+        delete this.attrs[name];
+        return false;
       }
-      if (force) { menu.attrs[name] = ''; return true; }
-      delete menu.attrs[name]; return false;
+      if (this.attrs[name] !== undefined) {
+        delete this.attrs[name];
+        return false;
+      }
+      this.attrs[name] = '';
+      return true;
     },
-    addEventListener: (type, fn) => { if (type === 'click') menuClick = fn; }
+    hasAttribute(name) {
+      return Object.prototype.hasOwnProperty.call(this.attrs, name);
+    },
+    addEventListener: (type, fn) => { if (type === 'click') menuClick = fn; },
+    querySelectorAll: (selector) => {
+      if (selector === 'a[href], button:not([disabled])') {
+        return focusables;
+      }
+      return [];
+    }
   };
-  const body = { style: {} };
+
   const navElement = { addEventListener: () => {} };
-  global.document = {
-    querySelector: sel => sel === '.menu-toggle' ? toggle : null,
+
+  global.document = documentStub = {
+    body: { style: {} },
+    _activeElement: toggle,
+    get activeElement() {
+      return this._activeElement;
+    },
+    set activeElement(value) {
+      this._activeElement = value;
+    },
+    querySelector: (selector) => (selector === '.menu-toggle' ? toggle : null),
     querySelectorAll: (selector) => {
       if (selector === 'nav') return [navElement];
       if (selector === 'a.button[href^="#"]') return [];
       if (selector === '.reveal') return [];
       return [];
     },
-    getElementById: id => id === 'mobileNav' ? menu : null,
-    body
+    getElementById: (id) => (id === 'mobileNav' ? menu : null),
+    addEventListener: (type, fn) => { if (type === 'keydown') keydownHandler = fn; }
   };
+
   global.window = {
     matchMedia: () => ({ matches: false })
   };
+
   initialiseSite();
+
   return {
     toggle,
     menu,
-    body,
-    clickToggle: () => btnClick && btnClick(),
-    clickMenuLink: () => menuClick && menuClick({ target: { closest: () => ({ hasAttribute: () => false }) } }),
-    clickExitLink: () => {
-      let prevented = false;
-      menuClick && menuClick({
-        target: { closest: () => ({ hasAttribute: attr => attr === 'data-exit' }) },
-        preventDefault: () => { prevented = true; }
-      });
-      return { prevented };
-    }
+    closeButton,
+    navLink,
+    exitLink,
+    openMenu: () => { toggleClick(); },
+    closeMenu: () => { toggleClick(); },
+    clickCloseButton: () => { menuClick({ target: closeButton, preventDefault() {} }); },
+    clickNavLink: () => { menuClick({ target: navLink, preventDefault() {} }); },
+    clickOutsidePanel: () => { menuClick({ target: { closest: (selector) => (selector === '.mobile-drawer__panel' ? null : null) }, preventDefault() {} }); },
+    clickExitLink: () => { menuClick({ target: exitLink, preventDefault() {} }); },
+    pressEscape: () => { keydownHandler && keydownHandler({ key: 'Escape', preventDefault() {} }); },
+    pressTab: (shiftKey = false) => { keydownHandler && keydownHandler({ key: 'Tab', shiftKey, preventDefault() {} }); }
   };
 }
 
-test('button toggles menu visibility and body scroll', () => {
+let documentStub;
+
+test('button toggles menu visibility and manages focus', () => {
   const env = setup();
-  env.clickToggle();
+  env.openMenu();
   assert.equal(env.toggle.getAttribute('aria-expanded'), 'true');
   assert.equal(env.menu.classList.contains('open'), true);
-  assert.equal('hidden' in env.menu.attrs, false);
-  assert.equal(env.body.style.overflow, 'hidden');
-  assert.equal(env.toggle.textContent, '☰');
-  env.clickToggle();
+  assert.equal(env.menu.hasAttribute('hidden'), false);
+  assert.equal(documentStub.body.style.overflow, 'hidden');
+  assert.equal(documentStub.activeElement, env.navLink);
+
+  env.closeMenu();
   assert.equal(env.toggle.getAttribute('aria-expanded'), 'false');
   assert.equal(env.menu.classList.contains('open'), false);
-  assert.equal('hidden' in env.menu.attrs, true);
-  assert.equal(env.body.style.overflow, '');
-  assert.equal(env.toggle.textContent, '☰');
+  assert.equal(env.menu.hasAttribute('hidden'), true);
+  assert.equal(documentStub.body.style.overflow, '');
+  assert.equal(documentStub.activeElement, env.toggle);
 });
 
-test('clicking a menu link closes the menu', () => {
+test('clicking a nav link closes the menu without changing focus', () => {
   const env = setup();
-  env.clickToggle();
-  env.clickMenuLink();
-  assert.equal(env.toggle.getAttribute('aria-expanded'), 'false');
+  env.openMenu();
+  env.clickNavLink();
   assert.equal(env.menu.classList.contains('open'), false);
-  assert.equal('hidden' in env.menu.attrs, true);
-  assert.equal(env.body.style.overflow, '');
-  assert.equal(env.toggle.textContent, '☰');
+  assert.equal(env.menu.hasAttribute('hidden'), true);
+  assert.equal(documentStub.body.style.overflow, '');
+  assert.equal(documentStub.activeElement, env.navLink);
 });
 
-test('clicking the exit link closes the menu without navigation', () => {
+test('close button and escape key close the menu and restore focus', () => {
   const env = setup();
-  env.clickToggle();
-  const res = env.clickExitLink();
-  assert.equal(env.toggle.getAttribute('aria-expanded'), 'false');
+  env.openMenu();
+  env.clickCloseButton();
   assert.equal(env.menu.classList.contains('open'), false);
-  assert.equal('hidden' in env.menu.attrs, true);
-  assert.equal(env.body.style.overflow, '');
-  assert.equal(env.toggle.textContent, '☰');
-  assert.equal(res.prevented, true);
+  assert.equal(documentStub.activeElement, env.toggle);
+
+  env.openMenu();
+  env.pressEscape();
+  assert.equal(env.menu.classList.contains('open'), false);
+  assert.equal(documentStub.activeElement, env.toggle);
 });
 
