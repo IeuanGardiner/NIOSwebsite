@@ -1,10 +1,10 @@
 <header class="site-header" role="banner">
-  <div class="container nav" aria-label="Top navigation">
-    <a class="logo" href="#home" aria-label="NIOS home">
+  <div class="shell site-header__inner" aria-label="Top navigation">
+    <a class="brand" href="#home" aria-label="NIOS home">
       <img src="images/NIOSLogoWithTextLarge.png" alt="NIOS Logo" class="brand-logo" />
     </a>
-    <nav class="primary-nav" aria-label="Primary">
-      <ul>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <ul class="site-nav__list">
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#services">Services</a></li>
@@ -12,22 +12,28 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
-    <div class="header-contact">
+    <div class="site-header__actions">
       <a href="mailto:info@nios-cloud.com">info@nios-cloud.com</a>
     </div>
-    <button id="menuToggle" class="menu-toggle" aria-controls="mobileNav" aria-expanded="false">
-      ☰
+    <button id="menuToggle" class="menu-toggle" type="button" aria-controls="mobileNav" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="menu-toggle__icon" aria-hidden="true"></span>
     </button>
   </div>
 </header>
-<nav id="mobileNav" class="mobile-nav" aria-label="Mobile" hidden>
-  <ul>
-    <li><a href="#home">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#products">Products</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="mailto:info@nios-cloud.com">info@nios-cloud.com</a></li>
-    <li><a href="#" data-exit>Exit</a></li>
-  </ul>
+<nav id="mobileNav" class="mobile-drawer" aria-label="Mobile navigation" hidden>
+  <div class="mobile-drawer__panel">
+    <button class="mobile-drawer__close" type="button" data-close aria-label="Close navigation">&times;</button>
+    <ul class="mobile-drawer__list">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="mobile-drawer__meta">
+      <a href="mailto:info@nios-cloud.com">info@nios-cloud.com</a>
+      <a href="#" data-close data-exit>Close menu</a>
+    </div>
+  </div>
 </nav>
