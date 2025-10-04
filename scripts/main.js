@@ -46,6 +46,11 @@ function initialiseSite() {
   d.querySelectorAll('nav').forEach((nav) => nav.addEventListener('click', go));
   d.querySelectorAll('a.button[href^="#"]').forEach((anchor) => anchor.addEventListener('click', go));
 
+  const yearElement = d.getElementById('year');
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
+
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!prefersReducedMotion && 'IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
