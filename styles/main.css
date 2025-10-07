@@ -665,6 +665,7 @@ textarea {
   display: none;
   background: rgba(15, 23, 42, 0.45);
   backdrop-filter: blur(6px);
+  z-index: 60;
 }
 
 .mobile-drawer.open {
