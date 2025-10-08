@@ -290,17 +290,20 @@ p {
 .hero {
   position: relative;
   overflow: hidden;
+  background: linear-gradient(155deg, #f7f8ff 0%, #ffffff 55%, #eef5ff 100%);
 }
 
 .hero::before {
   content: "";
   position: absolute;
-  inset: 8% 12% auto;
+  inset: 6% 10% auto;
   height: clamp(280px, 50vw, 360px);
-  background: radial-gradient(circle at top left, rgba(0, 0, 0, 0.18), transparent 58%),
-    radial-gradient(circle at bottom right, rgba(0, 0, 0, 0.12), transparent 55%);
-  filter: blur(0);
+  background:
+    radial-gradient(circle at top left, rgba(78, 107, 255, 0.28), rgba(78, 107, 255, 0) 62%),
+    radial-gradient(circle at bottom right, rgba(12, 168, 204, 0.24), rgba(12, 168, 204, 0) 60%),
+    linear-gradient(130deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.55));
   border-radius: var(--radius-lg);
+  box-shadow: 0 20px 60px rgba(17, 17, 17, 0.08);
   z-index: 0;
 }
 
