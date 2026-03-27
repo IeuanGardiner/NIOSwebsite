@@ -17,21 +17,25 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
-    <button id="menuToggle" class="menu-toggle" type="button" aria-controls="mobileNav" aria-expanded="false">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="menu-toggle__icon" aria-hidden="true"><span></span></span>
-    </button>
+    <div class="site-header__end">
+      <a href="#contact" class="button button--sm header-cta">Get in touch</a>
+      <button id="menuToggle" class="menu-toggle" type="button" aria-controls="mobileNav" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="menu-toggle__icon" aria-hidden="true">
+          <span class="menu-toggle__bar"></span>
+          <span class="menu-toggle__bar"></span>
+          <span class="menu-toggle__bar"></span>
+        </span>
+      </button>
+    </div>
   </div>
 </header>
-<nav id="mobileNav" class="mobile-drawer" aria-label="Mobile navigation" hidden>
-  <div class="mobile-drawer__panel">
-    <button class="mobile-drawer__close" type="button" data-close aria-label="Close navigation">&times;</button>
-    <ul class="mobile-drawer__list">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#products">Products</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </div>
+<nav id="mobileNav" class="mobile-menu" aria-label="Mobile navigation" hidden>
+  <ul class="mobile-menu__list">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 </nav>
