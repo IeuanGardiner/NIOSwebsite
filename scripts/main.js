@@ -81,7 +81,7 @@ function setupRevealOnScroll(d) {
 function setupActiveSectionTracking(d) {
   if (!('IntersectionObserver' in window)) return;
 
-  const links = Array.from(d.querySelectorAll('.site-nav a[href^="#"], .mobile-drawer a[href^="#"]'));
+  const links = Array.from(d.querySelectorAll('.site-nav a[href^="#"], .mobile-menu a[href^="#"]'));
   const map = new Map(links.map((link) => [link.getAttribute('href').slice(1), link]));
   const sections = Array.from(d.querySelectorAll(SELECTORS.section));
   if (!sections.length || !links.length) return;
@@ -126,6 +126,7 @@ function setupMobileMenu(d) {
 
   const setAria = (isOpen) => {
     toggle.setAttribute('aria-expanded', String(isOpen));
+    toggle.classList?.toggle('is-open', isOpen);
     menu.toggleAttribute('hidden', !isOpen);
     menu.classList.toggle('open', isOpen);
     if (d.body && d.body.style) {
@@ -166,12 +167,6 @@ function setupMobileMenu(d) {
   });
 
   menu.addEventListener('click', (event) => {
-    const isOutsidePanel = !event.target.closest('.mobile-drawer__panel');
-    if (isOutsidePanel) {
-      closeMenu();
-      return;
-    }
-
     const closeTarget = event.target.closest('[data-close]');
     if (closeTarget) {
       event.preventDefault();
@@ -210,6 +205,22 @@ function setupMobileMenu(d) {
   });
 }
 
+function setupScrollAwareHeader(d) {
+  const header = d.querySelector('.site-header');
+  if (!header) return;
+
+  const update = () => {
+    if (window.scrollY > 10) {
+      header.setAttribute('data-scrolled', '');
+    } else {
+      header.removeAttribute('data-scrolled');
+    }
+  };
+
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+}
+
 function setupContactForm(d) {
   const form = d.querySelector(SELECTORS.form);
   if (!form) return;
@@ -242,6 +253,7 @@ function initialiseSite() {
     yearElement.textContent = new Date().getFullYear();
   }
 
+  setupScrollAwareHeader(d);
   setupRevealOnScroll(d);
   setupActiveSectionTracking(d);
   setupMobileMenu(d);
@@ -263,6 +275,7 @@ if (typeof module !== 'undefined') {
     setupRevealOnScroll,
     setupActiveSectionTracking,
     setupMobileMenu,
-    setupContactForm
+    setupContactForm,
+    setupScrollAwareHeader
   };
 }
