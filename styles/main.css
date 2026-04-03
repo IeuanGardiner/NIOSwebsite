@@ -206,6 +206,7 @@ p {
 
 .button:hover,
 .button:focus-visible {
+  color: #fff;
   transform: translateY(-1px);
   box-shadow: var(--shadow-sm);
 }
