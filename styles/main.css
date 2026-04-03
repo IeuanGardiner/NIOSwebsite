@@ -1156,6 +1156,109 @@ textarea {
 
 }
 
+@media (prefers-color-scheme: dark) {
+  .load-error {
+    background: rgba(80, 30, 30, 0.85);
+    color: #f5c6c6;
+  }
+
+  .button--ghost {
+    border-color: rgba(107, 124, 255, 0.35);
+  }
+
+  .button--ghost:hover,
+  .button--ghost:focus-visible {
+    background: rgba(107, 124, 255, 0.15);
+  }
+
+  .site-header[data-scrolled] {
+    background: rgba(15, 20, 40, 0.94);
+    border-bottom-color: rgba(60, 75, 130, 0.3);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .menu-toggle {
+    border-color: rgba(107, 124, 255, 0.3);
+    background: linear-gradient(140deg, rgba(25, 32, 58, 0.9), rgba(20, 26, 50, 0.8));
+    box-shadow: inset 0 1px 0 rgba(60, 75, 130, 0.4), 0 2px 8px rgba(0, 0, 0, 0.25);
+  }
+
+  .menu-toggle:hover,
+  .menu-toggle:focus-visible {
+    box-shadow: inset 0 1px 0 rgba(60, 75, 130, 0.5), 0 4px 16px rgba(0, 0, 0, 0.35);
+  }
+
+  .hero {
+    background: var(--color-background);
+  }
+
+  .hero::before {
+    background:
+      radial-gradient(circle at top left, rgba(78, 107, 255, 0.28), rgba(78, 107, 255, 0) 62%),
+      radial-gradient(circle at bottom right, rgba(12, 168, 204, 0.24), rgba(12, 168, 204, 0) 60%),
+      linear-gradient(130deg, rgba(20, 28, 58, 0.9), rgba(15, 22, 48, 0.55));
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  }
+
+  .hero__card {
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  }
+
+  .hero__icon {
+    background: linear-gradient(140deg, rgba(40, 50, 80, 0.95), rgba(60, 75, 130, 0.65));
+    box-shadow: inset 0 1px 0 rgba(80, 100, 160, 0.5), 0 18px 36px rgba(0, 0, 0, 0.3);
+  }
+
+  .card__icon {
+    background: linear-gradient(135deg, rgba(60, 75, 130, 0.5), rgba(25, 32, 60, 0.3));
+    box-shadow: inset 0 1px 0 rgba(60, 75, 130, 0.4), 0 12px 30px rgba(0, 0, 0, 0.25);
+  }
+
+  .product__icon {
+    background: linear-gradient(140deg, rgba(60, 75, 130, 0.45), rgba(25, 32, 60, 0.2));
+    box-shadow: inset 0 1px 0 rgba(60, 75, 130, 0.4), 0 16px 38px rgba(0, 0, 0, 0.25);
+  }
+
+  .product--featured {
+    background: linear-gradient(150deg, rgba(107, 124, 255, 0.08), rgba(25, 32, 60, 0.75)) padding-box, var(--glass-border) border-box;
+  }
+
+  .contact__icon {
+    background: linear-gradient(140deg, rgba(60, 75, 130, 0.5), rgba(25, 32, 60, 0.3));
+    box-shadow: inset 0 1px 0 rgba(60, 75, 130, 0.4), 0 10px 28px rgba(0, 0, 0, 0.25);
+  }
+
+  input,
+  textarea {
+    background: rgba(25, 32, 58, 0.7);
+    border-color: rgba(60, 75, 130, 0.5);
+    box-shadow: inset 0 1px 0 rgba(60, 75, 130, 0.3);
+    color: var(--color-text);
+  }
+
+  input:focus-visible,
+  textarea:focus-visible {
+    border-color: rgba(107, 124, 255, 0.75);
+    box-shadow: 0 0 0 4px rgba(107, 124, 255, 0.2);
+  }
+
+  .mobile-menu {
+    background: rgba(15, 20, 40, 0.97);
+  }
+}
+
+@media (prefers-color-scheme: dark) and (max-width: 720px) {
+  .hero {
+    background: rgba(12, 16, 36, 0.95);
+  }
+
+  .hero__badge,
+  .card {
+    background: rgba(21, 26, 48, 0.92);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.2);
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .hero::before {
     animation: heroFloat 8s ease-in-out infinite;
