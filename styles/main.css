@@ -108,7 +108,7 @@ h2 {
   width: clamp(38px, 8vw, 70px);
   height: 4px;
   border-radius: 999px;
-  background: linear-gradient(90deg, rgba(146, 180, 255, 0.75), rgba(120, 206, 255, 0.35));
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-secondary));
   box-shadow: 0 0 16px rgba(146, 180, 255, 0.45);
 }
 
@@ -126,7 +126,7 @@ p {
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--color-accent-secondary);
 }
 
 .section__lede {
@@ -456,7 +456,7 @@ p {
 
 .hero__badge dt {
   font-weight: 600;
-  color: var(--color-text);
+  color: var(--color-accent-secondary);
 }
 
 .hero__badge dd {
@@ -623,7 +623,7 @@ p {
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(146, 180, 255, 0.85), rgba(120, 206, 255, 0.5));
+  background: linear-gradient(135deg, rgba(146, 180, 255, 0.85), var(--color-accent-secondary));
   box-shadow: 0 0 12px rgba(146, 180, 255, 0.45);
 }
 

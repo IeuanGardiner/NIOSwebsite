@@ -3,9 +3,11 @@
   --color-surface: #ffffff;
   --color-elevated: #111111;
   --color-text: #111111;
-  --color-muted: #3c4366;
+  --color-muted: #2d3354;
   --color-accent: #2430a3;
   --color-accent-soft: #dce2ff;
+  --color-accent-secondary: #0CA8CC;
+  --color-accent-secondary-soft: #d4f4fb;
   --color-border: #c7d2ff;
   --color-success: #222222;
   --radius-sm: 10px;
