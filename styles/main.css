@@ -603,8 +603,31 @@ p {
   gap: 1.5rem;
 }
 
+.products__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
 .product {
   gap: 1.5rem;
+}
+
+.product--featured {
+  border-left: 4px solid var(--color-accent);
+  background: linear-gradient(150deg, rgba(36, 48, 163, 0.06), rgba(230, 236, 255, 0.72)) padding-box, var(--glass-border) border-box;
+}
+
+@media (min-width: 721px) {
+  .product--featured {
+    grid-template-columns: auto 1fr auto;
+    align-items: start;
+  }
+
+  .product--featured .product__icon {
+    width: 72px;
+    height: 72px;
+  }
 }
 
 .product__header {
