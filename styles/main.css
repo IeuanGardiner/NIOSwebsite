@@ -1,3 +1,9 @@
+@keyframes heroFloat {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.85; }
+  50% { transform: translate(2%, -3%) scale(1.04); opacity: 1; }
+  100% { transform: translate(0, 0) scale(1); opacity: 0.85; }
+}
+
 /* Base */
 * {
   box-sizing: border-box;
@@ -1032,6 +1038,12 @@ textarea {
     height: 40px;
   }
 
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero::before {
+    animation: heroFloat 8s ease-in-out infinite;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
