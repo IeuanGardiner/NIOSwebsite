@@ -242,6 +242,22 @@ function setupContactForm(d) {
   });
 }
 
+function setupScrollToTop(d) {
+  const btn = d.getElementById('scrollTop');
+  if (!btn) return;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 600);
+    btn.hidden = window.scrollY <= 600;
+  }, { passive: true });
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+  });
+}
+
 function setupCardGlow(d) {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
@@ -272,6 +288,7 @@ function initialiseSite() {
   setupActiveSectionTracking(d);
   setupMobileMenu(d);
   setupContactForm(d);
+  setupScrollToTop(d);
   setupCardGlow(d);
 }
 
@@ -292,6 +309,7 @@ if (typeof module !== 'undefined') {
     setupMobileMenu,
     setupContactForm,
     setupScrollAwareHeader,
+    setupScrollToTop,
     setupCardGlow
   };
 }
