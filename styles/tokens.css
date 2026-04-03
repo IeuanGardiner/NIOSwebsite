@@ -26,21 +26,19 @@
   --glass-shadow: 0 28px 60px rgba(120, 140, 200, 0.25);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: #0c1024;
-    --color-surface: #151a30;
-    --color-elevated: #f0f0f0;
-    --color-text: #e8ecf4;
-    --color-muted: #9ca3c0;
-    --color-accent: #6b7cff;
-    --color-accent-soft: #1e2550;
-    --color-border: #2a3260;
-    --gradient-background: radial-gradient(circle at 10% 5%, rgba(40, 50, 100, 0.4), transparent 55%),
-      radial-gradient(circle at 90% 15%, rgba(60, 70, 130, 0.3), transparent 55%),
-      linear-gradient(180deg, #0c1024 0%, #0e1228 45%, #0c1024 100%);
-    --glass-surface: linear-gradient(150deg, rgba(25, 32, 60, 0.85), rgba(18, 24, 50, 0.75));
-    --glass-border: linear-gradient(160deg, rgba(60, 75, 130, 0.5), rgba(40, 55, 110, 0.3));
-    --glass-shadow: 0 28px 60px rgba(0, 0, 0, 0.4);
-  }
+html[data-theme="dark"] {
+  --color-background: #0c1024;
+  --color-surface: #151a30;
+  --color-elevated: #f0f0f0;
+  --color-text: #e8ecf4;
+  --color-muted: #9ca3c0;
+  --color-accent: #6b7cff;
+  --color-accent-soft: #1e2550;
+  --color-border: #2a3260;
+  --gradient-background: radial-gradient(circle at 10% 5%, rgba(40, 50, 100, 0.4), transparent 55%),
+    radial-gradient(circle at 90% 15%, rgba(60, 70, 130, 0.3), transparent 55%),
+    linear-gradient(180deg, #0c1024 0%, #0e1228 45%, #0c1024 100%);
+  --glass-surface: linear-gradient(150deg, rgba(25, 32, 60, 0.85), rgba(18, 24, 50, 0.75));
+  --glass-border: linear-gradient(160deg, rgba(60, 75, 130, 0.5), rgba(40, 55, 110, 0.3));
+  --glass-shadow: 0 28px 60px rgba(0, 0, 0, 0.4);
 }

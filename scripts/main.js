@@ -251,6 +251,25 @@ function setupContactForm(d) {
   });
 }
 
+function setupDarkModeToggle(d) {
+  const toggle = d.getElementById('themeToggle');
+  if (!toggle) return;
+
+  const apply = (isDark) => {
+    d.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+  };
+
+  const isDark = d.documentElement.getAttribute('data-theme') === 'dark';
+  apply(isDark);
+
+  toggle.addEventListener('click', () => {
+    const nowDark = d.documentElement.getAttribute('data-theme') !== 'dark';
+    localStorage.setItem('theme', nowDark ? 'dark' : 'light');
+    apply(nowDark);
+  });
+}
+
 function setupScrollToTop(d) {
   const btn = d.getElementById('scrollTop');
   if (!btn) return;
@@ -296,6 +315,7 @@ function initialiseSite() {
   setupRevealOnScroll(d);
   setupActiveSectionTracking(d);
   setupMobileMenu(d);
+  setupDarkModeToggle(d);
   setupContactForm(d);
   setupScrollToTop(d);
   setupCardGlow(d);
@@ -316,6 +336,7 @@ if (typeof module !== 'undefined') {
     setupRevealOnScroll,
     setupActiveSectionTracking,
     setupMobileMenu,
+    setupDarkModeToggle,
     setupContactForm,
     setupScrollAwareHeader,
     setupScrollToTop,
