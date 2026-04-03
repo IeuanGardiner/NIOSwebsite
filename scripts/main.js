@@ -132,7 +132,6 @@ function setupMobileMenu(d) {
   const setAria = (isOpen) => {
     toggle.setAttribute('aria-expanded', String(isOpen));
     toggle.classList?.toggle('is-open', isOpen);
-    menu.toggleAttribute('hidden', !isOpen);
     menu.classList.toggle('open', isOpen);
     if (d.body && d.body.style) {
       d.body.style.overflow = isOpen ? 'hidden' : '';
@@ -172,6 +171,11 @@ function setupMobileMenu(d) {
   });
 
   menu.addEventListener('click', (event) => {
+    if (event.target === menu) {
+      closeMenu();
+      return;
+    }
+
     const closeTarget = event.target.closest('[data-close]');
     if (closeTarget) {
       event.preventDefault();
