@@ -535,6 +535,8 @@ p {
 
 /* Cards */
 .card {
+  --glow-x: 50%;
+  --glow-y: 50%;
   position: relative;
   display: grid;
   gap: 0.75rem;
@@ -546,6 +548,23 @@ p {
   transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
+  overflow: hidden;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle 180px at var(--glow-x) var(--glow-y), rgba(146, 180, 255, 0.18), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.card:hover::after {
+  opacity: 1;
 }
 
 .card:hover,

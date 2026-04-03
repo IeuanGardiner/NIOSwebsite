@@ -242,6 +242,20 @@ function setupContactForm(d) {
   });
 }
 
+function setupCardGlow(d) {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  d.querySelectorAll('.card').forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty('--glow-x', `${x}%`);
+      card.style.setProperty('--glow-y', `${y}%`);
+    });
+  });
+}
+
 function initialiseSite() {
   const d = document;
 
@@ -258,6 +272,7 @@ function initialiseSite() {
   setupActiveSectionTracking(d);
   setupMobileMenu(d);
   setupContactForm(d);
+  setupCardGlow(d);
 }
 
 if (typeof window !== 'undefined') {
@@ -276,6 +291,7 @@ if (typeof module !== 'undefined') {
     setupActiveSectionTracking,
     setupMobileMenu,
     setupContactForm,
-    setupScrollAwareHeader
+    setupScrollAwareHeader,
+    setupCardGlow
   };
 }
