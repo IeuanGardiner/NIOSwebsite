@@ -152,6 +152,11 @@ p {
   z-index: 0;
 }
 
+.section:not(.hero) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
 .section-divider {
   width: min(90%, 600px);
   height: 1px;
@@ -1097,6 +1102,13 @@ textarea {
     box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
   }
 
+  .card,
+  .contact__details,
+  .contact__form {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
   .section--frosted::before,
   .section--frosted::after {
     display: none;
@@ -1169,5 +1181,10 @@ textarea {
     animation: none;
     opacity: 1;
     transform: none;
+  }
+
+  .card {
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
   }
 }

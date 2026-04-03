@@ -69,8 +69,13 @@ function setupRevealOnScroll(d) {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('revealed');
-        observer.unobserve(entry.target);
+        const el = entry.target;
+        el.style.willChange = 'transform, opacity';
+        el.classList.add('revealed');
+        el.addEventListener('transitionend', () => {
+          el.style.willChange = 'auto';
+        }, { once: true });
+        observer.unobserve(el);
       }
     });
   }, { threshold: 0.12 });
