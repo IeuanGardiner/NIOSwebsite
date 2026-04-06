@@ -239,22 +239,27 @@ function setupContactForm(d) {
   const form = d.querySelector(SELECTORS.form);
   if (!form) return;
 
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
+  const status = form.querySelector('[data-form-status]');
+  const submitButton = form.querySelector('button[type="submit"]');
 
+  form.addEventListener('submit', (event) => {
     if (typeof form.checkValidity === 'function' && !form.checkValidity()) {
+      event.preventDefault();
       form.reportValidity?.();
       return;
     }
 
-    const status = form.querySelector('[data-form-status]');
     if (status) {
-      status.textContent = 'Thanks! We will get back to you within one business day.';
+      status.textContent = 'Sending…';
     }
 
-    form.reset();
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.setAttribute('aria-busy', 'true');
+    }
   });
 }
+
 
 function setupDarkModeToggle(d) {
   const toggle = d.getElementById('themeToggle');
