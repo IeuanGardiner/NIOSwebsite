@@ -643,66 +643,16 @@ html[data-theme="dark"] .theme-toggle__moon { display: none; }
 
 /* Contact */
 .contact__content {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(2rem, 4vw, 3.5rem);
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.contact__details {
-  padding: clamp(1.75rem, 4vw, 2.25rem);
-  border-radius: clamp(18px, 3vw, 26px);
-  background: var(--glass-surface) padding-box, var(--glass-border) border-box;
-  border: 1px solid transparent;
-  box-shadow: var(--glass-shadow);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-}
-
-.contact__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.contact__form {
   display: grid;
   gap: 1.25rem;
-}
-
-.contact__list li {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: start;
-  gap: 1rem;
-}
-
-.contact__list a {
-  font-weight: 600;
-  color: var(--color-accent);
-}
-
-.contact__list a:hover,
-.contact__list a:focus-visible {
-  text-decoration: underline;
-}
-
-.contact__icon {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  background: linear-gradient(140deg, rgba(146, 180, 255, 0.4), rgba(255, 255, 255, 0.2));
-  color: var(--color-accent);
-  display: grid;
-  place-items: center;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85), 0 10px 28px rgba(120, 140, 200, 0.25);
-}
-
-.contact__icon svg {
-  width: 24px;
-  height: 24px;
-}
-
-.contact__label {
-  font-weight: 600;
-  color: var(--color-text);
-  margin-bottom: 0.25rem;
+  padding-top: 1.5rem;
+  border-top: 3px solid transparent;
+  border-image: linear-gradient(90deg, var(--color-accent), var(--color-accent-secondary)) 1;
 }
 
 .contact__status {
@@ -711,16 +661,44 @@ html[data-theme="dark"] .theme-toggle__moon { display: none; }
   font-weight: 500;
 }
 
-.contact__form {
-  padding: clamp(1.85rem, 4vw, 2.5rem);
-  border-radius: clamp(18px, 3vw, 26px);
-  background: var(--glass-surface) padding-box, var(--glass-border) border-box;
-  border: 1px solid transparent;
-  box-shadow: var(--glass-shadow);
-  display: grid;
-  gap: 1.25rem;
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+.contact__strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 0;
+  margin-top: 2.5rem;
+  font-size: 0.95rem;
+}
+
+.contact__strip-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  padding: 0 1.25rem;
+  border-right: 1px solid var(--color-border);
+}
+
+.contact__strip-item:last-child {
+  border-right: none;
+}
+
+.contact__strip-item strong {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.contact__strip-item span {
+  color: var(--color-muted);
+}
+
+.contact__strip-item a {
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.contact__strip-item a:hover,
+.contact__strip-item a:focus-visible {
+  text-decoration: underline;
 }
 
 .form-field {
@@ -1037,9 +1015,7 @@ textarea {
     box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
   }
 
-  .card,
-  .contact__details,
-  .contact__form {
+  .card {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
   }
@@ -1055,10 +1031,6 @@ textarea {
 
   .products__grid {
     grid-template-columns: 1fr;
-  }
-
-  .contact__content {
-    grid-template-columns: minmax(0, 1fr);
   }
 
   .footer__inner {
@@ -1086,13 +1058,15 @@ textarea {
     justify-content: center;
   }
 
-  .contact__list li {
-    grid-template-columns: minmax(0, 1fr);
+  .contact__strip {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
   }
 
-  .contact__icon {
-    width: 40px;
-    height: 40px;
+  .contact__strip-item {
+    border-right: none;
+    padding: 0;
   }
 
 }
@@ -1131,11 +1105,6 @@ html[data-theme="dark"] .menu-toggle:focus-visible {
 html[data-theme="dark"] .hero {
   background: radial-gradient(ellipse at 50% 40%, rgba(78, 107, 255, 0.08), transparent 70%),
     var(--color-background);
-}
-
-html[data-theme="dark"] .contact__icon {
-  background: linear-gradient(140deg, rgba(60, 75, 130, 0.5), rgba(25, 32, 60, 0.3));
-  box-shadow: inset 0 1px 0 rgba(60, 75, 130, 0.4), 0 10px 28px rgba(0, 0, 0, 0.25);
 }
 
 html[data-theme="dark"] input,
