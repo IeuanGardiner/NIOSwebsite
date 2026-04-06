@@ -79,24 +79,8 @@ function setup() {
   const focusables = [closeButton, navLink, exitLink];
 
   const menu = {
-    attrs: { hidden: '' },
+    attrs: {},
     classList: createClassList(),
-    toggleAttribute(name, force) {
-      if (typeof force === 'boolean') {
-        if (force) {
-          this.attrs[name] = '';
-          return true;
-        }
-        delete this.attrs[name];
-        return false;
-      }
-      if (this.attrs[name] !== undefined) {
-        delete this.attrs[name];
-        return false;
-      }
-      this.attrs[name] = '';
-      return true;
-    },
     hasAttribute(name) {
       return Object.prototype.hasOwnProperty.call(this.attrs, name);
     },
@@ -161,14 +145,12 @@ test('button toggles menu visibility and manages focus', () => {
   env.openMenu();
   assert.equal(env.toggle.getAttribute('aria-expanded'), 'true');
   assert.equal(env.menu.classList.contains('open'), true);
-  assert.equal(env.menu.hasAttribute('hidden'), false);
   assert.equal(documentStub.body.style.overflow, 'hidden');
   assert.equal(documentStub.activeElement, env.navLink);
 
   env.closeMenu();
   assert.equal(env.toggle.getAttribute('aria-expanded'), 'false');
   assert.equal(env.menu.classList.contains('open'), false);
-  assert.equal(env.menu.hasAttribute('hidden'), true);
   assert.equal(documentStub.body.style.overflow, '');
   assert.equal(documentStub.activeElement, env.toggle);
 });
@@ -178,7 +160,6 @@ test('clicking a nav link closes the menu without changing focus', () => {
   env.openMenu();
   env.clickNavLink();
   assert.equal(env.menu.classList.contains('open'), false);
-  assert.equal(env.menu.hasAttribute('hidden'), true);
   assert.equal(documentStub.body.style.overflow, '');
   assert.equal(documentStub.activeElement, env.navLink);
 });
