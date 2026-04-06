@@ -522,25 +522,42 @@ html[data-theme="dark"] .theme-toggle__moon { display: none; }
   box-shadow: 0 32px 80px rgba(110, 130, 200, 0.28);
 }
 
-.card__icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
-  background: linear-gradient(135deg, rgba(146, 180, 255, 0.35), rgba(255, 255, 255, 0.2));
+.services__grid {
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1.5rem;
+}
+
+.services__grid > * {
+  grid-column: span 2;
+}
+
+.services__grid > :nth-child(4) {
+  grid-column: 2 / span 2;
+}
+
+.card__number {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 700;
   display: grid;
   place-items: center;
-  color: var(--color-accent);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 12px 30px rgba(120, 140, 200, 0.25);
+  line-height: 1;
 }
 
-.card__icon svg {
-  width: 26px;
-  height: 26px;
-}
-
-.services__grid {
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
+.services__grid .card::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: clamp(18px, 3vw, 24px);
+  right: clamp(18px, 3vw, 24px);
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-secondary));
+  border-radius: 1px;
 }
 
 /* About — two-column narrative layout */
@@ -559,7 +576,6 @@ html[data-theme="dark"] .theme-toggle__moon { display: none; }
   display: grid;
   gap: 1.5rem;
 }
-
 .about__value {
   padding-left: 1.25rem;
   border-left: 4px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
@@ -1007,6 +1023,20 @@ textarea {
     display: inline-flex;
   }
 
+  .services__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .services__grid > * {
+    grid-column: auto;
+  }
+
+  .services__grid > :last-child {
+    grid-column: 1 / -1;
+    max-width: 50%;
+    justify-self: center;
+  }
+
 }
 
 @media (max-width: 720px) {
@@ -1014,8 +1044,13 @@ textarea {
     padding-block: clamp(2.5rem, 8vw, 3.5rem);
   }
 
-  .card__icon {
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78), 0 12px 28px rgba(15, 23, 42, 0.18);
+  .services__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .services__grid > :last-child {
+    max-width: none;
+    justify-self: auto;
   }
 
   .card {
@@ -1113,11 +1148,6 @@ html[data-theme="dark"] .menu-toggle:focus-visible {
 html[data-theme="dark"] .hero {
   background: radial-gradient(ellipse at 50% 40%, rgba(78, 107, 255, 0.08), transparent 70%),
     var(--color-background);
-}
-
-html[data-theme="dark"] .card__icon {
-  background: linear-gradient(135deg, rgba(60, 75, 130, 0.5), rgba(25, 32, 60, 0.3));
-  box-shadow: inset 0 1px 0 rgba(60, 75, 130, 0.4), 0 12px 30px rgba(0, 0, 0, 0.25);
 }
 
 html[data-theme="dark"] .product__icon {
