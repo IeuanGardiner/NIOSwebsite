@@ -87,18 +87,23 @@ function setupActiveSectionTracking(d) {
   if (!('IntersectionObserver' in window)) return;
 
   const links = Array.from(d.querySelectorAll('.site-nav a[href^="#"], .mobile-menu a[href^="#"]'));
-  const map = new Map(links.map((link) => [link.getAttribute('href').slice(1), link]));
+  const linksBySection = new Map();
+  links.forEach((link) => {
+    const id = link.getAttribute('href').slice(1);
+    if (!linksBySection.has(id)) linksBySection.set(id, []);
+    linksBySection.get(id).push(link);
+  });
   const sections = Array.from(d.querySelectorAll(SELECTORS.section));
   if (!sections.length || !links.length) return;
 
+  let currentId = null;
   const updateCurrent = (id) => {
-    links.forEach((link) => {
-      if (link.getAttribute('href') === `#${id}`) {
-        link.setAttribute('aria-current', 'page');
-      } else {
-        link.removeAttribute('aria-current');
-      }
-    });
+    if (id === currentId) return;
+    if (currentId) {
+      (linksBySection.get(currentId) || []).forEach((link) => link.removeAttribute('aria-current'));
+    }
+    (linksBySection.get(id) || []).forEach((link) => link.setAttribute('aria-current', 'page'));
+    currentId = id;
   };
 
   const observer = new IntersectionObserver((entries) => {
@@ -114,7 +119,7 @@ function setupActiveSectionTracking(d) {
   sections.forEach((section) => observer.observe(section));
 
   const initial = sections[0]?.id;
-  if (initial && map.has(initial)) {
+  if (initial && linksBySection.has(initial)) {
     updateCurrent(initial);
   }
 }
