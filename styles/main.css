@@ -538,10 +538,33 @@ html[data-theme="dark"] .theme-toggle__moon { display: none; }
   height: 26px;
 }
 
-.about__content,
 .services__grid {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1.5rem;
+}
+
+/* About — two-column narrative layout */
+.about__inner {
+  display: grid;
+  grid-template-columns: 45% 1fr;
+  gap: clamp(2rem, 5vw, 3rem);
+  align-items: start;
+}
+
+.about__inner .section__header {
+  margin-bottom: 0;
+}
+
+.about__values {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.about__value {
+  padding-left: 1.25rem;
+  border-left: 4px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+  display: grid;
+  gap: 0.5rem;
 }
 
 .products__grid {
@@ -1010,6 +1033,10 @@ textarea {
   .section--frosted::before,
   .section--frosted::after {
     display: none;
+  }
+
+  .about__inner {
+    grid-template-columns: 1fr;
   }
 
   .contact__content {
