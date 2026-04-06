@@ -1005,7 +1005,8 @@ textarea {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .services__grid > * {
+  .services__grid > *,
+  .services__grid > :nth-child(4) {
     grid-column: auto;
   }
 
