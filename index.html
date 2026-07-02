@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" />
     <link rel="stylesheet" href="styles/tokens.css" />
     <link rel="stylesheet" href="styles/main.css" />
-    <link rel="preload" as="image" href="images/screenshots/app-home-control-centre.png" fetchpriority="high" />
     <script>
       (function () {
         var saved = localStorage.getItem('theme');
@@ -71,60 +70,109 @@
           </div>
         </div>
 
-        <!-- Feature gallery: full-bleed drifting close-ups; streaks from the field converge into it -->
+        <!-- Feature gallery: full-bleed drifting product vignettes; streaks from the field
+             converge into it. Each card links to the matching product walkthrough section. -->
         <div class="hero-gallery" data-hero-gallery>
           <div class="hero-gallery__mask">
             <div class="hero-gallery__track">
               <!-- set 1 -->
-              <figure class="hero-gallery__card hero-gallery__card--matrix">
-                <figcaption class="hero-gallery__tag">5×5 risk matrix</figcaption>
-              </figure>
-              <figure class="hero-gallery__card hero-gallery__card--posture">
-                <figcaption class="hero-gallery__tag">Control posture</figcaption>
-              </figure>
-              <figure class="hero-gallery__card hero-gallery__card--health">
-                <figcaption class="hero-gallery__tag">Portfolio health</figcaption>
-              </figure>
-              <figure class="hero-gallery__card hero-gallery__card--toprisks">
-                <figcaption class="hero-gallery__tag">Top priority risks</figcaption>
-              </figure>
-              <figure class="hero-gallery__card hero-gallery__card--change">
-                <figcaption class="hero-gallery__tag">Governed change control</figcaption>
-              </figure>
-              <figure class="hero-gallery__card hero-gallery__card--exposure">
-                <figcaption class="hero-gallery__tag">Risk exposure reporting</figcaption>
-              </figure>
-              <figure class="hero-gallery__card hero-gallery__card--queue">
-                <figcaption class="hero-gallery__tag">Priority action queue</figcaption>
-              </figure>
-              <figure class="hero-gallery__card hero-gallery__card--commands">
-                <figcaption class="hero-gallery__tag">Quick commands</figcaption>
-              </figure>
-              <!-- set 2: duplicate for the seamless loop -->
-              <figure class="hero-gallery__card hero-gallery__card--matrix" aria-hidden="true">
-                <figcaption class="hero-gallery__tag">5×5 risk matrix</figcaption>
-              </figure>
-              <figure class="hero-gallery__card hero-gallery__card--posture" aria-hidden="true">
-                <figcaption class="hero-gallery__tag">Control posture</figcaption>
-              </figure>
-              <figure class="hero-gallery__card hero-gallery__card--health" aria-hidden="true">
-                <figcaption class="hero-gallery__tag">Portfolio health</figcaption>
-              </figure>
-              <figure class="hero-gallery__card hero-gallery__card--toprisks" aria-hidden="true">
-                <figcaption class="hero-gallery__tag">Top priority risks</figcaption>
-              </figure>
-              <figure class="hero-gallery__card hero-gallery__card--change" aria-hidden="true">
-                <figcaption class="hero-gallery__tag">Governed change control</figcaption>
-              </figure>
-              <figure class="hero-gallery__card hero-gallery__card--exposure" aria-hidden="true">
-                <figcaption class="hero-gallery__tag">Risk exposure reporting</figcaption>
-              </figure>
-              <figure class="hero-gallery__card hero-gallery__card--queue" aria-hidden="true">
-                <figcaption class="hero-gallery__tag">Priority action queue</figcaption>
-              </figure>
-              <figure class="hero-gallery__card hero-gallery__card--commands" aria-hidden="true">
-                <figcaption class="hero-gallery__tag">Quick commands</figcaption>
-              </figure>
+              <a class="hero-gallery__card" href="product.html#risk">
+                <span class="hero-gallery__media"><img src="images/gallery/gallery-risk-matrix.webp" width="1440" height="900" alt="" decoding="async" /></span>
+                <span class="hero-gallery__label">5×5 risk matrix
+                  <svg class="hero-gallery__arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                </span>
+              </a>
+              <a class="hero-gallery__card" href="product.html#control-centre">
+                <span class="hero-gallery__media"><img src="images/gallery/gallery-control-posture.webp" width="1440" height="900" alt="" decoding="async" /></span>
+                <span class="hero-gallery__label">Control posture
+                  <svg class="hero-gallery__arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                </span>
+              </a>
+              <a class="hero-gallery__card" href="product.html#projects">
+                <span class="hero-gallery__media"><img src="images/gallery/gallery-portfolio-health.webp" width="1440" height="900" alt="" decoding="async" /></span>
+                <span class="hero-gallery__label">Portfolio health
+                  <svg class="hero-gallery__arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                </span>
+              </a>
+              <a class="hero-gallery__card" href="product.html#risk">
+                <span class="hero-gallery__media"><img src="images/gallery/gallery-top-risks.webp" width="1440" height="900" alt="" decoding="async" /></span>
+                <span class="hero-gallery__label">Top priority risks
+                  <svg class="hero-gallery__arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                </span>
+              </a>
+              <a class="hero-gallery__card" href="product.html#change">
+                <span class="hero-gallery__media"><img src="images/gallery/gallery-change-control.webp" width="1440" height="900" alt="" decoding="async" /></span>
+                <span class="hero-gallery__label">Governed change control
+                  <svg class="hero-gallery__arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                </span>
+              </a>
+              <a class="hero-gallery__card" href="product.html#reports">
+                <span class="hero-gallery__media"><img src="images/gallery/gallery-risk-exposure.webp" width="1440" height="900" alt="" decoding="async" /></span>
+                <span class="hero-gallery__label">Risk exposure reporting
+                  <svg class="hero-gallery__arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                </span>
+              </a>
+              <a class="hero-gallery__card" href="product.html#control-centre">
+                <span class="hero-gallery__media"><img src="images/gallery/gallery-action-queue.webp" width="1440" height="900" alt="" decoding="async" /></span>
+                <span class="hero-gallery__label">Priority action queue
+                  <svg class="hero-gallery__arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                </span>
+              </a>
+              <a class="hero-gallery__card" href="product.html#control-centre">
+                <span class="hero-gallery__media"><img src="images/gallery/gallery-quick-commands.webp" width="1440" height="900" alt="" decoding="async" /></span>
+                <span class="hero-gallery__label">Quick commands
+                  <svg class="hero-gallery__arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                </span>
+              </a>
+              <!-- set 2: duplicate for the seamless loop; inert for keyboard and screen readers -->
+              <a class="hero-gallery__card" href="product.html#risk" aria-hidden="true" tabindex="-1">
+                <span class="hero-gallery__media"><img src="images/gallery/gallery-risk-matrix.webp" width="1440" height="900" alt="" decoding="async" /></span>
+                <span class="hero-gallery__label">5×5 risk matrix
+                  <svg class="hero-gallery__arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                </span>
+              </a>
+              <a class="hero-gallery__card" href="product.html#control-centre" aria-hidden="true" tabindex="-1">
+                <span class="hero-gallery__media"><img src="images/gallery/gallery-control-posture.webp" width="1440" height="900" alt="" decoding="async" /></span>
+                <span class="hero-gallery__label">Control posture
+                  <svg class="hero-gallery__arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                </span>
+              </a>
+              <a class="hero-gallery__card" href="product.html#projects" aria-hidden="true" tabindex="-1">
+                <span class="hero-gallery__media"><img src="images/gallery/gallery-portfolio-health.webp" width="1440" height="900" alt="" decoding="async" /></span>
+                <span class="hero-gallery__label">Portfolio health
+                  <svg class="hero-gallery__arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                </span>
+              </a>
+              <a class="hero-gallery__card" href="product.html#risk" aria-hidden="true" tabindex="-1">
+                <span class="hero-gallery__media"><img src="images/gallery/gallery-top-risks.webp" width="1440" height="900" alt="" decoding="async" /></span>
+                <span class="hero-gallery__label">Top priority risks
+                  <svg class="hero-gallery__arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                </span>
+              </a>
+              <a class="hero-gallery__card" href="product.html#change" aria-hidden="true" tabindex="-1">
+                <span class="hero-gallery__media"><img src="images/gallery/gallery-change-control.webp" width="1440" height="900" alt="" decoding="async" /></span>
+                <span class="hero-gallery__label">Governed change control
+                  <svg class="hero-gallery__arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                </span>
+              </a>
+              <a class="hero-gallery__card" href="product.html#reports" aria-hidden="true" tabindex="-1">
+                <span class="hero-gallery__media"><img src="images/gallery/gallery-risk-exposure.webp" width="1440" height="900" alt="" decoding="async" /></span>
+                <span class="hero-gallery__label">Risk exposure reporting
+                  <svg class="hero-gallery__arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                </span>
+              </a>
+              <a class="hero-gallery__card" href="product.html#control-centre" aria-hidden="true" tabindex="-1">
+                <span class="hero-gallery__media"><img src="images/gallery/gallery-action-queue.webp" width="1440" height="900" alt="" decoding="async" /></span>
+                <span class="hero-gallery__label">Priority action queue
+                  <svg class="hero-gallery__arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                </span>
+              </a>
+              <a class="hero-gallery__card" href="product.html#control-centre" aria-hidden="true" tabindex="-1">
+                <span class="hero-gallery__media"><img src="images/gallery/gallery-quick-commands.webp" width="1440" height="900" alt="" decoding="async" /></span>
+                <span class="hero-gallery__label">Quick commands
+                  <svg class="hero-gallery__arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                </span>
+              </a>
             </div>
           </div>
         </div>
