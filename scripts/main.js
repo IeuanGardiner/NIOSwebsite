@@ -7,7 +7,7 @@ const SELECTORS = {
   mobileNav: 'mobileNav',
   section: 'main section[id]',
   form: '.contact__form',
-  heroShot: '[data-hero-shot]'
+  heroField: '[data-hero-field]'
 };
 
 // TODO: placeholder address until the Vesta domain exists. Keep in sync with
@@ -328,33 +328,14 @@ function setupActiveNavPage(d) {
   });
 }
 
-function setupHeroSettle(d) {
-  const shot = d.querySelector(SELECTORS.heroShot);
-  if (!shot) return;
+function setupDeliveryField(d) {
+  if (!d.querySelector(SELECTORS.heroField)) return;
 
-  const settle = () => shot.classList.add('is-settled');
-
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
-    settle();
-    return;
-  }
-
-  // Settle the perspective tilt once the shot is properly in view or the
-  // visitor starts scrolling, whichever comes first.
-  const observer = new IntersectionObserver((entries) => {
-    if (entries.some((entry) => entry.isIntersecting)) {
-      settle();
-      observer.disconnect();
-    }
-  }, { threshold: 0.55 });
-
-  observer.observe(shot);
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 80) {
-      settle();
-      observer.disconnect();
-    }
-  }, { passive: true, once: false });
+  // Dynamic import keeps this file loadable as CommonJS by the node:test
+  // suite while the browser gets the ES module.
+  import('./hero-delivery-field.js')
+    .then(({ initDeliveryField }) => initDeliveryField())
+    .catch((error) => console.error(error));
 }
 
 function initialiseSite() {
@@ -372,7 +353,7 @@ function initialiseSite() {
   setupRevealOnScroll(d);
   setupActiveSectionTracking(d);
   setupActiveNavPage(d);
-  setupHeroSettle(d);
+  setupDeliveryField(d);
   setupMobileMenu(d);
   setupDarkModeToggle(d);
   setupContactForm(d);
@@ -394,7 +375,7 @@ if (typeof module !== 'undefined') {
     setupRevealOnScroll,
     setupActiveSectionTracking,
     setupActiveNavPage,
-    setupHeroSettle,
+    setupDeliveryField,
     setupMobileMenu,
     setupDarkModeToggle,
     setupContactForm,

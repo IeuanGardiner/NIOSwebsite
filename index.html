@@ -38,17 +38,30 @@
     <div data-include="partials/header.html"></div>
 
     <main id="main-content" tabindex="-1">
-      <!-- Hero -->
+      <!-- Hero: "Portfolio in Motion" -->
       <section class="hero band--night" aria-labelledby="hero-title">
         <div class="hero__backdrop" aria-hidden="true">
           <div class="hero__glow hero__glow--one"></div>
           <div class="hero__glow hero__glow--two"></div>
         </div>
+
+        <!-- Delivery field: ambient project-delivery animation (Gantt, milestones, structures, burn-up) -->
+        <canvas
+          class="hero__field"
+          data-hero-field
+          data-intensity="7"
+          data-labels="true"
+          data-convergence="true"
+          aria-hidden="true"
+        ></canvas>
+
         <div class="shell hero__inner">
           <div class="hero__copy">
-            <p class="hero__badge"><span class="hero__badge-dot" aria-hidden="true"></span>Early access: founding cohort now forming</p>
-            <h1 id="hero-title">Every risk. Every change. One source of truth.</h1>
-            <p class="lead">Vesta gives your PMO a live, permissioned, audit-ready picture of risk and change across every programme and project.</p>
+            <h1 id="hero-title">
+              <span class="hero__line hero__line--1">Every risk. Every change.</span>
+              <span class="hero__line hero__line--2 hero__accent">One source of truth.</span>
+            </h1>
+            <p class="lead hero__lead">Vesta gives your PMO a live, permissioned, audit-ready picture of risk and change across every programme and project.</p>
             <div class="hero__actions">
               <a class="button" href="contact.html">Register interest
                 <svg class="button__arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
@@ -56,22 +69,63 @@
               <a class="button button--ghost" href="product.html">Explore the product</a>
             </div>
           </div>
-          <div class="hero__media">
-            <figure class="frame hero__shot" data-hero-shot>
-              <div class="frame__bar" aria-hidden="true">
-                <span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span>
-              </div>
-              <div class="frame__media">
-                <img
-                  src="images/screenshots/app-home-control-centre.png"
-                  width="3200"
-                  height="2000"
-                  alt="Vesta Home Control Centre: control posture banner, critical and high risk counts, portfolio health RAG by programme, and a prioritised act-now queue"
-                  fetchpriority="high"
-                  decoding="async"
-                />
-              </div>
-            </figure>
+        </div>
+
+        <!-- Feature gallery: full-bleed drifting close-ups; streaks from the field converge into it -->
+        <div class="hero-gallery" data-hero-gallery>
+          <div class="hero-gallery__mask">
+            <div class="hero-gallery__track">
+              <!-- set 1 -->
+              <figure class="hero-gallery__card hero-gallery__card--matrix">
+                <figcaption class="hero-gallery__tag">5×5 risk matrix</figcaption>
+              </figure>
+              <figure class="hero-gallery__card hero-gallery__card--posture">
+                <figcaption class="hero-gallery__tag">Control posture</figcaption>
+              </figure>
+              <figure class="hero-gallery__card hero-gallery__card--health">
+                <figcaption class="hero-gallery__tag">Portfolio health</figcaption>
+              </figure>
+              <figure class="hero-gallery__card hero-gallery__card--toprisks">
+                <figcaption class="hero-gallery__tag">Top priority risks</figcaption>
+              </figure>
+              <figure class="hero-gallery__card hero-gallery__card--change">
+                <figcaption class="hero-gallery__tag">Governed change control</figcaption>
+              </figure>
+              <figure class="hero-gallery__card hero-gallery__card--exposure">
+                <figcaption class="hero-gallery__tag">Risk exposure reporting</figcaption>
+              </figure>
+              <figure class="hero-gallery__card hero-gallery__card--queue">
+                <figcaption class="hero-gallery__tag">Priority action queue</figcaption>
+              </figure>
+              <figure class="hero-gallery__card hero-gallery__card--commands">
+                <figcaption class="hero-gallery__tag">Quick commands</figcaption>
+              </figure>
+              <!-- set 2: duplicate for the seamless loop -->
+              <figure class="hero-gallery__card hero-gallery__card--matrix" aria-hidden="true">
+                <figcaption class="hero-gallery__tag">5×5 risk matrix</figcaption>
+              </figure>
+              <figure class="hero-gallery__card hero-gallery__card--posture" aria-hidden="true">
+                <figcaption class="hero-gallery__tag">Control posture</figcaption>
+              </figure>
+              <figure class="hero-gallery__card hero-gallery__card--health" aria-hidden="true">
+                <figcaption class="hero-gallery__tag">Portfolio health</figcaption>
+              </figure>
+              <figure class="hero-gallery__card hero-gallery__card--toprisks" aria-hidden="true">
+                <figcaption class="hero-gallery__tag">Top priority risks</figcaption>
+              </figure>
+              <figure class="hero-gallery__card hero-gallery__card--change" aria-hidden="true">
+                <figcaption class="hero-gallery__tag">Governed change control</figcaption>
+              </figure>
+              <figure class="hero-gallery__card hero-gallery__card--exposure" aria-hidden="true">
+                <figcaption class="hero-gallery__tag">Risk exposure reporting</figcaption>
+              </figure>
+              <figure class="hero-gallery__card hero-gallery__card--queue" aria-hidden="true">
+                <figcaption class="hero-gallery__tag">Priority action queue</figcaption>
+              </figure>
+              <figure class="hero-gallery__card hero-gallery__card--commands" aria-hidden="true">
+                <figcaption class="hero-gallery__tag">Quick commands</figcaption>
+              </figure>
+            </div>
           </div>
         </div>
       </section>
