@@ -672,7 +672,8 @@ body:has(.mobile-menu.open) .site-header {
   animation: heroMarquee 60s linear infinite;
 }
 
-.hero-gallery__track:hover {
+.hero-gallery__track:hover,
+.hero-gallery__track:focus-within {
   animation-play-state: paused;
 }
 
@@ -681,44 +682,75 @@ body:has(.mobile-menu.open) .site-header {
   to   { transform: translateX(calc(-50% - 9px)); } /* -9px = half the 18px gap */
 }
 
+/* Card = link: framed product vignette with a caption plaque below */
 .hero-gallery__card {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
   flex: none;
-  margin: 0;
-  width: clamp(250px, 26vw, 350px);
-  aspect-ratio: 1.48;
+  width: clamp(260px, 27vw, 360px);
+  text-decoration: none;
+}
+
+.hero-gallery__media {
+  display: block;
+  overflow: hidden;
   border: 1px solid rgba(148, 163, 201, 0.2);
   border-radius: 12px;
-  overflow: hidden;
   background-color: var(--night-bg-raised);
-  background-repeat: no-repeat;
   box-shadow: 0 14px 40px -14px rgba(5, 8, 18, 0.6);
+  transition:
+    border-color var(--speed-soft) var(--ease-out),
+    transform var(--speed-soft) var(--ease-out),
+    box-shadow var(--speed-soft) var(--ease-out);
 }
 
-.hero-gallery__tag {
-  position: absolute;
-  left: 10px;
-  bottom: 10px;
-  padding: 4px 9px;
-  border: 1px solid rgba(148, 163, 201, 0.2);
-  border-radius: 6px;
-  background: rgba(7, 11, 23, 0.8);
+.hero-gallery__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hero-gallery__label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  padding-inline: 2px;
   color: var(--night-ink-secondary);
   font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  transition: color var(--speed-quick) var(--ease-out);
 }
 
-/* Close-up crops (background-size / background-position pairs are exact — do not eyeball) */
-.hero-gallery__card--matrix   { background-image: url("../images/screenshots/app-risk-dashboard.png");      background-size: 344.828% 317.46%;  background-position: 43.66% 32.12%; }
-.hero-gallery__card--posture  { background-image: url("../images/screenshots/app-home-control-centre.png"); background-size: 500% 465.116%;     background-position: 98.75% 11.85%; }
-.hero-gallery__card--health   { background-image: url("../images/screenshots/app-home-control-centre.png"); background-size: 333.333% 312.5%;   background-position: 25% 54.41%; }
-.hero-gallery__card--toprisks { background-image: url("../images/screenshots/app-risk-dashboard.png");      background-size: 270.27% 250%;      background-position: 96.83% 35.83%; }
-.hero-gallery__card--change   { background-image: url("../images/screenshots/app-change-detail.png");       background-size: 333.333% 307.692%; background-position: 44.29% 23.7%; }
-.hero-gallery__card--exposure { background-image: url("../images/screenshots/app-reports.png");             background-size: 333.333% 307.692%; background-position: 25.71% 13.33%; }
-.hero-gallery__card--queue    { background-image: url("../images/screenshots/app-home-control-centre.png"); background-size: 384.615% 357.143%; background-position: 22.97% 100%; }
-.hero-gallery__card--commands { background-image: url("../images/screenshots/app-home-control-centre.png"); background-size: 384.615% 357.143%; background-position: 98.65% 98.61%; }
+.hero-gallery__arrow {
+  flex: none;
+  color: var(--night-accent);
+  opacity: 0.45;
+  transition:
+    opacity var(--speed-quick) var(--ease-out),
+    transform var(--speed-quick) var(--ease-out);
+}
+
+.hero-gallery__card:hover .hero-gallery__media,
+.hero-gallery__card:focus-visible .hero-gallery__media {
+  border-color: var(--night-border-strong);
+  transform: translateY(-3px);
+  box-shadow: 0 22px 50px -16px rgba(5, 8, 18, 0.8);
+}
+
+.hero-gallery__card:hover .hero-gallery__label,
+.hero-gallery__card:focus-visible .hero-gallery__label {
+  color: var(--night-ink);
+}
+
+.hero-gallery__card:hover .hero-gallery__arrow,
+.hero-gallery__card:focus-visible .hero-gallery__arrow {
+  opacity: 1;
+  transform: translateX(3px);
+}
 
 /* ---------- 7. Home sections ---------- */
 

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8" />
+<title>Vesta gallery art-boards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+<style>
+  :root {
+    --bg0: #0b1122;
+    --bg1: #0a0e1c;
+    --line: rgba(148, 163, 201, 0.16);
+    --line-strong: rgba(148, 163, 201, 0.3);
+    --row: rgba(148, 163, 201, 0.055);
+    --ink: #eef2fa;
+    --ink-2: #b7c2d9;
+    --ink-3: #8d99b4;
+    --indigo: #6366f1;
+    --indigo-text: #97a0ff;
+    --red: #fb7185;
+    --orange: #fb923c;
+    --amber: #fbbf24;
+    --green: #4ade80;
+    --teal: #2dd4bf;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: #05070f;
+    font-family: "Inter", sans-serif;
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .board {
+    width: 640px;
+    height: 400px;
+    flex: none;
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(120% 90% at 15% -10%, rgba(99, 102, 241, 0.09) 0%, transparent 55%),
+      linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
+    padding: 26px 28px;
+    font-feature-settings: "tnum";
+  }
+  .head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .head h2 { font-size: 25px; font-weight: 700; letter-spacing: -0.015em; }
+  .head .sub { margin-top: 5px; font-size: 15px; color: var(--ink-3); font-weight: 400; }
+
+  /* shared bits */
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 11px; border-radius: 999px;
+    font-size: 12.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .chip--red    { color: var(--red);    background: rgba(251, 113, 133, 0.12); border: 1px solid rgba(251, 113, 133, 0.4); }
+  .chip--amber  { color: var(--amber);  background: rgba(251, 191, 36, 0.1);   border: 1px solid rgba(251, 191, 36, 0.38); }
+  .chip--indigo { color: var(--indigo-text); background: rgba(99, 102, 241, 0.14); border: 1px solid rgba(99, 102, 241, 0.45); }
+  .pill-id {
+    padding: 3px 10px; border-radius: 7px; font-size: 13px; font-weight: 600;
+    color: var(--indigo-text); border: 1px solid rgba(99, 102, 241, 0.4); background: rgba(99, 102, 241, 0.1);
+  }
+  .rows { display: flex; flex-direction: column; }
+
+  /* ---------- 1. Risk matrix ---------- */
+  .seg { display: flex; border: 1px solid var(--line); border-radius: 9px; overflow: hidden; }
+  .seg span { padding: 7px 14px; font-size: 13.5px; font-weight: 600; color: var(--ink-3); }
+  .seg span.on { background: rgba(99, 102, 241, 0.18); color: var(--ink); }
+  .matrix { margin-top: 16px; display: grid; grid-template-columns: 88px repeat(5, 1fr); gap: 5px; }
+  .matrix .rlabel {
+    align-self: center; justify-self: end; padding-right: 8px;
+    font-size: 12.5px; color: var(--ink-3); font-weight: 500;
+  }
+  .cell { height: 44px; border-radius: 7px; position: relative; }
+  .cell.g { background: rgba(74, 222, 128, 0.07);  border: 1px solid rgba(74, 222, 128, 0.32); }
+  .cell.y { background: rgba(251, 191, 36, 0.07);  border: 1px solid rgba(251, 191, 36, 0.32); }
+  .cell.o { background: rgba(251, 146, 60, 0.09);  border: 1px solid rgba(251, 146, 60, 0.4); }
+  .cell.r { background: rgba(251, 113, 133, 0.1);  border: 1px solid rgba(251, 113, 133, 0.45); }
+  .cell b {
+    position: absolute; inset: 0; margin: auto; width: 27px; height: 27px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14.5px; font-weight: 700; color: #170b12;
+  }
+  .cell b.br { background: var(--red); }
+  .cell b.bo { background: var(--orange); }
+  .clabels { display: grid; grid-template-columns: 88px repeat(5, 1fr); gap: 5px; margin-top: 7px; }
+  .clabels span { text-align: center; font-size: 12px; color: var(--ink-3); }
+
+  /* ---------- 2. Control posture ---------- */
+  .eyebrow { display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 700; letter-spacing: 0.14em; color: var(--ink-2); }
+  .eyebrow svg { width: 17px; height: 17px; stroke: var(--indigo-text); }
+  .posture-line { margin-top: 16px; font-size: 21px; color: var(--ink-2); }
+  .posture-line strong { color: var(--ink); font-weight: 600; }
+  .kpis { margin-top: 22px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .kpi { border-radius: 11px; padding: 17px 16px 15px; position: relative; }
+  .kpi .dot { position: absolute; top: 12px; right: 12px; width: 7px; height: 7px; border-radius: 50%; }
+  .kpi.r { background: rgba(251, 113, 133, 0.09); border: 1px solid rgba(251, 113, 133, 0.32); }
+  .kpi.r .num { color: var(--red); } .kpi.r .dot { background: var(--red); }
+  .kpi.a { background: rgba(251, 191, 36, 0.08); border: 1px solid rgba(251, 191, 36, 0.3); }
+  .kpi.a .num { color: var(--amber); } .kpi.a .dot { background: var(--amber); }
+  .kpi .num { font-size: 44px; font-weight: 800; letter-spacing: -0.02em; line-height: 1; }
+  .kpi .lab { margin-top: 8px; font-size: 14.5px; color: var(--ink-2); line-height: 1.32; }
+  .actions { margin-top: 28px; display: flex; gap: 10px; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 12px 20px; border-radius: 9px; font-size: 15.5px; font-weight: 600;
+  }
+  .btn--primary { background: var(--indigo); color: #fff; }
+  .btn--ghost { border: 1px solid var(--line-strong); color: var(--ink); }
+
+  /* ---------- 3. Portfolio health ---------- */
+  .health-count { font-size: 15px; font-weight: 700; margin-top: 6px; white-space: nowrap; }
+  .health-count .r { color: var(--red); } .health-count .a { color: var(--amber); }
+  .hrows { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
+  .hrow {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--row); border: 1px solid var(--line); border-radius: 10px;
+    padding: 15px 18px;
+  }
+  .hrow .stack { min-width: 0; }
+  .hrow .name { font-size: 18px; font-weight: 600; white-space: nowrap; }
+  .hrow .meta { margin-top: 4px; font-size: 14px; color: var(--ink-3); white-space: nowrap; }
+  .hrow .pill-id { margin-left: auto; flex: none; white-space: nowrap; }
+  .rag { padding: 3px 9px; border-radius: 6px; font-size: 11.5px; font-weight: 800; letter-spacing: 0.08em; }
+  .rag.red { color: var(--red); background: rgba(251, 113, 133, 0.13); border: 1px solid rgba(251, 113, 133, 0.42); }
+  .rag.amber { color: var(--amber); background: rgba(251, 191, 36, 0.11); border: 1px solid rgba(251, 191, 36, 0.4); }
+
+  /* ---------- 4. Top priority risks ---------- */
+  .table { margin-top: 16px; }
+  .thead, .trow { display: grid; grid-template-columns: 1fr 96px 110px 64px; gap: 12px; align-items: center; }
+  .thead {
+    padding: 0 4px 10px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-3);
+    border-bottom: 1px solid var(--line);
+  }
+  .trow { padding: 12.5px 4px; border-bottom: 1px solid var(--line); }
+  .trow:last-child { border-bottom: 0; }
+  .trow .risk { font-size: 16px; font-weight: 600; line-height: 1.25; }
+  .trow .rid { display: block; margin-top: 3px; font-size: 13px; font-weight: 500; color: var(--ink-3); }
+  .lvl { justify-self: start; padding: 3px 10px; border-radius: 6px; font-size: 12.5px; font-weight: 700;
+         color: var(--red); background: rgba(251, 113, 133, 0.12); border: 1px solid rgba(251, 113, 133, 0.4); }
+  .trow .owner { font-size: 14.5px; color: var(--ink-2); }
+  .trow .open { font-size: 14.5px; font-weight: 600; color: var(--indigo-text); }
+
+  /* ---------- 5. Governed change control ---------- */
+  .change-title { margin-top: 12px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .change-title .urgent { color: var(--red); font-weight: 700; font-size: 14px; }
+  .change-title h3 { font-size: 19px; font-weight: 700; width: 100%; margin-top: 6px; letter-spacing: -0.01em; }
+  .change-title h3 span { color: var(--indigo-text); }
+  .stepper { margin-top: 20px; display: flex; align-items: center; }
+  .step { display: flex; align-items: center; gap: 7px; }
+  .step .ball {
+    width: 25px; height: 25px; border-radius: 50%; flex: none;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12.5px; font-weight: 700;
+  }
+  .step.done .ball { background: rgba(74, 222, 128, 0.16); border: 1.5px solid var(--green); color: var(--green); }
+  .step.now .ball { background: rgba(99, 102, 241, 0.22); border: 1.5px solid var(--indigo); color: var(--ink); }
+  .step.next .ball { border: 1.5px solid var(--line-strong); color: var(--ink-3); }
+  .step .slab { font-size: 13px; font-weight: 600; white-space: nowrap; }
+  .step.done .slab { color: var(--ink-2); }
+  .step.now .slab { color: var(--ink); }
+  .step.next .slab { color: var(--ink-3); font-weight: 500; }
+  .conn { flex: 1; height: 2px; margin: 0 8px; min-width: 8px; }
+  .conn.done { background: rgba(74, 222, 128, 0.55); }
+  .conn.next { background: var(--line); }
+  .warn {
+    margin-top: 18px; display: flex; align-items: center; gap: 10px;
+    border: 1px solid rgba(251, 113, 133, 0.32); background: rgba(251, 113, 133, 0.07);
+    border-radius: 10px; padding: 11px 14px; font-size: 14px; color: var(--ink-2);
+  }
+  .warn svg { width: 16px; height: 16px; flex: none; stroke: var(--red); }
+  .warn strong { color: var(--red); font-weight: 700; }
+  .decision {
+    margin-top: 16px; border: 1px solid var(--line); border-radius: 12px;
+    background: var(--row); padding: 16px 18px;
+  }
+  .decision h4 { font-size: 16.5px; font-weight: 700; }
+  .decision p { margin-top: 5px; font-size: 14.5px; color: var(--ink-3); }
+  .decision .dbtns { margin-top: 13px; display: flex; gap: 10px; }
+  .dbtn { padding: 8px 17px; border-radius: 9px; font-size: 14px; font-weight: 700; }
+  .dbtn.ok { background: rgba(74, 222, 128, 0.9); color: #06220f; }
+  .dbtn.no { background: rgba(251, 113, 133, 0.16); color: var(--red); border: 1px solid rgba(251, 113, 133, 0.45); }
+
+  /* ---------- 6. Risk exposure ---------- */
+  .csv { display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; border: 1px solid var(--line-strong);
+         border-radius: 9px; font-size: 13.5px; font-weight: 600; color: var(--ink); }
+  .ehead, .erow { display: grid; grid-template-columns: 1.35fr 0.55fr 0.85fr 1fr; gap: 12px; align-items: center; }
+  .ehead {
+    margin-top: 16px; padding: 0 4px 10px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-3); border-bottom: 1px solid var(--line);
+  }
+  .ehead span:nth-child(n+2), .erow span:nth-child(n+2) { text-align: right; }
+  .erow { padding: 12px 4px; border-bottom: 1px solid var(--line); font-size: 16px; }
+  .erow:last-child { border-bottom: 0; }
+  .erow .cat { font-weight: 600; }
+  .erow .n { color: var(--ink-2); }
+  .erow .est { font-weight: 700; }
+  .erow .exp { font-weight: 700; color: var(--indigo-text); }
+
+  /* ---------- 7. Priority action queue ---------- */
+  .actnow { margin-top: 16px; display: flex; align-items: center; gap: 9px; }
+  .actnow span { font-size: 12.5px; font-weight: 800; letter-spacing: 0.13em; color: var(--ink-2); }
+  .actnow b { min-width: 24px; height: 24px; padding: 0 7px; border-radius: 7px; display: flex; align-items: center; justify-content: center;
+              font-size: 13px; font-weight: 700; color: var(--red); background: rgba(251, 113, 133, 0.13); border: 1px solid rgba(251, 113, 133, 0.4); }
+  .qrows { margin-top: 12px; display: flex; flex-direction: column; gap: 9px; }
+  .qrow {
+    display: flex; align-items: center; gap: 13px;
+    background: var(--row); border: 1px solid var(--line); border-radius: 10px; padding: 12px 15px;
+  }
+  .qrow .shield {
+    width: 34px; height: 34px; flex: none; border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.32);
+  }
+  .qrow .shield svg { width: 17px; height: 17px; stroke: var(--amber); }
+  .qrow .qt { font-size: 16px; font-weight: 600; }
+  .qrow .qt i { font-style: normal; color: var(--indigo-text); font-weight: 700; margin-right: 7px; }
+  .qrow .qm { margin-top: 3px; font-size: 13.5px; color: var(--ink-3); }
+  .qrow .due { margin-left: auto; text-align: right; flex: none; }
+  .qrow .due .r1 { font-size: 13.5px; font-weight: 700; color: var(--ink-2); }
+  .qrow .due .r2 { margin-top: 2px; font-size: 13.5px; color: var(--red); font-weight: 600; }
+
+  /* ---------- 8. Quick commands ---------- */
+  .create { margin-top: 16px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.13em; color: var(--ink-3); }
+  .crows { margin-top: 12px; display: flex; flex-direction: column; gap: 10px; }
+  .crow {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--row); border: 1px solid var(--line); border-radius: 11px; padding: 13px 16px;
+  }
+  .crow .plus {
+    width: 36px; height: 36px; flex: none; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 600; line-height: 1;
+  }
+  .crow .plus.am { color: var(--amber); background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.32); }
+  .crow .plus.rd { color: var(--red); background: rgba(251, 113, 133, 0.1); border: 1px solid rgba(251, 113, 133, 0.32); }
+  .crow .plus.tl { color: var(--teal); background: rgba(45, 212, 191, 0.09); border: 1px solid rgba(45, 212, 191, 0.3); }
+  .crow .ct { font-size: 16.5px; font-weight: 600; }
+  .crow .cm { margin-top: 3px; font-size: 14px; color: var(--ink-3); }
+  .crow .go { margin-left: auto; color: var(--ink-3); font-size: 18px; }
+</style>
+</head>
+<body>
+
+<!-- 1. 5x5 risk matrix -->
+<section class="board" data-name="gallery-risk-matrix">
+  <div class="head">
+    <div><h2>Risk Matrix</h2><div class="sub">Current position, 13 active risks</div></div>
+    <div class="seg"><span class="on">Current</span><span>Target</span></div>
+  </div>
+  <div class="matrix">
+    <span class="rlabel">Catastrophic</span><span class="cell y"></span><span class="cell r"><b class="br">1</b></span><span class="cell r"><b class="br">2</b></span><span class="cell r"></span><span class="cell r"><b class="br">1</b></span>
+    <span class="rlabel">Major</span><span class="cell y"></span><span class="cell o"><b class="bo">1</b></span><span class="cell o"><b class="bo">3</b></span><span class="cell r"><b class="br">2</b></span><span class="cell r"><b class="br">1</b></span>
+    <span class="rlabel">Moderate</span><span class="cell g"></span><span class="cell y"></span><span class="cell o"><b class="bo">1</b></span><span class="cell o"></span><span class="cell r"><b class="br">1</b></span>
+    <span class="rlabel">Minor</span><span class="cell g"></span><span class="cell g"></span><span class="cell y"></span><span class="cell y"></span><span class="cell o"></span>
+    <span class="rlabel">Negligible</span><span class="cell g"></span><span class="cell g"></span><span class="cell g"></span><span class="cell y"></span><span class="cell y"></span>
+  </div>
+  <div class="clabels">
+    <span></span><span>Rare</span><span>Unlikely</span><span>Possible</span><span>Likely</span><span>Almost certain</span>
+  </div>
+</section>
+
+<!-- 2. Control posture -->
+<section class="board" data-name="gallery-control-posture">
+  <div class="eyebrow">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.6-3 7.6-7 9-4-1.4-7-4.4-7-9V6z"/></svg>
+    CONTROL POSTURE
+  </div>
+  <div style="margin-top: 14px;"><span class="chip chip--red">Critical control posture</span></div>
+  <p class="posture-line"><strong>11 items</strong> need immediate control action.</p>
+  <div class="kpis">
+    <div class="kpi r"><span class="dot"></span><div class="num">13</div><div class="lab">Critical / high risks</div></div>
+    <div class="kpi r"><span class="dot"></span><div class="num">3</div><div class="lab">Mitigations overdue</div></div>
+    <div class="kpi r"><span class="dot"></span><div class="num">1</div><div class="lab">Urgent issues</div></div>
+    <div class="kpi a"><span class="dot"></span><div class="num">6</div><div class="lab">Overdue reviews</div></div>
+  </div>
+  <div class="actions">
+    <span class="btn btn--primary">Review R006 &#8594;</span>
+    <span class="btn btn--ghost">Risk Register</span>
+  </div>
+</section>
+
+<!-- 3. Portfolio health -->
+<section class="board" data-name="gallery-portfolio-health">
+  <div class="head">
+    <div><h2>Portfolio health</h2><div class="sub">Worst-health first, across 3 active programmes</div></div>
+    <div class="health-count"><span class="r">2 Red</span> &nbsp;<span class="a">1 Amber</span></div>
+  </div>
+  <div class="hrows">
+    <div class="hrow"><span class="rag red">RED</span><span class="stack"><span class="name">Infrastructure Programme</span><div class="meta">7 open risks &middot; 3 pending changes</div></span><span class="pill-id">PRJ-002</span></div>
+    <div class="hrow"><span class="rag red">RED</span><span class="stack"><span class="name">Property Portfolio</span><div class="meta">4 open risks &middot; 2 open issues</div></span><span class="pill-id">PRJ-001</span></div>
+    <div class="hrow"><span class="rag amber">AMBER</span><span class="stack"><span class="name">Harbour Quay Phase 2</span><div class="meta">2 open risks &middot; 1 pending change</div></span><span class="pill-id">PRJ-003</span></div>
+  </div>
+</section>
+
+<!-- 4. Top priority risks -->
+<section class="board" data-name="gallery-top-risks">
+  <div class="head">
+    <div><h2>Top Priority Risks</h2><div class="sub">Sorted by severity</div></div>
+  </div>
+  <div class="table">
+    <div class="thead"><span>Risk</span><span>Level</span><span>Owner</span><span>Status</span></div>
+    <div class="trow"><span class="risk">Scaffolding collapse at Level 4<span class="rid">R001 &middot; Safety</span></span><span class="lvl">Critical</span><span class="owner">J. Hayes</span><span class="open">Open</span></div>
+    <div class="trow"><span class="risk">Steel delivery delayed<span class="rid">R006 &middot; Supply</span></span><span class="lvl">Critical</span><span class="owner">M. Clarke</span><span class="open">Open</span></div>
+    <div class="trow"><span class="risk">Ground subsidence Zone D<span class="rid">R002 &middot; Structural</span></span><span class="lvl">Critical</span><span class="owner">S. Patel</span><span class="open">Open</span></div>
+    <div class="trow"><span class="risk">Fuel &amp; energy price volatility<span class="rid">R011 &middot; Supply Chain</span></span><span class="lvl">Critical</span><span class="owner">I. Gardiner</span><span class="open">Open</span></div>
+  </div>
+</section>
+
+<!-- 5. Governed change control -->
+<section class="board" data-name="gallery-change-control">
+  <div class="change-title">
+    <span class="chip chip--indigo">Under Review</span>
+    <span class="urgent">Urgent</span>
+    <h3><span>C001</span> Underpinning design for warehouse slab foundation</h3>
+  </div>
+  <div class="stepper">
+    <span class="step done"><span class="ball">&#10003;</span><span class="slab">Draft</span></span>
+    <span class="conn done"></span>
+    <span class="step done"><span class="ball">&#10003;</span><span class="slab">Submitted</span></span>
+    <span class="conn done"></span>
+    <span class="step now"><span class="ball">3</span><span class="slab">Under Review</span></span>
+    <span class="conn next"></span>
+    <span class="step next"><span class="ball">4</span><span class="slab">Decision</span></span>
+    <span class="conn next"></span>
+    <span class="step next"><span class="ball">5</span><span class="slab">Implemented</span></span>
+  </div>
+  <div class="warn">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+    <span><strong>Budget overrun.</strong> Applying this impact would exceed the approved budget by &pound;2.1M.</span>
+  </div>
+  <div class="decision">
+    <h4>Approval Decision</h4>
+    <p>Permanent and auditable. It cannot be quietly undone.</p>
+    <div class="dbtns"><span class="dbtn ok">Approve&#8230;</span><span class="dbtn no">Reject&#8230;</span></div>
+  </div>
+</section>
+
+<!-- 6. Risk exposure reporting -->
+<section class="board" data-name="gallery-risk-exposure">
+  <div class="head">
+    <div><h2>Risk Exposure</h2><div class="sub">Active risks, by category</div></div>
+    <span class="csv">&#8595; CSV</span>
+  </div>
+  <div class="ehead"><span>Category</span><span>Risks</span><span>Estimated</span><span>Open exposure</span></div>
+  <div class="erow"><span class="cat">Economic</span><span class="n">1</span><span class="est">&pound;6.8M</span><span class="exp">&pound;6.0M</span></div>
+  <div class="erow"><span class="cat">Safety</span><span class="n">4</span><span class="est">&pound;6.3M</span><span class="exp">&pound;3.1M</span></div>
+  <div class="erow"><span class="cat">Supply Chain</span><span class="n">2</span><span class="est">&pound;5.4M</span><span class="exp">&pound;5.4M</span></div>
+  <div class="erow"><span class="cat">Regulatory</span><span class="n">2</span><span class="est">&pound;2.5M</span><span class="exp">&pound;1.9M</span></div>
+  <div class="erow"><span class="cat">Structural</span><span class="n">1</span><span class="est">&pound;1.6M</span><span class="exp">&pound;1.1M</span></div>
+</section>
+
+<!-- 7. Priority action queue -->
+<section class="board" data-name="gallery-action-queue">
+  <div class="head">
+    <div><h2>Priority action queue</h2><div class="sub">Prioritised across risks, issues and changes</div></div>
+  </div>
+  <div class="actnow"><span>ACT NOW</span><b>7</b></div>
+  <div class="qrows">
+    <div class="qrow">
+      <span class="shield"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.6-3 7.6-7 9-4-1.4-7-4.4-7-9V6z"/></svg></span>
+      <span><span class="qt"><i>R006</i>Steel delivery delayed</span><div class="qm">Review overdue &middot; 1 mitigation overdue &middot; M. Clarke</div></span>
+      <span class="due"><div class="r1">Review</div><div class="r2">28 Feb 2026</div></span>
+    </div>
+    <div class="qrow">
+      <span class="shield"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.6-3 7.6-7 9-4-1.4-7-4.4-7-9V6z"/></svg></span>
+      <span><span class="qt"><i>R002</i>Ground subsidence Zone D</span><div class="qm">Target date passed &middot; 1 action overdue &middot; S. Patel</div></span>
+      <span class="due"><div class="r1">Review</div><div class="r2">15 May 2026</div></span>
+    </div>
+    <div class="qrow">
+      <span class="shield"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.6-3 7.6-7 9-4-1.4-7-4.4-7-9V6z"/></svg></span>
+      <span><span class="qt"><i>R001</i>Scaffolding collapse, Level 4</span><div class="qm">Review overdue &middot; 1 mitigation overdue &middot; J. Hayes</div></span>
+      <span class="due"><div class="r1">Review</div><div class="r2">30 May 2026</div></span>
+    </div>
+  </div>
+</section>
+
+<!-- 8. Quick commands -->
+<section class="board" data-name="gallery-quick-commands">
+  <div class="head">
+    <div><h2>Quick commands</h2><div class="sub">Permission-gated create and inspect paths</div></div>
+  </div>
+  <div class="create">CREATE</div>
+  <div class="crows">
+    <div class="crow"><span class="plus am">+</span><span><div class="ct">Add Risk</div><div class="cm">Capture a new threat or control concern</div></span><span class="go">&#8250;</span></div>
+    <div class="crow"><span class="plus rd">+</span><span><div class="ct">Raise Issue</div><div class="cm">Escalate an active blocker</div></span><span class="go">&#8250;</span></div>
+    <div class="crow"><span class="plus tl">+</span><span><div class="ct">Raise Change</div><div class="cm">Request controlled change</div></span><span class="go">&#8250;</span></div>
+  </div>
+</section>
+
+</body>
+</html>
