@@ -6,8 +6,13 @@ const SELECTORS = {
   menuToggle: '.menu-toggle',
   mobileNav: 'mobileNav',
   section: 'main section[id]',
-  form: '.contact__form'
+  form: '.contact__form',
+  heroShot: '[data-hero-shot]'
 };
+
+// TODO: placeholder address until the Vesta domain exists. Keep in sync with
+// the visible placeholders in contact.html and partials/footer.html.
+const FALLBACK_EMAIL = 'hello@vesta-pm.example';
 
 async function loadPartials(root = document) {
   const placeholders = Array.from(root.querySelectorAll(SELECTORS.include));
@@ -164,7 +169,7 @@ function setupMobileMenu(d) {
   const openMenu = () => {
     previouslyFocused = d.activeElement;
     setAria(true);
-    focusFirstElement();
+    window.setTimeout(focusFirstElement, 60);
   };
 
   toggle.addEventListener('click', () => {
@@ -247,12 +252,32 @@ function setupContactForm(d) {
       return;
     }
 
+    // Honeypot: quietly drop bot submissions.
+    const honeypot = form.querySelector('input[name="website"]');
+    if (honeypot && honeypot.value) return;
+
+    // STUB BEHAVIOUR (no backend yet): compose the registration as an email
+    // via the mailto: fallback. Swap this whole handler out once the form
+    // `action` points at a real endpoint.
+    const data = new FormData(form);
+    const intent = data.get('intent') === 'book-demo' ? 'Book a demo' : 'Register interest';
+    const lines = [
+      `Name: ${data.get('name') || ''}`,
+      `Work email: ${data.get('email') || ''}`,
+      `Organisation: ${data.get('organisation') || ''}`,
+      `Role: ${data.get('role') || ''}`,
+      `Portfolio size: ${data.get('portfolio') || ''}`,
+      '',
+      data.get('message') || ''
+    ];
+    const mailto = `mailto:${FALLBACK_EMAIL}?subject=${encodeURIComponent(`Vesta: ${intent}`)}&body=${encodeURIComponent(lines.join('\n'))}`;
+
     const status = form.querySelector('[data-form-status]');
     if (status) {
-      status.textContent = 'Thanks! We will get back to you within one business day.';
+      status.textContent = `Opening your email client. If nothing happens, write to ${FALLBACK_EMAIL} directly.`;
     }
 
-    form.reset();
+    window.location.href = mailto;
   });
 }
 
@@ -291,18 +316,45 @@ function setupScrollToTop(d) {
   });
 }
 
-function setupCardGlow(d) {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+function setupActiveNavPage(d) {
+  const page = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  const links = d.querySelectorAll('.site-nav a[href], .mobile-menu a[href]:not(.button)');
 
-  d.querySelectorAll('.card').forEach((card) => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
-      card.style.setProperty('--glow-x', `${x}%`);
-      card.style.setProperty('--glow-y', `${y}%`);
-    });
+  links.forEach((link) => {
+    const href = (link.getAttribute('href') || '').split('#')[0].toLowerCase();
+    if (href && href === page) {
+      link.setAttribute('aria-current', 'page');
+    }
   });
+}
+
+function setupHeroSettle(d) {
+  const shot = d.querySelector(SELECTORS.heroShot);
+  if (!shot) return;
+
+  const settle = () => shot.classList.add('is-settled');
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+    settle();
+    return;
+  }
+
+  // Settle the perspective tilt once the shot is properly in view or the
+  // visitor starts scrolling, whichever comes first.
+  const observer = new IntersectionObserver((entries) => {
+    if (entries.some((entry) => entry.isIntersecting)) {
+      settle();
+      observer.disconnect();
+    }
+  }, { threshold: 0.55 });
+
+  observer.observe(shot);
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 80) {
+      settle();
+      observer.disconnect();
+    }
+  }, { passive: true, once: false });
 }
 
 function initialiseSite() {
@@ -319,11 +371,12 @@ function initialiseSite() {
   setupScrollAwareHeader(d);
   setupRevealOnScroll(d);
   setupActiveSectionTracking(d);
+  setupActiveNavPage(d);
+  setupHeroSettle(d);
   setupMobileMenu(d);
   setupDarkModeToggle(d);
   setupContactForm(d);
   setupScrollToTop(d);
-  setupCardGlow(d);
 }
 
 if (typeof window !== 'undefined') {
@@ -340,11 +393,12 @@ if (typeof module !== 'undefined') {
     initialiseSite,
     setupRevealOnScroll,
     setupActiveSectionTracking,
+    setupActiveNavPage,
+    setupHeroSettle,
     setupMobileMenu,
     setupDarkModeToggle,
     setupContactForm,
     setupScrollAwareHeader,
-    setupScrollToTop,
-    setupCardGlow
+    setupScrollToTop
   };
 }

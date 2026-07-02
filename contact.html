@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact | Vesta</title>
+    <meta
+      name="description"
+      content="Register interest in Vesta or book a demo. Join the founding cohort shaping the portfolio risk and change management platform for PMOs."
+    />
+    <meta name="theme-color" content="#070b17" />
+    <!-- Open Graph. TODO: switch og:image (and add og:url) to absolute URLs once the production domain exists. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Vesta" />
+    <meta property="og:title" content="Register interest in Vesta" />
+    <meta property="og:description" content="Join the founding cohort: early access, priority onboarding and a real say in the roadmap." />
+    <meta property="og:image" content="images/screenshots/app-home-control-centre.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" />
+    <link rel="stylesheet" href="styles/tokens.css" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <script>
+      (function () {
+        var saved = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+        document.documentElement.classList.add('js');
+      })();
+    </script>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
+    <script src="scripts/main.js" type="module" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div data-include="partials/header.html"></div>
+
+    <main id="main-content" tabindex="-1">
+      <!-- Intro -->
+      <section class="page-intro band--night" aria-labelledby="intro-title">
+        <div class="shell">
+          <h1 id="intro-title">Register interest, or book a demo.</h1>
+          <p class="lead">Tell us a little about your portfolio and what you'd like to see. The founding cohort is forming now.</p>
+        </div>
+      </section>
+
+      <!-- Form + aside -->
+      <section class="contact" aria-labelledby="form-title">
+        <div class="shell contact__grid">
+          <!--
+            DEMO-REQUEST FORM STUB
+            TODO: point `action` at the chosen form backend (own endpoint or self-hosted handler)
+            and remove the JS intercept in scripts/main.js (setupContactForm).
+            Deliberately NOT wired to any third-party form service.
+            Fallback: the placeholder mailto link in the aside below.
+          -->
+          <form class="contact__form reveal" action="#" method="post" aria-labelledby="form-title">
+            <h2 id="form-title" class="sr-only">Register interest</h2>
+            <fieldset class="field">
+              <legend>I'd like to</legend>
+              <div class="choice-row">
+                <label class="choice">
+                  <input type="radio" name="intent" value="register-interest" checked />
+                  <span>Register interest</span>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="intent" value="book-demo" />
+                  <span>Book a demo</span>
+                </label>
+              </div>
+            </fieldset>
+            <div class="field field--split">
+              <div>
+                <label for="name">Full name</label>
+                <input id="name" name="name" type="text" autocomplete="name" required />
+              </div>
+              <div>
+                <label for="email">Work email</label>
+                <input id="email" name="email" type="email" autocomplete="email" required />
+              </div>
+            </div>
+            <div class="field field--split">
+              <div>
+                <label for="organisation">Organisation</label>
+                <input id="organisation" name="organisation" type="text" autocomplete="organization" required />
+              </div>
+              <div>
+                <label for="role">Role <span class="optional">(optional)</span></label>
+                <input id="role" name="role" type="text" autocomplete="organization-title" placeholder="e.g. Head of PMO" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="portfolio">Portfolio size <span class="optional">(optional)</span></label>
+              <select id="portfolio" name="portfolio">
+                <option value="">Choose one</option>
+                <option value="individual">Just me</option>
+                <option value="small">Up to 10 projects</option>
+                <option value="medium">10 to 50 projects</option>
+                <option value="large">More than 50 projects</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="message">Anything we should know? <span class="optional">(optional)</span></label>
+              <textarea id="message" name="message" placeholder="Current tools, timescales, the state of your spreadsheets."></textarea>
+              <p class="field__hint">The more honest, the more useful. We've seen worse, we promise.</p>
+            </div>
+            <!-- Honeypot: hidden from humans, catches naive bots. Remove if the backend has its own spam control. -->
+            <div class="sr-only" aria-hidden="true">
+              <label for="website">Leave this field empty</label>
+              <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+            </div>
+            <button class="button" type="submit">Send
+              <svg class="button__arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+            </button>
+            <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+          </form>
+
+          <aside class="contact__aside reveal" aria-labelledby="next-title">
+            <h2 id="next-title">What happens next</h2>
+            <ol class="next-steps">
+              <li>
+                <div><strong>We read it properly.</strong> A person reads every registration; there's no automated sequence on the other end.</div>
+              </li>
+              <li>
+                <div><strong>A short call, if you want one.</strong> Book a demo and we'll walk your own scenarios through the product: your registers, your programmes.</div>
+              </li>
+              <li>
+                <div><strong>Early access, in cohorts.</strong> We're onboarding the founding cohort in small groups, so registering early genuinely matters.</div>
+              </li>
+            </ol>
+            <div class="contact__alt">
+              <!-- TODO: placeholder address. Swap for the real one when the Vesta domain goes live. -->
+              <p>Prefer email? Write to <a href="mailto:hello@vesta-pm.example">hello@vesta-pm.example</a> (a placeholder address until our domain goes live).</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <div data-include="partials/footer.html"></div>
+
+    <noscript>
+      <p style="text-align: center; padding: 1rem 0 3rem">JavaScript is required to load the shared header and footer.</p>
+    </noscript>
+  </body>
+</html>

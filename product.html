@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Product | Vesta</title>
+    <meta
+      name="description"
+      content="A screen-by-screen walkthrough of Vesta: the Home Control Centre, risk registers and dashboard, controlled change, projects, programmes and reports."
+    />
+    <meta name="theme-color" content="#070b17" />
+    <!-- Open Graph. TODO: switch og:image (and add og:url) to absolute URLs once the production domain exists. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Vesta" />
+    <meta property="og:title" content="Inside Vesta: risk, change, projects and reports" />
+    <meta property="og:description" content="Screen by screen: how a PMO runs risks, changes, projects and reporting from one live, permissioned platform." />
+    <meta property="og:image" content="images/screenshots/app-home-control-centre.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" />
+    <link rel="stylesheet" href="styles/tokens.css" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <script>
+      (function () {
+        var saved = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+        document.documentElement.classList.add('js');
+      })();
+    </script>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
+    <script src="scripts/main.js" type="module" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div data-include="partials/header.html"></div>
+
+    <main id="main-content" tabindex="-1">
+      <!-- Intro -->
+      <section class="page-intro band--night" aria-labelledby="intro-title">
+        <div class="shell">
+          <h1 id="intro-title">A working day inside Vesta.</h1>
+          <p class="lead">Screen by screen: how risks, issues, changes, projects and reports run through one live, permissioned platform.</p>
+          <ul class="jump" aria-label="Jump to a capability">
+            <li><a href="#control-centre">Control Centre</a></li>
+            <li><a href="#risk">Risk</a></li>
+            <li><a href="#change">Change</a></li>
+            <li><a href="#projects">Projects &amp; programmes</a></li>
+            <li><a href="#reports">Reports</a></li>
+            <li><a href="#foundations">Foundations</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Control Centre -->
+      <section class="walk" id="control-centre" aria-labelledby="cc-title">
+        <div class="shell">
+          <div class="walk__head reveal">
+            <span class="walk__kicker">Home Control Centre</span>
+            <h2 id="cc-title">Start where the risk actually is.</h2>
+            <p class="lead">Sign in and the whole portfolio takes a posture. Critical and high risks, overdue mitigations, urgent issues and slipped reviews roll up into one banner, with a prioritised act-now queue underneath telling each person what deserves their morning.</p>
+          </div>
+          <figure class="frame reveal">
+            <div class="frame__bar" aria-hidden="true">
+              <span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span>
+            </div>
+            <div class="frame__media">
+              <img
+                src="images/screenshots/app-home-control-centre.png"
+                width="3200"
+                height="2000"
+                alt="Vesta Home Control Centre: control posture banner, KPI tiles for critical risks and overdue reviews, portfolio health by programme, and the priority action queue"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </figure>
+          <p class="frame-caption">Portfolio health RAG by programme and project, and the queue of items that need control action now.</p>
+        </div>
+      </section>
+
+      <!-- Risk -->
+      <section class="walk bg-alt" id="risk" aria-labelledby="risk-title">
+        <div class="shell">
+          <div class="walk__grid">
+            <div class="walk__copy reveal">
+              <span class="walk__kicker">Risk registers &amp; dashboard</span>
+              <h2 id="risk-title">The register your auditors will believe.</h2>
+              <p>Score each risk on the 5&times;5 likelihood and impact matrix, current position against target. Give it an owner, a review cadence and mitigation actions, and quantify the exposure in pounds.</p>
+              <ul class="points">
+                <li>Current versus target scoring on every risk</li>
+                <li>Review dates that surface when they slip</li>
+                <li>Exposure rolled up per project and programme</li>
+              </ul>
+            </div>
+            <figure class="frame reveal">
+              <div class="frame__bar" aria-hidden="true">
+                <span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span>
+              </div>
+              <div class="frame__media">
+                <img
+                  src="images/screenshots/app-risk-dashboard.png"
+                  width="3200"
+                  height="2000"
+                  alt="Vesta risk dashboard: KPI tiles, the 5 by 5 risk matrix, top priority risks and the attention-needed list"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </figure>
+          </div>
+          <div class="walk__full reveal">
+            <figure class="frame">
+              <div class="frame__bar" aria-hidden="true">
+                <span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span>
+              </div>
+              <div class="frame__media">
+                <img
+                  src="images/screenshots/app-risk-register.png"
+                  width="3200"
+                  height="2000"
+                  alt="Vesta risk register: a data-dense table with scoring, owners, review dates, statuses and filters"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </figure>
+            <p class="frame-caption">The register you keep in Excel today: scoring, owners, review dates and filters. Live, permissioned, and exportable to CSV or Excel when you need it back in a spreadsheet.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Change -->
+      <section class="walk" id="change" aria-labelledby="change-title">
+        <div class="shell walk__grid walk__grid--flip">
+          <div class="walk__copy reveal">
+            <span class="walk__kicker">Controlled change</span>
+            <h2 id="change-title">Approvals with a permanent record.</h2>
+            <p>Change requests move through one governed workflow, and nowhere else:</p>
+            <ol class="stepper">
+              <li>Draft</li>
+              <li>Submitted</li>
+              <li>Under review</li>
+              <li>Decision</li>
+              <li>Implemented</li>
+            </ol>
+            <p>Before anyone approves, Vesta warns about the consequences: budget overrun, schedule slip, open risks on the affected project. The decision itself is recorded permanently, with who made it and when.</p>
+          </div>
+          <figure class="frame reveal">
+            <div class="frame__bar" aria-hidden="true">
+              <span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span>
+            </div>
+            <div class="frame__media">
+              <img
+                src="images/screenshots/app-change-detail.png"
+                width="3200"
+                height="2000"
+                alt="Vesta change request detail: the workflow stepper, approval impact warnings for budget and schedule, and a permanent approval decision"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </figure>
+        </div>
+      </section>
+
+      <!-- Issues: deliberate text-only strip -->
+      <section class="walk bg-alt" id="issues" aria-labelledby="issues-title">
+        <div class="shell">
+          <div class="walk__head reveal" style="margin-bottom: 0;">
+            <span class="walk__kicker">Issues</span>
+            <h2 id="issues-title">When a risk lands, it doesn't leave the system.</h2>
+            <p class="lead">Escalate any risk into an issue with an owner and a resolution path, tracked alongside risks and changes on the same project. No separate tracker, no lost escalations, no "I thought you had it".</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects & programmes -->
+      <section class="walk" id="projects" aria-labelledby="projects-title">
+        <div class="shell walk__grid">
+          <div class="walk__copy reveal">
+            <span class="walk__kicker">Projects &amp; programmes</span>
+            <h2 id="projects-title">A register of record for the portfolio.</h2>
+            <p>Every project with its contract value, dates, project manager and health. Group them into programmes you define, and the risk, issue and change picture rolls up with them.</p>
+            <ul class="points">
+              <li>Contract values and key dates in one place</li>
+              <li>Health RAG that reflects live registers, not memory</li>
+              <li>Programme groupings defined by you, not the tool</li>
+            </ul>
+          </div>
+          <figure class="frame reveal">
+            <div class="frame__bar" aria-hidden="true">
+              <span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span>
+            </div>
+            <div class="frame__media">
+              <img
+                src="images/screenshots/app-projects-register.png"
+                width="3200"
+                height="2000"
+                alt="Vesta project register: projects with contract values, programmes, project managers and health RAG"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </figure>
+        </div>
+      </section>
+
+      <!-- Reports (night band) -->
+      <section class="walk band--night" id="reports" aria-labelledby="preports-title">
+        <div class="shell">
+          <div class="walk__head reveal">
+            <span class="walk__kicker">Reports</span>
+            <h2 id="preports-title">Reporting that keeps up with the question.</h2>
+            <p class="lead">Risk exposure by category and level. The change pipeline with its net cost and schedule impact. Everything exportable to CSV or Excel, so the steering pack takes minutes, not the night before.</p>
+          </div>
+          <figure class="frame reveal">
+            <div class="frame__bar" aria-hidden="true">
+              <span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span>
+            </div>
+            <div class="frame__media">
+              <img
+                src="images/screenshots/app-reports.png"
+                width="3200"
+                height="2000"
+                alt="Vesta reports: risk exposure by category and level, and the change pipeline with net cost impact in pounds"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </figure>
+          <!-- Foundations, shared trust component -->
+          <div class="trust reveal" id="foundations">
+            <p>Enterprise foundations from day one</p>
+            <ul class="trust__grid">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.6-3 7.6-7 9-4-1.4-7-4.4-7-9V6z"/><path d="m9 11.8 2.1 2.1 3.9-3.9"/></svg>
+                <div><strong>Microsoft Entra ID single sign-on</strong><span>Sign in with the identity your organisation already runs.</span></div>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+                <div><strong>Role-based access control</strong><span>Everyone sees exactly what their role allows, nothing more.</span></div>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>
+                <div><strong>Full audit trail</strong><span>Every action recorded, attributable and permanent.</span></div>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18a4.5 4.5 0 1 1 .6-8.96A6 6 0 0 1 19 11a3.5 3.5 0 0 1-.5 7z"/></svg>
+                <div><strong>Hosted on Microsoft Azure</strong><span>Runs on Microsoft's cloud, with no months-long deployment.</span></div>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3v12"/><path d="m4.5 11.5 3.5 3.5 3.5-3.5"/><path d="M16 21V9"/><path d="m12.5 12.5 3.5-3.5 3.5 3.5"/></svg>
+                <div><strong>CSV &amp; Excel import and export</strong><span>Your data arrives easily and leaves freely.</span></div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="cta band--night" aria-labelledby="cta-title" style="border-top: 1px solid var(--night-border);">
+        <div class="shell cta__inner reveal">
+          <h2 id="cta-title">See your portfolio in it.</h2>
+          <p class="lead">Book a demo and we'll walk your own scenarios through Vesta: your registers, your programmes, your Tuesday.</p>
+          <div class="cta__actions">
+            <a class="button" href="contact.html">Register interest
+              <svg class="button__arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+            </a>
+            <a class="button button--ghost" href="pricing.html">See the pricing shape</a>
+          </div>
+          <p class="cta__note">A free trial is on the way. Founding customers get it first.</p>
+        </div>
+      </section>
+    </main>
+
+    <div data-include="partials/footer.html"></div>
+
+    <noscript>
+      <p style="text-align: center; padding: 1rem 0 3rem">JavaScript is required to load the shared header and footer.</p>
+    </noscript>
+  </body>
+</html>
