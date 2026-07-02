@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pricing | Vesta</title>
+    <meta
+      name="description"
+      content="Vesta pricing is being finalised with founding customers. Three tiers, Individual, Team and Enterprise, with a free trial on the way. Register interest to hear first."
+    />
+    <meta name="theme-color" content="#070b17" />
+    <!-- Open Graph. TODO: switch og:image (and add og:url) to absolute URLs once the production domain exists. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Vesta" />
+    <meta property="og:title" content="Vesta pricing: three tiers, no games" />
+    <meta property="og:description" content="Individual, Team and Enterprise tiers. Numbers being finalised with founding customers; a free trial is on the way." />
+    <meta property="og:image" content="images/screenshots/app-home-control-centre.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" />
+    <link rel="stylesheet" href="styles/tokens.css" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <script>
+      (function () {
+        var saved = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+        document.documentElement.classList.add('js');
+      })();
+    </script>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
+    <script src="scripts/main.js" type="module" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div data-include="partials/header.html"></div>
+
+    <main id="main-content" tabindex="-1">
+      <!-- Intro -->
+      <section class="page-intro band--night" aria-labelledby="intro-title">
+        <div class="shell">
+          <h1 id="intro-title">Three tiers. No games.</h1>
+          <p class="lead">Vesta scales from a single project manager to a whole PMO. The numbers are being finalised with founding customers; the shape is below.</p>
+        </div>
+      </section>
+
+      <!-- Tiers -->
+      <section class="tiers" aria-labelledby="tiers-title">
+        <div class="shell">
+          <h2 id="tiers-title" class="sr-only">Tiers</h2>
+          <div class="tiers__grid">
+            <article class="tier reveal" aria-labelledby="tier-individual">
+              <h3 id="tier-individual">Individual</h3>
+              <p class="tier__for">For one project manager or consultant who wants rigour without the overhead.</p>
+              <ul class="tier__list">
+                <li>Projects with risk and issue registers</li>
+                <li>5&times;5 scoring with owners and review dates</li>
+                <li>Exposure tracked in pounds</li>
+                <li>CSV and Excel import and export</li>
+              </ul>
+              <a class="button" href="contact.html">Register interest</a>
+            </article>
+            <article class="tier reveal" aria-labelledby="tier-team">
+              <h3 id="tier-team">Team</h3>
+              <p class="tier__for">For programmes that need shared, permissioned governance across projects.</p>
+              <ul class="tier__list">
+                <li class="tier__carry">Everything in Individual</li>
+                <li>Programmes with portfolio rollups</li>
+                <li>Governed change workflow with approvals</li>
+                <li>Role-based access control</li>
+                <li>Portfolio health and exposure reporting</li>
+              </ul>
+              <a class="button" href="contact.html">Register interest</a>
+            </article>
+            <article class="tier reveal" aria-labelledby="tier-enterprise">
+              <h3 id="tier-enterprise">Enterprise</h3>
+              <p class="tier__for">For PMOs answering to boards, auditors and regulators.</p>
+              <ul class="tier__list">
+                <li class="tier__carry">Everything in Team</li>
+                <li>Microsoft Entra ID single sign-on</li>
+                <li>Full audit trail</li>
+                <li>Priority onboarding and support</li>
+                <li>Founding-customer input into the roadmap</li>
+              </ul>
+              <a class="button" href="contact.html">Register interest</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why no numbers -->
+      <section class="pricing-note" aria-labelledby="note-title">
+        <div class="shell">
+          <div class="pricing-note__panel reveal">
+            <div>
+              <h2 id="note-title">Why there are no prices on this page.</h2>
+              <p>We're finalising pricing with our founding customers rather than guessing at it. When the numbers land, the organisations that registered interest see them first, on founding terms.</p>
+            </div>
+            <div>
+              <h2>A free trial is coming.</h2>
+              <p>Every tier will launch with a free trial. It isn't live yet, so you won't find a trial button anywhere on this site. Registering interest puts you at the front of the queue.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="faq bg-alt" aria-labelledby="faq-title">
+        <div class="shell">
+          <div class="faq__head reveal">
+            <h2 id="faq-title">Fair questions.</h2>
+          </div>
+          <div class="reveal">
+            <details>
+              <summary>When will pricing be announced?</summary>
+              <p>Once it has been validated with the founding cohort. Registered organisations hear first, with founding terms that outlast the early-access period.</p>
+            </details>
+            <details>
+              <summary>Will there be a free trial?</summary>
+              <p>Yes. It's being built now and will be announced to registered organisations first. Until it exists, we won't put a trial button on this site.</p>
+            </details>
+            <details>
+              <summary>Can a single person really use Vesta?</summary>
+              <p>Yes, deliberately. The Individual tier exists because governance discipline shouldn't require an enterprise agreement. Start alone; the Team and Enterprise tiers are there when your portfolio grows.</p>
+            </details>
+            <details>
+              <summary>What do founding customers actually get?</summary>
+              <p>Early access, priority onboarding, a real say in the roadmap and first sight of pricing. In return, we get the thing we value most: a portfolio to build around.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="cta band--night" aria-labelledby="cta-title">
+        <div class="shell cta__inner reveal">
+          <h2 id="cta-title">Be first in the queue.</h2>
+          <p class="lead">Register interest and you'll see pricing before it's public, with founding terms attached.</p>
+          <div class="cta__actions">
+            <a class="button" href="contact.html">Register interest
+              <svg class="button__arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+            </a>
+            <a class="button button--ghost" href="product.html">Explore the product</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div data-include="partials/footer.html"></div>
+
+    <noscript>
+      <p style="text-align: center; padding: 1rem 0 3rem">JavaScript is required to load the shared header and footer.</p>
+    </noscript>
+  </body>
+</html>

@@ -1,44 +1,95 @@
+/* ============================================================
+   Vesta design tokens
+   Theme tokens flip with html[data-theme]; --night-* tokens are
+   invariant and power the always-dark bands (hero, reports,
+   trust, CTA) so the dark/light rhythm holds in both themes.
+   ============================================================ */
+
 :root {
-  --color-background: #eef2ff;
-  --color-surface: #ffffff;
-  --color-elevated: #111111;
-  --color-text: #111111;
-  --color-muted: #2d3354;
-  --color-accent: #2430a3;
-  --color-accent-soft: #dce2ff;
-  --color-accent-secondary: #0CA8CC;
-  --color-accent-secondary-soft: #d4f4fb;
-  --color-border: #c7d2ff;
-  --color-success: #222222;
+  color-scheme: light;
+
+  /* Brand */
+  --brand: #4f46e5;
+  --brand-strong: #4338ca;
+  --brand-soft: rgba(79, 70, 229, 0.08);
+  --brand-ring: rgba(79, 70, 229, 0.35);
+  --on-brand: #ffffff;
+
+  /* Theme surfaces (light) */
+  --bg: #ffffff;
+  --bg-alt: #f5f6fa;
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --ink: #0e1526;
+  --ink-secondary: #3d4966;
+  --ink-muted: #57627c;
+  --border: #e4e7ef;
+  --border-strong: #c9cfdf;
+  --link: #4f46e5;
+
+  /* Night surfaces (invariant dark bands) */
+  --night-bg: #070b17;
+  --night-bg-raised: #0c1226;
+  --night-surface: rgba(148, 163, 201, 0.07);
+  --night-ink: #eef2fa;
+  --night-ink-secondary: #b7c2d9;
+  --night-ink-muted: #8d99b4;
+  --night-border: rgba(148, 163, 201, 0.17);
+  --night-border-strong: rgba(148, 163, 201, 0.32);
+  --night-accent: #97a0ff;
+
+  /* Type */
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-display: "Plus Jakarta Sans", var(--font-body);
+
+  /* Shape */
+  --radius-xs: 6px;
   --radius-sm: 10px;
+  --radius-md: 14px;
   --radius-lg: 20px;
-  --shadow-sm: 0 12px 40px rgba(0, 0, 0, 0.12);
-  --shadow-xs: 0 4px 20px rgba(0, 0, 0, 0.08);
-  --max-width: 1120px;
-  --section-space: clamp(3rem, 8vw, 6.5rem);
-  --font-base: "Inter", "Segoe UI", "Helvetica Neue", Arial, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI Emoji", sans-serif;
-  --font-display: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
-  --gradient-background: radial-gradient(circle at 10% 5%, rgba(162, 172, 212, 0.22), transparent 55%),
-    radial-gradient(circle at 90% 15%, rgba(198, 208, 255, 0.2), transparent 55%),
-    linear-gradient(180deg, rgba(241, 245, 255, 0.9) 0%, rgba(244, 246, 255, 0.7) 45%, rgba(236, 240, 255, 0.9) 100%);
-  --glass-surface: linear-gradient(150deg, rgba(255, 255, 255, 0.88), rgba(230, 236, 255, 0.72));
-  --glass-border: linear-gradient(160deg, rgba(255, 255, 255, 0.8), rgba(146, 180, 255, 0.45));
-  --glass-shadow: 0 28px 60px rgba(120, 140, 200, 0.25);
+
+  /* Elevation */
+  --shadow-sm: 0 1px 2px rgba(14, 21, 38, 0.05), 0 4px 14px rgba(14, 21, 38, 0.06);
+  --shadow-md: 0 2px 6px rgba(14, 21, 38, 0.06), 0 16px 40px rgba(14, 21, 38, 0.1);
+  --shadow-frame:
+    0 1px 1px rgba(5, 8, 18, 0.28),
+    0 24px 70px -18px rgba(5, 8, 18, 0.55),
+    0 40px 120px -30px rgba(79, 70, 229, 0.28);
+
+  /* Layout */
+  --max-width: 1140px;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --section-pad: clamp(4.5rem, 9vw, 7.5rem);
+  --header-height: 72px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --speed-quick: 180ms;
+  --speed-soft: 360ms;
+
+  /* Z scale */
+  --z-header: 40;
+  --z-menu: 50;
+  --z-toast: 60;
 }
 
 html[data-theme="dark"] {
-  --color-background: #0c1024;
-  --color-surface: #151a30;
-  --color-elevated: #f0f0f0;
-  --color-text: #e8ecf4;
-  --color-muted: #9ca3c0;
-  --color-accent: #6b7cff;
-  --color-accent-soft: #1e2550;
-  --color-border: #2a3260;
-  --gradient-background: radial-gradient(circle at 10% 5%, rgba(40, 50, 100, 0.4), transparent 55%),
-    radial-gradient(circle at 90% 15%, rgba(60, 70, 130, 0.3), transparent 55%),
-    linear-gradient(180deg, #0c1024 0%, #0e1228 45%, #0c1024 100%);
-  --glass-surface: linear-gradient(150deg, rgba(25, 32, 60, 0.85), rgba(18, 24, 50, 0.75));
-  --glass-border: linear-gradient(160deg, rgba(60, 75, 130, 0.5), rgba(40, 55, 110, 0.3));
-  --glass-shadow: 0 28px 60px rgba(0, 0, 0, 0.4);
+  color-scheme: dark;
+
+  --brand-soft: rgba(151, 160, 255, 0.1);
+  --brand-ring: rgba(151, 160, 255, 0.4);
+
+  --bg: #070b17;
+  --bg-alt: #0a0f20;
+  --surface: #0d1327;
+  --surface-raised: #111834;
+  --ink: #eef2fa;
+  --ink-secondary: #b7c2d9;
+  --ink-muted: #8d99b4;
+  --border: rgba(148, 163, 201, 0.17);
+  --border-strong: rgba(148, 163, 201, 0.32);
+  --link: #97a0ff;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 14px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.45), 0 16px 40px rgba(0, 0, 0, 0.4);
 }

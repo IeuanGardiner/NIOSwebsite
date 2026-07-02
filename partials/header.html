@@ -1,25 +1,21 @@
 <header class="site-header" role="banner">
-  <div class="shell site-header__inner" aria-label="Top navigation">
-    <a class="brand brand--logo" href="#home" aria-label="[Brand Name] home">
-      <img
-        class="brand__logo"
-        src="images/abertechicon.png"
-        alt="[Brand Name] logomark"
-      />
-      <span class="brand__text">[Brand Name]</span>
+  <div class="shell site-header__inner">
+    <a class="brand" href="index.html" aria-label="Vesta home">
+      <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <rect width="32" height="32" rx="8" fill="#4f46e5"/>
+        <path d="M9.5 10.5 16 23l6.5-12.5" fill="none" stroke="#ffffff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="brand__text">Vesta</span>
     </a>
-    <nav class="site-nav" aria-label="Primary navigation">
+    <nav class="site-nav" aria-label="Primary">
       <ul class="site-nav__list">
-        <li><a href="#home">[Nav Item 1]</a></li>
-        <li><a href="#about">[Nav Item 2]</a></li>
-        <li><a href="#services">[Nav Item 3]</a></li>
-        <li><a href="#products">[Nav Item 4]</a></li>
-        <li><a href="#contact">[Nav Item 5]</a></li>
+        <li><a href="product.html">Product</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
     <div class="site-header__end">
-      <a href="#contact" class="button button--sm header-cta">[CTA Button]</a>
-      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to dark mode">
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch theme">
         <svg class="theme-toggle__sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="12" r="5"/>
           <line x1="12" y1="1" x2="12" y2="3"/>
@@ -35,8 +31,9 @@
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
         </svg>
       </button>
+      <a href="contact.html" class="button button--sm header-cta">Register interest</a>
       <button id="menuToggle" class="menu-toggle" type="button" aria-controls="mobileNav" aria-expanded="false">
-        <span class="sr-only">[Toggle navigation]</span>
+        <span class="sr-only">Toggle navigation</span>
         <span class="menu-toggle__icon" aria-hidden="true">
           <span class="menu-toggle__bar"></span>
           <span class="menu-toggle__bar"></span>
@@ -46,12 +43,12 @@
     </div>
   </div>
 </header>
-<nav id="mobileNav" class="mobile-menu" aria-label="Mobile navigation">
+<nav id="mobileNav" class="mobile-menu" aria-label="Mobile">
   <ul class="mobile-menu__list">
-    <li><a href="#home">[Nav Item 1]</a></li>
-    <li><a href="#about">[Nav Item 2]</a></li>
-    <li><a href="#services">[Nav Item 3]</a></li>
-    <li><a href="#products">[Nav Item 4]</a></li>
-    <li><a href="#contact">[Nav Item 5]</a></li>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="product.html">Product</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a class="button" href="contact.html">Register interest</a></li>
   </ul>
 </nav>

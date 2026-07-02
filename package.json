@@ -1,7 +1,7 @@
 {
-  "name": "nioswebsite",
+  "name": "vesta-website",
   "version": "1.0.0",
-  "description": "",
+  "description": "Marketing website for Vesta, the portfolio risk and change management platform for PMOs.",
   "main": "index.js",
   "scripts": {
     "test": "node --test"
